@@ -1,0 +1,75 @@
+/* body{
+    background: #f1f1ff;
+    height:100vh
+} */
+
+.DocUploadContainer{
+    background:white;
+    margin-top:-10px
+}
+.documentUpload{
+    position:relative;
+    /* top:10vh; */
+    left:22vw;
+    background:white;
+    height:475px;
+    width:1000px;
+
+    display:grid;
+    grid-template-rows:10% 50% 20% 20%;
+    border:2px dashed whitesmoke
+}
+#loader{
+    height: 100px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+#uploadTextProgress{
+    margin-left: 10px;
+    font-size: 23px;
+    font-weight: bolder;
+    color:black;
+}
+#uploadText{
+    font-size: 23px;
+    font-weight: bolder;
+    color: #739900;
+}
+#uploadSuccess{
+    height: 87px;
+    margin: 32px;
+}
+
+.DocTypeSection{
+    padding:1em;
+    border-top: 2px dash #CFCFCF
+}
+.headingSection{
+    background:whitesmoke;
+    font-size:20px;
+    font-weight:bolder;
+    padding:10px
+}
+
+.fileUploadSection{
+    border-bottom:1px solid whitesmoke;
+    display:grid;
+    grid-template-columns:25% 50% 25%
+}
+
+.UploadContainer{
+   margin-top:20px;
+   margin-bottom:20px;
+   border: 2px dashed #00ace6
+}
+
+@media screen and (max-width:1440px){
+
+    .documentUpload{
+        height:375px;
+        margin-left: -140px;
+    }
+
+    
+}

@@ -1,0 +1,252 @@
+.overlayWrapper{
+    display:grid;
+    grid-template-rows: 8% 10% 29% 8% 45%;
+    height:365px;
+    width:275px;
+    background:white;
+    /* position:absolute;
+    top:20vh;
+    left:35vw; */
+    border-radius:5px;
+    border: 1px solid #8c8c8c
+}
+#link:hover{
+    cursor:pointer
+}
+.OverlayHeader{
+    display:grid;
+    grid-template-columns:80% 20%;
+    padding:5px;
+    font-weight:bolder;
+    font-size:14px;
+}
+
+.ShipmentID{
+    display:grid;
+    grid-template-rows:40% 60%;
+    text-align:center
+    }
+
+.ShipmentIDHeader{
+    font-size:12px;
+    font-weight:bolder;
+    }
+
+.ID{
+    color:#77b300;
+    font-weight:bolder;
+    font-size:16px
+    }
+
+.ShipmentID, .BriefBox {
+    background:#f2f2f2;
+    height:100%;
+    border-top:1px solid black;
+   
+}
+
+/* Brief Box CSS Starts Here */
+.BriefBox {
+    border-bottom: 1px solid black;
+    display:grid;
+    grid-template-columns:60% 40%
+
+}
+
+
+.leftSection{
+    /* background:red; */
+    display:grid;
+    grid-template-rows:50% 50% ;
+    height: fit-content;
+
+}
+.topLeftSection{
+    /* background:yellow; */
+    margin:3px;
+    border-bottom: 1px solid black;
+    display:grid;
+    grid-template-columns:40% 60%
+}
+
+.StatusSection{
+    /* background:blue; */
+    display:grid;
+    grid-template-rows:40% 60%;
+    /* border-right: 2px solid black;
+    /* padding:2px */
+    /* margin:-2px  */
+}
+
+.statusHeader{
+    /* background:orange; */
+    color:black;
+    font-weight:bold;
+    font-size:11px;
+    text-align:center;
+}
+/* Purchase Order Section */
+.POSection{
+    /* background: blue; */
+    display:grid;
+    grid-template-rows:40% 60%;
+    margin-left:8px;
+    border-left:1px solid black
+}
+
+.POHeader{
+    color:black;
+    font-weight:bold;
+    font-size:11px;
+    text-align:center;
+}
+.POValue{
+    font-size:12px;
+    font-weight:bolder;
+    text-align:center;
+    margin-top:5px
+}
+/* Purchase ORder Section ENds HEre */
+.Status{
+    margin-top:4px;
+    border-radius:55px;
+    background:orange;
+    height:18px
+}
+.statusValue{
+    font-size:10px;
+    font-weight:bold;
+    text-align:center
+}
+.rightSection{
+    /* background:#bfbfbf; */
+    display:grid;
+    grid-template-rows:25% 75%;
+    border-left:1px solid black;
+    height:fit-content
+}
+
+.TopRightSection{
+    /* background:yellow; */
+    margin-left:5px;
+    margin-right:5px;
+    margin-top:2px;
+    font-size:13px;
+    color: #cc0000;
+    font-weight:bold;
+    text-align:center;
+    border-bottom:1px solid black
+}
+
+/* Incidents Boxes HEre  */
+.BottomRightSection{
+    display:grid;
+    grid-template-rows:50% 50%;
+    background: white
+    /* grid-row-gap: px */
+}
+.IncidentTopBoxes{
+  
+    display:grid;
+    grid-template-columns:50% 50%;
+    padding:5px
+    
+}
+
+.IncidentBottomBoxes{
+ 
+    display:grid;
+    grid-template-columns:50% 50%;
+    padding:5px
+    /* height: fit-content; */
+ 
+}
+
+
+.TemperatureAlertBox, .HumidityAlertBox, .ShockAlertBox,.TamperAlertBox{
+    background:white;
+    padding:1px;
+    display:grid;
+    grid-template-columns: 50% 50%
+}
+.TemperatureAlertBox{
+    margin-left:5px;
+}
+.AlertNumber{
+    font-size:11px;
+    font-weight:bolder;
+    margin-top: 10px;
+    margin-left: 3px;
+}
+
+#AlertIcon{
+margin-top:5px
+}
+/* Overlay Incident SOurce and Destination  */
+.bottomLeftSection{
+    display:grid;
+    grid-template-columns: 15% 85%;
+    height:fit-content;
+   
+
+}
+
+.IconSection{
+    display:grid;
+    grid-template-rows: 35% 30% 35%;
+    margin-bottom: 5px;
+    margin-top: -4px;
+}
+
+.SourceDestinationDetails{
+    margin-bottom: 5px;
+    margin-top: -3px;
+    display:grid;
+    grid-template-rows: 65% 35%;
+    margin-left:2px
+}
+
+.SourceDetails{
+    display:grid;
+    grid-template-rows: 50% 50%;
+    font-size:12px;
+    font-weight:bolder
+}
+
+.DestinationDetails{
+    font-size:12px;
+    font-weight:bolder;
+    margin-top: -6px;
+}
+.Date{
+    font-size:10px;
+    margin-top: -4px;
+}
+/* Incidents Source DestinationENds HEre */
+
+
+/* Brief Box CSS Ends Here */
+.IncidentHeader{
+    border-bottom: 1px solid black;
+    color:#cc0000;
+    font-weight:bolder;
+    padding:3px;
+    text-align:center
+}
+body{
+    height:90vh;
+    background:#ccccff;
+}
+
+.NoGPSData{
+    height: 66px;
+    width: 200px;
+    background: white;
+    border: 2px dashed #cc0000;
+    margin: 2px;
+}
+.NoGPSData h4{
+    margin: 5px;
+    font-size:14px;
+    font-weight:bolder;
+}

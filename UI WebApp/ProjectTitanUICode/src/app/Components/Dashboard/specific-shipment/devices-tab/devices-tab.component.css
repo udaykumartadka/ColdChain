@@ -1,0 +1,125 @@
+th{
+    font-size:12px;
+    text-align:center
+}
+
+td,th{
+    width:200px !important
+}
+
+td{
+    border-right:2px solid white;
+    border-bottom:2px solid white;
+}
+
+table{
+    text-align:center;
+    width:90%;
+    margin-top:2%;
+    margin-left: 14%;
+}
+
+thead, tbody {
+    display: block;
+}
+
+
+tbody {
+    background:white;
+    height: 550px;
+    overflow-y: auto;
+}
+
+
+tbody td, thead th {
+    width: 850px;
+
+}
+
+ /* Styling Scrollbar */
+ tbody::-webkit-scrollbar{
+    width:8px;
+}
+
+tbody::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background: rgba(0,0,0,0.1);
+    border: 1px solid #ccc;
+}
+
+tbody::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(#999966, #aaaa55);
+    border: 1px solid #aaa;
+  }
+
+  tbody::-webkit-scrollbar-thumb:hover{
+    background: #cccc00;
+  }
+
+  tbody::-webkit-scrollbar-thumb:active{
+    background: linear-gradient(left, #22ADD4, rgb(186, 170, 30));
+  }
+
+#TabContent{
+    padding:1em;
+}
+
+/* .tableHolder{
+    height:600px;
+    overflow-y:scroll;
+    overflow-x:hidden;
+} */
+tr{
+    background:whitesmoke
+}
+
+#connectivityIcon{
+    height:45px;
+    width:65px;
+    margin-top:-10px;
+    margin-bottom:-10px
+}
+
+td{
+    font-size:12px;
+    font-weight:bolder;
+
+}
+/* 
+.isConnected{
+width:100px !important
+} */
+@media screen and (max-width:1440px){
+
+    table{
+        width:900px;
+        font-size:10px;
+        margin-left: 8%;
+    }
+    th{
+        font-size:10px
+    }
+    td{
+        font-size:10px
+    }
+
+    tbody {
+        height: 365px;
+        overflow-y: scroll;
+    }
+
+    
+td,th{
+    width:180px !important;
+    text-align:center
+}
+
+#connectivityIcon{
+    height:35px;
+    width:50px;
+    margin-top:-10px;
+    margin-bottom:-10px
+}
+
+}

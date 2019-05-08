@@ -1,0 +1,21 @@
+{
+  "name": "tcp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "MSG_Services.js",
+  "dependencies": {
+    "@types/node": "^10.12.1",
+    "async": "^2.6.1",
+    "bitwise": "^2.0.0",
+    "hex-to-dec": "^1.0.1",
+    "tedious": "^3.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

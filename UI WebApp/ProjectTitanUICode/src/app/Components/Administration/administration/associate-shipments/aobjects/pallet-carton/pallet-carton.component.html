@@ -1,0 +1,131 @@
+<div *ngIf = "displayPalletCarton">
+    <div>
+        <ul id="head" class="nav nav-tabs">
+          <li >Map Beacons</li>
+          <li >Associate Hierarchy</li>
+          <li class="active">Associate Objects</li>
+          <li>Assign Gateways</li>
+        </ul>
+    </div>
+<div class="row justify-content-center" >
+  <div class="col-12" >
+  <ul class="nav nav-tabs">
+    <li *ngIf = "boxToprod">
+    <img class="icon-custom" src='../assets/icons/pills-bottle.svg'>
+    <img class="icon-custom" src='../assets/icons/link-building-symbol-of-two-chain-links-union-with-a-plus-sign.svg'>
+    <img class="icon-custom" src='../assets/icons/empty-blackbox-open.svg'>
+  </li>
+    <li *ngIf = "cartTobox" >
+      <img class="icon-custom" src='../assets/icons/empty-blackbox-open.svg'>
+      <img class="icon-custom" src='../assets/icons/link-building-symbol-of-two-chain-links-union-with-a-plus-sign.svg'>
+      <img class="icon-custom" src='../assets/icons/black-box.svg'>
+    </li>
+    <li class="active">
+      <img class="icon-custom" src='../assets/icons/black-box.svg'>
+      <img class="icon-custom" src='../assets/icons/link-building-symbol-of-two-chain-links-union-with-a-plus-sign.svg'>
+      <img class="icon-custom" src='../assets/icons/pallet-black.svg'>
+    </li>
+    <li><img class="icon-custom" src='../assets/icons/shuffle.svg'></li>
+    <div class="footer-button">
+      <button class="button-align" (click) = "gotoNext()"> Next></button>
+    <button class="button-align" (click) = "gotoPrevious()"><Previous</button>
+  </div>
+  </ul>
+</div>
+  </div>
+  <div class="row justify-content-center main-container" style="margin-top:10px">
+    <div class="col-2 destroy-margin">
+        <p class="heading"> Cartons
+            <!-- <img class="icon-custom" src='../assets/icons/magnifier.svg'>
+            <img class="icon-custom " src='../assets/icons/filter.svg'> -->
+          </p>
+            <div class="sub-heading">Remaining - </div>
+      <div class="col column-style">
+        <div *ngFor ="let item of CartonList" >
+          <div class="bullet-style">{{item.ObjectiD}}</div>
+          </div>
+      </div>
+    </div>
+    <div class="col-2 destroy-margin">
+      <p class="heading"> Pallets
+        <!-- <img class="icon-custom" src='../assets/icons/magnifier.svg'>
+        <img class="icon-custom " src='../assets/icons/filter.svg'> -->
+      </p>
+      <div class="sub-heading">Remaining - </div>
+      <div class="col column-style">
+          <div *ngFor ="let item of PalletList" >
+            <div class="bullet-style">{{item.ObjectiD}}</div>
+            </div>
+        </div>
+
+  </div>
+    <div class="col-5 destroy-margin">
+      <p class="heading"> Association
+        <img class="icon-custom" src='../assets/icons/plus (1).svg' (click)= "toggleView=!toggleView">
+        <!-- <img class="icon-custom" src='../assets/icons/magnifier.svg'> -->
+      </p>
+        <div class="col summary-section">
+            <app-tree-view [TreeResponse]="TreeResponse"></app-tree-view>
+          </div>
+  </div>
+    <div class="col-3">
+        <p class="heading"> Summary</p>
+        <div class="col summary-section">
+            <div class="col-Summary">
+            <p id="Summary">Unlinked</p>
+            <div><img class="icon-Summary" src='../assets/icons/Green-pills-bottle.svg'>{{UnlinkedProduct}}</div>
+            <div><img class="icon-Summary" src='../assets/icons/Green-empty-box-open.svg'>{{UnlinkedBoxes}}</div>
+            <div><img class="icon-Summary" src='../assets/icons/Green-box.svg'>{{UnlinkedCartons}}</div>
+            </div>
+            <div class="col-summary">
+                <p id="Summary">Not Utilized</p>
+                <div><img class="icon-Summary" src='../assets/icons/Green-empty-box-open.svg'></div>
+                <div><img class="icon-Summary" src='../assets/icons/Green-box.svg'></div>
+                <img class="icon-Summary" src='../assets/icons/Green-Pallet.svg'>{{UnUtilizedPallets}}
+            </div>
+        </div>
+  </div>
+  </div>
+  
+  <div *ngIf= "toggleView === true" id="myModal" class="modal row justify-content-center">
+  
+    <!-- Modal content -->
+    <div class="modal-content col-3 col-md-4" >
+      <h3>Associate
+      <!-- <img class="icon-custom-small" src='../assets/icons/cancel.svg' (click)="toggleView=!toggleView"> -->
+    </h3>
+      <div class="row ">
+      <div class="col-3">
+        <h5>Pallet</h5>
+      </div>
+        <div class="col-8 list-style">
+        <input id="pallet" autofocus="autofocus"  [(ngModel)] ="PalletVal" (change)="PalletValue($event)" />
+        <img class="icon-custom-modal" src='../assets/icons/cancel.svg' (click)="removePallet()">
+      </div>
+      </div>
+  
+      <div class="row">
+      <div class="col-3">
+      <h5>Cartons</h5>
+      </div>
+      <div class="col-8 list-style">
+      <input [(ngModel)] ="CartonVal" (change)="CartonValues($event)"/>
+        <div class="product-wrapper">
+            <div class="col-9 product-container">
+                <div *ngFor ="let item of AssociationList">
+                  <div class="list-style">{{item.ObjectiD}} 
+                    <img class="icon-custom-small" src='../assets/icons/cancel.svg' (click)="removeCarton(item)">
+                  </div>
+                  </div>
+              </div>
+        </div>
+      </div>
+      </div>
+      <div class="modal-footer-button">
+          <button class="button-align" (click) = "Associate()">Associate</button>
+          <button class="button-align" (click) = "AbortOperation()"> Cancel</button>
+        </div>
+      </div>
+  </div>
+</div>
+<app-association-summary [childMessage]="childMessage" *ngIf = "displayAssociation"></app-association-summary>

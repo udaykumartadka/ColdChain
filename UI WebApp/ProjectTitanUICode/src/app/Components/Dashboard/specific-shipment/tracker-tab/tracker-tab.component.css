@@ -1,0 +1,19 @@
+#TabContent{
+    margin-left:-15px;
+    margin-top:-18px;
+    margin-right:-15px
+}
+
+#mapContent{
+    height: 78vh;
+    width:80vw
+}
+
+
+/* 14 inch Laptop Screen */
+@media screen and (max-width:1440px){
+    #mapContent{
+        height: 70vh;
+        width:78vw
+    }
+}

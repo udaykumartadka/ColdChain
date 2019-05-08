@@ -1,0 +1,100 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>
+    Device Management
+  </title>
+</head>
+
+<body>
+  <div class="row">
+    <div class="col-10">
+      <h3 style="font-weight: bolder;">Device Management</h3>
+    </div>
+    <div id="addButton" class="col-1" style="align-items: right" data-toggle="modal" data-target="#addDeviceModal">
+         <img id="addButton" 
+          src="../../../../../assets/icons/add-circular-button.svg" style="  margin-left: -14px " >
+        <div class="addButton">Add Device</div>
+    </div>
+  </div>
+ 
+  <div class="table-container">
+
+<!-- Editable table -->
+      <div id="table" class="table-editable">
+        
+        <table class="table table-bordered table-responsive-md table-striped text-center">
+          <tr>
+            <th class="text-center">MacId</th>
+            <th class="text-center">Device Type</th>
+            <th class="text-center">Created On</th>
+            <th class="text-center">Status</th>
+            <th class="text-center">Actions</th>
+          </tr>
+          <tr *ngFor="let device of DeviceList; let id = index">
+            <td>{{device.MacId}}</td>
+            <td >{{device.DeviceType}}</td>
+            <td >{{device.CreatedOn | date:'medium'}}</td>
+            <td id="sn" *ngIf="device.Status == 'Online'">{{device.Status}}</td>
+            <td id="StatusN" *ngIf="device.Status == 'Offline'">{{device.Status}}</td>
+                      
+            <td>
+                <img src="../../../../../assets/icons/bin.svg" (click)="remove(id, device.id)" style="height: 25px; width: 25px; " />
+            </td>
+          </tr>
+        </table>
+      </div>
+  <!-- Editable table -->
+  </div>
+
+  <!-- MODAL TO ADD Device To System -->
+  <div class="modal fade" id="addDeviceModal" tabindex="-1" role="dialog" aria-labelledby="addDeviceModalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content" id="modalContent">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Add Device</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">MacId</th>
+                <th scope="col">DeviceType</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row">
+                  <input type="text" id="MacIdField" placeholder="Enter Mac ID" [(ngModel)]="MacId" required>
+                </td>
+                <td>
+                    <select  placeholder="Enter DeviceType" class="custom-select"  style="height: initial; font: bold;" name="{{DeviceType}}"
+                    [(ngModel)]="DeviceType">
+                    <option *ngFor="let object of objectList" [ngValue]="object">{{object}}</option>
+    
+                  </select>
+                  </td>
+                
+                </tr>
+            </tbody>
+          </table>
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button> <!--(click)="resetFields()"-->
+          <button type="button" class="btn btn-primary"  data-dismiss="modal"  (click)="AddDevice()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

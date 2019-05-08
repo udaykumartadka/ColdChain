@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/cast_libraries_material_featurehighlight_text_body_color">
+
+
+
+
+  <ProgressBar
+      android:id="@+id/progressBar"
+      style="?android:attr/yesNoPreferenceStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:layout_centerInParent="true">
+  </ProgressBar>
+
+  <TextView
+      android:id="@+id/message"
+      android:layout_marginTop="10dp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/progressBar"
+      android:layout_centerHorizontal="true"
+      android:gravity="center"
+      android:text=""
+      android:textColor="@color/black"
+      android:textSize="@dimen/activity_vertical_margin"
+      android:textStyle="bold"/>
+
+
+  <!--  <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sendcommand"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:onClick="sendCommand"
+        android:text="Send Command"
+        android:textAllCaps="false"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/header">
+        <TextView
+            android:id="@+id/status"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/status"
+            android:textColor="@color/black"
+            android:textSize="@dimen/button_font_size"
+            android:textStyle="bold"/>
+
+        <View
+            android:id="@+id/line"
+            android:layout_below="@+id/status"
+            style="@style/gradient"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/colorPrimary"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/header"
+        android:id="@+id/status_icon">
+
+        <ImageView
+            android:id="@+id/success"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/status_success" />
+
+        <ImageView
+            android:id="@+id/error"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/status_error" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/product_data"
+        android:layout_below="@+id/status_icon"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:text="@string/product_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_view_dim"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/colon_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/product_name"
+            android:layout_marginStart="40dp"
+            android:text=":"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_view_dim" />
+
+        <TextView
+            android:id="@+id/product_name_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/colon_one"
+            android:layout_marginStart="40dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_view_dim"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/product_type"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/product_name"
+            android:layout_below="@+id/product_name"
+            android:text="@string/product_type"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_view_dim"
+            android:textStyle="bold"/>
+
+
+        <TextView
+            android:id="@+id/colon_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/colon_one"
+            android:layout_below="@+id/colon_one"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/product_type"
+            android:text=":"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_view_dim"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/product_type_value"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/colon_two"
+            android:layout_alignLeft="@+id/product_name_value"
+            android:layout_below="@+id/product_name_value"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_view_dim"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/product_id"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/product_type"
+            android:layout_below="@+id/product_type"
+            android:text="@string/product_id"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_view_dim"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/colon_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/colon_one"
+            android:layout_below="@+id/colon_two"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/product_id"
+            android:text=":"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_view_dim"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/product_id_value"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/colon_two"
+            android:layout_alignLeft="@+id/product_type_value"
+            android:layout_below="@+id/product_type_value"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_view_dim"
+            android:textStyle="bold"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="30sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="40dp"
+            android:layout_below="@+id/product_id_value"
+            android:background="@drawable/rounded_textview"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:id="@+id/temp_count"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/temperature"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="40dp"
+            android:layout_below="@+id/temp_count"
+            android:gravity="center"
+            android:id="@+id/temperature"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="30sp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/product_id_value"
+            android:layout_alignLeft="@+id/product_id_value"
+            android:background="@drawable/rounded_textview"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:id="@+id/humidity_count"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/humidity"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/humidity_count"
+            android:layout_alignLeft="@+id/humidity_count"
+            android:id="@+id/humidity"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="30sp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/temperature"
+            android:layout_alignLeft="@+id/temperature"
+            android:background="@drawable/rounded_textview"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:id="@+id/vibration_count"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/vibration"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/vibration_count"
+            android:layout_alignLeft="@+id/vibration_count"
+            android:id="@+id/vibration"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="30sp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/humidity"
+            android:layout_alignLeft="@+id/humidity"
+            android:background="@drawable/rounded_textview"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:id="@+id/shock_count"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/shock"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/shock_count"
+            android:layout_alignLeft="@+id/shock_count"
+            android:id="@+id/shock"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/bottom_line"
+        style="@style/gradient"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/launch_scan"
+        android:background="@color/colorPrimary"/>
+
+    <ImageView
+        android:id="@+id/launch_scan"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:src="@drawable/launch_scan" />-->
+</RelativeLayout>

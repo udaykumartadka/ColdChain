@@ -1,0 +1,247 @@
+*{
+  font-weight: bolder;
+  }
+  .icon-custom{
+      float: right;
+      width: 19px;
+      margin-right: 2px;
+      cursor: pointer;
+    }
+    .icon-custom-small{
+      float: right;
+      width: 10px;
+      cursor: pointer;
+      padding-top: 8px;
+    }
+    .icon-custom-modal{
+      width: 10px;
+      cursor: pointer;
+    }
+    .heading{
+        background-color:#f1f1f1;
+        height: 25px;
+        font-size: 15px;
+    }
+    .sub-heading{
+      background-color:#95c210;
+      padding:2px;
+      font-weight:bold
+    }
+    p{
+      margin-bottom: 0;
+    }
+    .column-style{
+      border:1px solid #dadada;
+      height: 53vh;
+      overflow-y: scroll;
+      margin-top:5px;
+    }
+    .modal {
+        display: block; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+  
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        height: 80%;
+    }
+  
+    .active{
+      background-color: white;
+      border-bottom: 1px solid green;
+    }
+    .main-container{
+      height: 70vh;
+      overflow-y: scroll;
+    }
+  
+    .button-align{
+      background-color:#759b04;
+      cursor: pointer;
+      float: right;
+      font-size: 14px;
+      color: white;
+      width: 75px;
+      border-radius: 5px;
+      bottom:0;
+    }
+    li{
+      padding:5px 30px 5px 5px;
+      cursor: pointer;
+      font-weight: bolder;
+      list-style: none;
+    }
+    #head{
+      background-color: whitesmoke;
+      font-size: 12px;
+    }
+      .active{
+        background-color: white;
+        border-bottom: 2px solid #2f922f
+      }
+      .footer-button{
+        padding-bottom: 3px;
+        margin-right: 10px;
+        position:absolute;
+        right: 0;
+      }
+      .destroy-margin{
+        padding-right: 0px;
+      }
+      .bullet-style{
+        color: deepskyblue;
+        font-size: 12px;
+        margin-bottom: 4px;
+        font-weight: bolder;
+      }
+      .summary-section{
+        height:57vh;
+        overflow-y: scroll;
+      }
+  .modal-content-style{
+    height: max-content;
+    border:1px solid #ececec;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .list-style{
+    height: inherit;
+    border:1px solid #ececec;
+    padding: 10px;
+    margin-top: 10px;
+    color:#33d6ff;
+    margin-bottom:10px;
+  }
+  .list-style-1{
+    height: inherit;
+    border:1px solid #ececec;
+    margin-top: 10px;
+    color:#33d6ff;
+    margin-bottom:10px;
+  }
+  .product-wrapper{
+    overflow-y: scroll;
+    height: 150px;
+  }
+  .container-summary{
+    margin-top: 5px;
+    }
+  .modal-footer-button{
+    bottom:0;
+    right:0;
+    position:absolute;
+    padding: 5px;
+  }
+  .scroll-list{
+  overflow-y: scroll
+  }
+  .space-heading{
+    height: 24px;
+    background-color: #f1f1f1;
+  }
+  .icon-Summary{
+    width:43px;
+    padding: 10px;
+  }
+  .icon-assoc{
+    width: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  .col-summary{
+    padding: 10px;
+  }
+  #box{
+    color:#669900;
+    padding:2px;
+    border: 1px solid aliceblue;
+  }
+  #Summary{
+    color:#3abffa;
+    font-weight:bold
+  }
+  .summary-section{
+    height:58vh;
+    border:1px solid #dadada;
+  }
+  @media screen and (min-width:1440px){
+    .footer-button{
+      margin-top:5px;
+    }
+    .bullet-style{
+      color: deepskyblue;
+      font-size: 14px;
+      margin-bottom: 8px;
+      font-weight: bolder;
+    }
+    .icon-custom{
+      width: 25px;
+      margin-right: 2px;
+    }
+    #head{
+      background-color: whitesmoke;
+      font-size: 14px;
+      height:40px;
+    }
+    .summary-section{
+      height:57vh;
+    }
+    .column-style{
+      height: 53vh;
+    }
+    .heading{
+      height: 30px;
+      font-size: 20px;
+    }
+    .sub-heading{
+      padding: 7px;
+    }
+  .modal-content{
+    height:60%;
+  }
+  .product-wrapper{
+    height: 250px;
+  }
+  .space-heading{
+    height: 38px;
+  }
+  
+  .main-container{
+    height: 63vh;
+  }
+  .icon-Summary{
+    width:52px;
+    padding: 10px;
+  }
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: whitesmoke;
+  }
+  ::-webkit-scrollbar{
+  width:3px;
+  }
+  /* Handle */
+  :-webkit-scrollbar-thumb {
+    background: yellow;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover { 
+    background: yellow;
+  }
+  

@@ -1,0 +1,15 @@
+<i class="fa"></i>
+<div *ngIf="displayMap" style="height: 78vh">
+  <x-map #xmap [Options]="_options" [Box]="_box">
+    <x-map-marker *ngFor="let m of _markers; let i=index" [Latitude]="m.latitude" [Longitude]="m.longitude" [Latitude]=lat
+      [Longitude]=long [Title]="" [IconInfo]="_iconInfo">
+      <x-info-box [DisableAutoPan]="true" [Title]="'My InfoBox'">
+        <div class="container">
+          <app-map-overlay-popup></app-map-overlay-popup>
+
+        </div>
+
+      </x-info-box>
+    </x-map-marker>
+  </x-map>
+</div>

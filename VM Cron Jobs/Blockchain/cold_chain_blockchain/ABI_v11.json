@@ -1,0 +1,583 @@
+[
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_shipmentId",
+				"type": "bytes16"
+			}
+		],
+		"name": "getShipmentById",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes16"
+			},
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_shipmentId",
+				"type": "bytes16"
+			}
+		],
+		"name": "emitShipmentEvent",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_shipmentId",
+				"type": "bytes16"
+			},
+			{
+				"name": "_heartBeat",
+				"type": "string"
+			},
+			{
+				"name": "_messageType",
+				"type": "string"
+			},
+			{
+				"name": "_fromUser",
+				"type": "string"
+			}
+		],
+		"name": "updateShipmentHeartBeat",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getShipments",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes16[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_shipmentId",
+				"type": "bytes16"
+			}
+		],
+		"name": "getMsgTypeDetails",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_shipmentId",
+				"type": "bytes16"
+			}
+		],
+		"name": "emitShipmentDetailsEvent",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_shipmentId",
+				"type": "bytes16"
+			},
+			{
+				"name": "_status",
+				"type": "string"
+			},
+			{
+				"name": "_messageType",
+				"type": "string"
+			},
+			{
+				"name": "_fromUser",
+				"type": "string"
+			}
+		],
+		"name": "updateShipmentStatus",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_shipmentId",
+				"type": "bytes16"
+			},
+			{
+				"name": "_docRef",
+				"type": "string"
+			},
+			{
+				"name": "_messageType",
+				"type": "string"
+			},
+			{
+				"name": "_fromUser",
+				"type": "string"
+			}
+		],
+		"name": "updateShipmentDocs",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_shipmentId",
+				"type": "bytes16"
+			},
+			{
+				"name": "_shipmentInfo",
+				"type": "string"
+			},
+			{
+				"name": "_messageType",
+				"type": "string"
+			},
+			{
+				"name": "_fromUser",
+				"type": "string"
+			}
+		],
+		"name": "updateShipmentInfo",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_shipmentId",
+				"type": "bytes16"
+			}
+		],
+		"name": "getShipmentDetails",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "bytes32"
+			},
+			{
+				"name": "",
+				"type": "bytes32"
+			},
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_shipmentId",
+				"type": "bytes16"
+			}
+		],
+		"name": "emitShipmentAlertsEvent",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_shipmentId",
+				"type": "bytes16"
+			},
+			{
+				"name": "_productList",
+				"type": "string"
+			},
+			{
+				"name": "_sourceLocation",
+				"type": "string"
+			},
+			{
+				"name": "_destinationLocation",
+				"type": "string"
+			},
+			{
+				"name": "_logisticsPartner",
+				"type": "string"
+			},
+			{
+				"name": "_dateOfShipment",
+				"type": "bytes32"
+			},
+			{
+				"name": "_dateOfDelivery",
+				"type": "bytes32"
+			},
+			{
+				"name": "_purchaseOrderNumber",
+				"type": "string"
+			},
+			{
+				"name": "_messageType",
+				"type": "string"
+			},
+			{
+				"name": "_fromUser",
+				"type": "string"
+			}
+		],
+		"name": "createShipment",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_shipmentId",
+				"type": "bytes16"
+			}
+		],
+		"name": "emitMsgTypeDetailsEvent",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_shipmentId",
+				"type": "bytes16"
+			},
+			{
+				"name": "_alertCount",
+				"type": "uint16"
+			},
+			{
+				"name": "_alertDetails",
+				"type": "string"
+			},
+			{
+				"name": "_messageType",
+				"type": "string"
+			},
+			{
+				"name": "_fromUser",
+				"type": "string"
+			}
+		],
+		"name": "updateShipmentAlerts",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_shipmentId",
+				"type": "bytes16"
+			},
+			{
+				"name": "_shipmentInfo",
+				"type": "string"
+			},
+			{
+				"name": "_status",
+				"type": "string"
+			},
+			{
+				"name": "_docRef",
+				"type": "string"
+			},
+			{
+				"name": "_heartBeat",
+				"type": "string"
+			},
+			{
+				"name": "_messageType",
+				"type": "string"
+			},
+			{
+				"name": "_fromUser",
+				"type": "string"
+			}
+		],
+		"name": "fillMsgTypeDetails",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_shipmentId",
+				"type": "bytes16"
+			}
+		],
+		"name": "getShipmentAlerts",
+		"outputs": [
+			{
+				"name": "",
+				"type": "int256"
+			},
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "shipmentId",
+				"type": "bytes16"
+			},
+			{
+				"indexed": false,
+				"name": "blockTimestamp",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "productList",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "messageType",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "fromUser",
+				"type": "string"
+			}
+		],
+		"name": "ShipmentEvent",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "shipmentId",
+				"type": "bytes16"
+			},
+			{
+				"indexed": false,
+				"name": "blockTimestamp",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "sourceLocation",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "destinationLocation",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "logisticsPartner",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "dateOfShipment",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "dateOfDelivery",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "purchaseOrderNumber",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "messageType",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "fromUser",
+				"type": "string"
+			}
+		],
+		"name": "ShipmentDetailsEvent",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "shipmentId",
+				"type": "bytes16"
+			},
+			{
+				"indexed": false,
+				"name": "blockTimestamp",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "shipmentInfo",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "status",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "docRef",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "heartBeat",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "messageType",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "fromUser",
+				"type": "string"
+			}
+		],
+		"name": "MsgTypeDetailsEvent",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "shipmentId",
+				"type": "bytes16"
+			},
+			{
+				"indexed": false,
+				"name": "blockTimestamp",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "alertCount",
+				"type": "int256"
+			},
+			{
+				"indexed": false,
+				"name": "alertDetails",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "messageType",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "fromUser",
+				"type": "string"
+			}
+		],
+		"name": "ShipmentAlertsEvent",
+		"type": "event"
+	}
+]

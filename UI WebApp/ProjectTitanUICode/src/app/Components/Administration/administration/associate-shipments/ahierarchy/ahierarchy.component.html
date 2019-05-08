@@ -1,0 +1,39 @@
+<div *ngIf = "displayAhier">
+<ul class="nav nav-tabs">
+  <li >Map Beacons</li>
+  <li class="active">Associate Hierarchy</li>
+  <li >Associate Objects</li>
+  <li >Assign Gateways</li>
+  <div class="footer-button">
+    <button class="button-align" (click) = "gotoNext()"> Next></button>
+  <button class="button-align" (click) = "gotoPrevious()"> <Previous </button>
+  </div>
+</ul>
+
+
+<div class="row justify-content-center screen-division" >
+  <div class="col-4 screen-division">
+    <div class="col-container">
+      <div *ngFor ="let item of list" id={{item}} class="batch-design" (drop)="DropOnList($event)" (dragover)="allowDrop($event)">
+      <p draggable="true" (dragstart)="dragFromList($event)">
+        <i class="fa fa-navicon icon-custom" aria-hidden="true"></i>
+        <span class="text-align">{{item}}</span></p>
+    </div>
+  </div>
+  </div>
+<div class="col-4" (drop)="DropOnFlow($event)" (dragover)="allowDrop($event)" >
+  <div class="col-container">
+  <div *ngFor ="let item of FlowArray; let i = index" [ngClass]="'align-' + (i+1)">
+    <p><i class="fa fa-navicon icon-custom" aria-hidden="true"></i><span class="text-align">{{item}}</span>
+      <i class="fa fa-times remove-item" (click) ="removeTree(item)"></i></p>
+  </div>
+</div>
+</div>
+
+</div>
+</div>
+<!-- <app-aobjects *ngIf="Aobjects" [childMessage] = "FlowArray"></app-aobjects> -->
+<app-box-product *ngIf = 'BoxId === 0' [childMessage] = "FlowArray"></app-box-product>
+<app-carton-box *ngIf = 'CartonId === 0' [childMessage] = "FlowArray"></app-carton-box>
+<app-pallet-carton *ngIf = 'palletId === 0' [childMessage] = "FlowArray"></app-pallet-carton>
+<app-agateways *ngIf = "agateways" [childMessage] = "FlowArray"></app-agateways>

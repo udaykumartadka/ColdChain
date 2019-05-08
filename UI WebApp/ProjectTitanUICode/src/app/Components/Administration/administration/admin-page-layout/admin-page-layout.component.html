@@ -1,0 +1,24 @@
+<body *ngIf="viewAdmin">
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link" id="nav-User-tab" data-toggle="tab" href="#nav-User" role="tab" aria-controls="nav-User" aria-selected="true">User</a>
+      <a class="nav-item nav-link active" id="nav-Shipments-tab" data-toggle="tab" href="#nav-Shipments" role="tab" aria-controls="nav-Shipments" aria-selected="false">Shipments</a>
+      <a class="nav-item nav-link" id="nav-Devices-tab" data-toggle="tab" href="#nav-Devices" role="tab" aria-controls="nav-Devices" aria-selected="false">Devices</a>
+      
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade " id="nav-User" role="tabpanel" aria-labelledby="nav-User-tab">
+      <app-admin-user-tab></app-admin-user-tab>
+    </div>
+  
+    <div class="tab-pane fade show active" id="nav-Shipments" role="tabpanel" aria-labelledby="nav-Shipments-tab">
+  <app-admin-shipments-tab> </app-admin-shipments-tab>
+    </div>
+  
+    <div class="tab-pane fade" id="nav-Devices" role="tabpanel" aria-labelledby="nav-Devices-tab">
+     <app-admin-devices-tab></app-admin-devices-tab>
+    </div>
+  
+  </div>
+</body>

@@ -1,0 +1,206 @@
+/* CSS For LARGER Screen (Width > 1440px) */
+
+.TimeLineWrapper{
+    width:283px;
+    height: 371px;
+    overflow-y: scroll
+  }
+
+  
+#TxnDetailsModalCenterTitle{
+       margin-left:150px;
+   
+}
+
+#shipmentCreationModalCenterTitle,#TxnDetailsModalCenterTitle,
+#statusUpdateModalCenterTitle,#ShipmentInfoUpdateModalCenterTitle,
+#ShipmentDocUpdateModalCenterTitle{
+    font-size:18px;
+    font-weight:bolder;
+    padding:5px;
+}
+
+
+#msg{
+    /* overflow-x:scroll; */
+    overflow:hidden;
+}
+.modal-header{
+    padding:5px;
+    padding-right:1.5em;
+}
+/* Styling Scrollbar */
+.timeline{
+    overflow:hidden !important;
+    margin-top:5px
+}
+.TimeLineWrapper::-webkit-scrollbar{
+    width:5px;
+}
+
+.TimeLineWrapper::-webkit-scrollbar-track{
+    border-radius: 5px;
+    background: rgba(1, 25, 90, 0.1);
+    border: 1px solid #ccc;
+}
+
+.TimeLineWrapper::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #3498db;
+    border: 1px solid #aaa;
+  }
+
+  .TimeLineWrapper::-webkit-scrollbar-thumb:hover{
+    background: #34d5db;
+  }
+
+  .TimeLineWrapper::-webkit-scrollbar-thumb:active{
+    background: linear-gradient(left, #22ADD4, rgb(186, 170, 30));
+  }
+
+  .TxnHash{
+      background:#0099cc;
+      border-radius: 8px;
+      padding:5px;
+      font-size:14px;
+      color:white;
+      font-weight:bolder;
+      text-align:center
+       }
+
+       #bcDetailsHeader,#bcData{
+           font-weight:bolder;
+           font-size:12px;
+           margin-left:10px;
+           border-radius:5px;
+           padding:3px
+       }
+
+       .row{
+           margin-bottom:5px
+       }
+             #bcDetailsHeader{
+               background:#0099cc;
+               margin-left:15px;
+               color:white;
+               text-align:center
+           } 
+           
+           #bcData{
+               background:white;
+               /* margin-left:-5px */
+           }
+
+           .row:hover{
+               background:#95b9f0;
+               opacity:0.8;
+               border-radius:8px;
+               padding:5px
+           }
+
+  .blockchainTxnDetails{
+      height:100%;
+      background:#e0ebeb;
+      margin-top:5px;
+      border-radius:8px;
+      padding:12px;
+  }
+  /* TimeLine COde HEre */
+  .timeline{
+      overflow:hidden;
+      overflow-y:scroll;
+      padding:10px;
+      position:relative;
+      padding:0px;
+      margin:0px
+  }
+
+  .timeline:before{
+      content:'';
+      width:2px;
+      height:100%;
+      background:#123e5c;
+      position: absolute;
+      left:10px;
+  }
+
+  /* .timeline:after{
+      height:100%
+  } */
+
+  .content{
+      background:#e6e6e6;
+      padding:10px;
+      margin:20px 35px;
+      width:230px;
+      border-radius:8px;
+      /* font-size:11px; */
+      font-weight:bolder;
+      /* box-shadow: 0px 0px 0px 6px #ccc; */
+     
+  }
+
+  .content p {
+    padding-left: 10px;
+    /* margin-bottom:-5px */
+  }
+
+  #msgType{
+      margin-bottom:0px;
+      font-size:12px !important;
+     
+      
+  }
+
+  #msg{
+      font-size:11px;
+      background:white;
+      border-radius:10px;
+      height: 40px;
+      padding-left: 8px;
+      padding-top: 3px;
+      margin-bottom: 1px;
+  }
+
+  #msg:hover{
+  cursor:pointer
+}
+  .content h3{
+      font-size:13px;
+      font-weight:bold;
+      color:#3498db
+  }
+  .content:before{
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: #e6e6e6;
+    position: absolute;
+    left: 26px;
+    /* top: 23%; */
+    transform: translatey(140%) rotate(45deg);
+  }
+
+  .content:after{
+    content: '';
+    width: 15px;
+    height: 15px;
+    background: #3498db;
+    border-radius: 50%;
+    position: absolute;
+    left: 3px;
+    /* top: 23%; */
+    transform: translatey(-357%) rotate(45deg);
+  }
+  /* Timeline Code Ends */
+  /*------------------------------------ MEDIA QUERIES SEPERATOR------------------------------- */
+
+  /* Media Queries for Css for Laptop Screen (width<1440px) */
+  @media screen and (max-width:1440px){
+
+    .TimeLineWrapper{
+        width:283px;
+        height:247px;
+        overflow-y: scroll
+      }
+  }

@@ -1,0 +1,131 @@
+*{
+  font-weight: bold;
+}
+.button-align{
+  background-color:#669900;
+  cursor: pointer;
+  float: right;
+  font-size: 14px;
+  color: white;
+  width: 75px;
+  border-radius: 5px;
+  bottom:0;
+}
+.icon-custom{
+  float: right;
+  width: 19px;
+  cursor: pointer;
+}
+.active{
+  background-color: white;
+  border-bottom: 1px solid green;
+}
+li{
+  padding:5px 30px 5px 5px;
+  cursor: pointer;
+  font-weight: bolder;
+  list-style: none;
+}
+#head{
+  background-color: whitesmoke;
+  font-size: 12px;
+}
+.column-style{
+  height: 60vh;
+  overflow-y: scroll;
+  border: 1px solid #ececec;
+}
+.heading{
+  height: 40px;
+  font-size: 20px;
+  background-color: #f1f1f1;
+  margin-left: 10px;
+}
+.icon-Summary{
+  width:43px;
+  padding: 10px;
+}
+.footer-button{
+  padding-bottom: 3px;
+  margin-right: 10px;
+  position:absolute;
+  right: 0;
+}
+.container-summary{
+  height: 70vh;
+  border:1px solid #dadada;
+}
+.col-summary{
+  padding: 10px;
+}
+#Summary{
+  color:#3abffa;
+}
+@media screen and (min-width:1440px){
+  .icon-custom{
+    width: 25px;
+    margin-right: 2px;
+  }
+  #head{
+    background-color: whitesmoke;
+    font-size: 14px;
+    height:40px;
+  }
+  .column-style{
+    height: 58vh;
+    border: 1px solid #ececec;
+  }
+  .container-summary{
+    height: 50vh;
+    border: none;
+  }
+  .icon-Summary{
+    width: 52px;
+  }
+  .footer-button{
+    margin-top:5px;
+  }
+}
+#box{
+  padding:5px 20px 5px 5px;
+  cursor: pointer;
+  list-style: none;
+  color:#669900;
+  border: 1px solid aliceblue;
+  width:30%;
+  }
+
+ul{
+  background-color: #ffffff;
+}
+.Product{
+  content: url('src/assets/icons/pills-bottle.svg');
+  width:20px;
+}
+.Box{
+  content: url('src/assets/icons/empty-box-open.svg');
+  width:20px;
+}
+.Pallet{
+  content: url('src/assets/icons/pallet.svg');
+  width:20px;
+}
+.Carton{
+  content: url('src/assets/icons/box.svg');
+  width:20px;
+}
+::-webkit-scrollbar-track {
+  background: whitesmoke;
+  }
+  ::-webkit-scrollbar{
+  width:3px;
+  }
+  /* Handle */
+  :-webkit-scrollbar-thumb {
+  background: yellow;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover { 
+  background: yellow;
+  }

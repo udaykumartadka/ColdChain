@@ -1,0 +1,53 @@
+{
+  "name": "titan-secure-offline-app",
+  "version": "1.0.9",
+  "description": "This modules contains the Node.js code for the gateway to scan the list of beacons and GPS and send data to Azure IoT Hub.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "lint": "./node_modules/.bin/eslint .",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "node ./node_modules/mocha/bin/mocha"
+  },
+  "files": [
+    "index.js",
+    "config.json"
+  ],
+  "bin": "index.js",
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "rigado",
+    "oemblue",
+    "noble",
+    "bluetooth",
+    "mqtt"
+  ],
+  "author": "Suman Sharma",
+  "license": "ISC",
+  "dependencies": {
+    "async": "2.6.1",
+    "azure-iot-device-mqtt": "^1.7.3",
+    "bindings": "^1.3.1",
+    "bluetooth-hci-socket": "^0.5.1",
+    "connectivity": "1.0.1",
+    "fs": "0.0.1-security",
+    "lodash": "4.17.11",
+    "macaddress": "^0.2.9",
+    "nmea": "^0.1.0",
+    "noble": "^1.9.1",
+    "npm": "^6.4.1",
+    "request": "^2.88.0",
+    "serialport": "^7.1.2",
+    "usb": "^1.5.0"
+  },
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2",
+    "sinon": "^2.3.8",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.10.0"
+  }
+}

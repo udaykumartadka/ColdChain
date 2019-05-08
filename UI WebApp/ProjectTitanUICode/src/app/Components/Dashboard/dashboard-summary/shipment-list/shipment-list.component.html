@@ -1,0 +1,24 @@
+<div class="shipmentListSection">
+
+  <div *ngFor="let shipment of shipmentList; let i of index" class="singleShipment" (click)="setLatLong(shipment.ShipmentID)">
+    <div class="infoSection" style="text-align:right"><img (click)="toggleOverview(i,shipment.ShipmentID)" src="../../../../../assets/icons/info.svg"
+        data-toggle="tooltip" data-placement="top" title="Click here to view Shipment Overview" style="height:16px;width:16px;">
+    </div>
+    <div class="shipmentIdSection">{{shipment.ShipmentID}}</div>
+    <div class="viewShipmentSection">
+
+      <img [routerLink]="['/SpecificShipment']" id="viewShipmentDetails" src="../../../../../assets/icons/visible-opened-eye-interface-option (1).svg"
+        data-toggle="tooltip" data-placement="top" title="Redirect to Detailed Shipment Dashboard for this shipment"
+        style="height:20px;width:20px"
+        
+        (click)="setShipmentID(shipment.ShipmentID,shipment.ShipmasterID)">
+<img *ngIf=" shipment.AlertStatus == 'Active'" src ="../../../../../assets/icons/icons/alarm_1.svg" id="alertIcon">
+    </div>
+    <div *ngIf="displayOverview === i" class="overview">
+      <app-shipment-overview-layout></app-shipment-overview-layout>
+    </div>
+
+  </div>
+
+
+</div>

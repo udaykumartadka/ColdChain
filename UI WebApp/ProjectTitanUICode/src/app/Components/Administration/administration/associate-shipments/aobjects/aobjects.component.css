@@ -1,0 +1,22 @@
+.icon-custom{
+    width: 30px;
+    padding: 2px;
+  }
+  li{
+    padding: 0px 25px 5px 10px;
+  }
+  .link{
+    color:green;
+  }
+  .container{
+    border: 1px solid #dadada;
+    height: -webkit-fill-available;
+    padding: 5px;
+  }
+  ul{
+    background-color: #f0f9ff;
+  }
+    .active{
+      background-color: white;
+      border-bottom: white
+    }

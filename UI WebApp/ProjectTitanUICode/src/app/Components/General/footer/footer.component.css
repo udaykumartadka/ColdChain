@@ -1,0 +1,15 @@
+.footer{
+    position:fixed;
+    height:30px;
+    bottom:0;
+    background:#07608A;
+    color:white;
+    width:100%;
+    /* margin-left:-18px; */
+    padding:5px
+}
+
+#copyright{
+    font-size:14px;
+    /* background:olivedrab */
+}

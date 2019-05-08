@@ -1,0 +1,14 @@
+<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <defs>
+  <pattern height="100" width="100" y="0" x="0" patternUnits="userSpaceOnUse" id="gridpattern">
+   <image height="100" width="100" y="0" x="0" id="svg_46"/>
+  </pattern>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_4"/>
+  <g id="svg_50"/>
+  <g id="svg_17"/>
+  <ellipse stroke="#ffffff" fill-opacity="0" ry="179.5" rx="179.5" id="svg_9" cy="240.50001" cx="302.50001" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="99" fill="#000000"/>
+ </g>
+</svg>

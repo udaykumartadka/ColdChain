@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+</head>
+<body>
+  <div class="Navbar">
+   <div class="row">  
+    <div class="col-2" id="Brand"  >Titan-Secure</div> <!-- [routerLink]="['/home']"-->
+    <div class="col-5" id="TagLine"> A Secure Cold Chain and Anti-Counterfeiting Solution - Leveraging IoT & Blockchain</div>
+
+    <div  *ngIf ="viewdashboard" [routerLink]="['/dashboard']" [routerLinkActive]="['active']" id="TabHeading"  class="col-1"> Dashboard</div> <!--*ngIf ="viewdashboard" -->
+ 
+    <div *ngIf ="viewAdmin" [routerLink]="['/Administration']" [routerLinkActive]="['active']" class="col-1" id="TabHeading">Admin</div> <!-- *ngIf ="viewAdmin"-->
+  
+ 
+    <!-- <div *ngIf="viewSignIn" [routerLink]="['/login']" [routerLinkActive]="['active']" class="col-1" id="TabHeading">Sign In</div> -->
+     <!--  *ngIf="viewSignIn"-->
+   
+     <div  class="col-2"  >  </div>
+
+    <div *ngIf="viewSignOut" class="col-1" id="signOut" (click)="logOut()"> Sign Out  <img id="signOutIcon" src="../../../../assets/icons/sign-out-option.svg"></div>
+  </div>
+  </div>
+
+</body>
+</html>
