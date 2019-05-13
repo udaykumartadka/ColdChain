@@ -1,1 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Type="table=TestAlert" Target="/Data/dbo.TestAlert/TableData-000-00000.BCP" Id="R573a9920b3d74b12" /><Relationship Type="schema=dbo" Target="/Data/dbo.TestAlert/TableData-000-00000.BCP" Id="Ra48b9444a59b476f" /></Relationships>
