@@ -1,0 +1,175 @@
+<div *ngIf="displayMapBeacons">
+   
+    <div>
+      <ul class="nav nav-tabs">
+        <li (click)="id ='map-beacons'" class="active">Map Beacons</li>
+        <li>Associate Hierarchy</li>
+        <li>Associate Objects</li>
+        <li>Assign Gateways</li>
+      </ul>
+    </div>
+    
+    
+    <div class="MapBeacons">
+    <!-- Editable table -->
+    <div class="reloadSection" style="float:right" >
+      <img id="reloadButton" (click)="refresh()" src="../../../../../assets/icons/refresh-button.svg">
+    </div>
+        
+     
+          
+        <button type="button" (click)="add()">
+          <img src="../../../../../../assets/icons/scan-barcode-with-scanner-tool.svg" /> 
+         Map
+        </button>
+        <div style="padding-top: 7px; border-color: green;">
+          <select class='select-option' required [(ngModel)]='optionSelected' (ngModelChange)='onOptionsSelected($event)'>
+            <option class='option' *ngFor='let option of options' [value]="option">{{option}}</option>
+        </select>
+      </div>
+         <div class="table-container">
+        <div id="table" class="table-editable">
+        <table class="table table-bordered table-responsive-md table-striped text-center" style="margin-left:auto;margin-right:auto">
+          <tr>
+            <th *ngIf="hidden" rowspan="2"> BeaconObjectId </th>
+            <th rowspan="2">Serial No.</th>
+            <th rowspan="2">Beacon Id</th>
+            <th rowspan="2">Object ID</th>
+            <th rowspan="2">Object Type</th>
+            <th rowspan="2">Content</th>
+            <th colspan="2">Temperature (&#8451;) </th>
+            <th rowspan="2">Temperature Alert Threshold Time</th>
+            <th colspan="2">Humidity (%)</th>
+            <th rowspan="2">Humidity Alert Threshold Time</th>
+            
+            <th rowspan="2">Actions</th>
+          </tr>
+          <tr >
+            <th>Min</th>
+            <th>Max</th>
+            <th>Min</th>
+            <th>Max</th>
+          </tr>
+          <tr *ngFor="let beacon of beaconList; let id = index">
+              <td *ngIf="hidden">{{beacon.BeaconObjectId}}</td>
+              <td>{{id+1}}</td>
+            <td  contenteditable="true" aria-placeholder="Beacon_Id" (keyup)="changeValue(id, 'BeaconID', $event)"  (blur)="updateList(id, 'BeaconID', $event)">{{beacon.BeaconID}}</td>
+            <td contenteditable="true" aria-placeholder="ObjectId" (keyup)="changeValue(id, 'ObjectId', $event)"  (blur)="updateList(id, 'ObjectId', $event)">{{beacon.ObjectId}}</td>
+            <td>
+            <mat-select placeholder={{beacon.ObjectType}} (change)="changeMatValue(id, 'ObjectType', $event)" (blur)="updateList(id, 'ObjectType', $event)">
+              <mat-option *ngFor="let object of Objects" [value]="object.Name" >
+                {{ object.Name }}
+              </mat-option>
+            </mat-select>
+          </td>
+          <td>
+            <mat-select placeholder={{beacon.Content}} (change)="changeMatValue(id, 'Content', $event)" (blur)="updateList(id, 'Content', $event)">
+              <mat-option *ngFor="let content of contentList" [value]="content" >
+                {{ content }}
+              </mat-option>
+            </mat-select>
+          </td>  
+            <td contenteditable="true"  aria-placeholder="Min Temp" (keyup)="changeValue(id, 'TemperatureMin', $event)"  (blur)="updateList(id, 'TemperatureMin', $event)">{{beacon.TemperatureMin}}</td>
+            <td contenteditable="true"  aria-placeholder="Max Temp" (keyup)="changeValue(id, 'TemperatureMax', $event)"  (blur)="updateList(id, 'TemperatureMax', $event)">{{beacon.TemperatureMax}}</td>
+            <td contenteditable="true"  aria-placeholder="Temp Threshold" (keyup)="changeValue(id, 'TemperatureAlertThreshold', $event)"  (blur)="updateList(id, 'TemperatureAlertThreshold', $event)">{{beacon.TemperatureAlertThreshold}}</td>
+            <td contenteditable="true"  aria-placeholder="Min Humidity" (keyup)="changeValue(id, 'HumidityMin', $event)"  (blur)="updateList(id, 'HumidityMin', $event)">{{beacon.HumidityMin}}</td>
+            <td contenteditable="true"  aria-placeholder="Max Humidity" (keyup)="changeValue(id, 'HumidityMax', $event)"  (blur)="updateList(id, 'HumidityMax', $event)">{{beacon.HumidityMax}}</td>
+            <td contenteditable="true" aria-placeholder="Humidity Threshold" (keyup)="changeValue(id, 'HumidityAlertThreshold', $event)"  (blur)="updateList(id, 'HumidityAlertThreshold', $event)">{{beacon.HumidityAlertThreshold}}</td>
+           
+            <td >
+              <span  class="table-remove">
+               
+                <img class="icon-custom-small" src='../../../../../assets/icons/checked (1).svg' (click)="SavebeaconList(id)">
+                <img class="icon-custom-small" src='../../../../../../assets/icons/edit (1).svg' (click)="editrecord(id)">
+                <img class="icon-custom-small" src='../../../../../assets/icons/bin.svg' (click)="remove(id, beacon.BeaconObjectId)">
+              </span>
+              </td>
+              
+        <!--   <td >
+              <span class="table-remove">
+                  <img class="icon-custom-small" src='../../../../../../assets/icons/edit (1).svg' (click)="editrecord(id)">
+                  <img class="icon-custom-small" src='../../../../../assets/icons/bin.svg' (click)="remove(id, beacon.BeaconObjectId)">
+              </span>
+                </td>--> 
+  
+          </tr>
+        </table>
+      </div>
+    </div>
+ 
+  <!-- Editable table -->
+</div>
+     
+      
+  
+      <div class="footer-button">
+          <button class="button-align" (click) = "gotoNext()"> Next></button>
+        
+      </div>
+
+
+   
+    <div *ngIf="toggleView" id="myModal" class="modal row justify-content-center">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+          <div class="card">
+              <div class="card-body-modal">
+                <div id="table" class="table-editable">
+                  <table class="table table-bordered table-responsive-md table-striped text-center">
+                    <tr>
+                      <th rowspan="2">Beacon Id</th>
+                      <th rowspan="2">Object ID</th>
+                      <th rowspan="2">Object Type</th>
+                      <th rowspan="2">Content</th>
+                      <th colspan="2">Temperature (&#8451;) </th>
+                      <th rowspan="2">Temperature Alert Threshold Time</th>
+                      <th colspan="2">Humidity (%)</th>
+                      <th rowspan="2">Humidity Alert Threshold Time</th>
+                    </tr>
+                    <tr >
+                      <th>Min</th>
+                      <th>Max</th>
+                      <th>Min</th>
+                      <th>Max</th>
+                    </tr>
+                    <tr *ngFor="let beacon of editbeaconlist; let id = index ">
+                      <td  contenteditable="true"  (keyup)="editValue(id, 'BeaconId', $event)"  (blur)="newList(id, 'BeaconId', $event)">{{beacon.BeaconId}}</td>
+                      <td contenteditable="true"  (keyup)="editValue(id, 'ObjectId', $event)"  (blur)="newList(id, 'ObjectId', $event)">{{beacon.ObjectId}}</td>
+                      <td>
+                      <mat-select placeholder={{beacon.ObjectType}} (change)="changeMatValue(id, 'ObjectType', $event)" (blur)="newList(id, 'ObjectType', $event)">
+                        <mat-option *ngFor="let object of Objects" [value]="object.Name" >
+                          {{ object.Name }}
+                        </mat-option>
+                      </mat-select>
+                    </td>
+                    <td>
+                      <mat-select placeholder={{beacon.Content}} (change)="editValue(id, 'Content', $event)" (blur)="newList(id, 'Content', $event)">
+                        <mat-option *ngFor="let content of contentList" [value]="content" >
+                          {{ content }}
+                        </mat-option>
+                      </mat-select>
+                    </td>  
+                      <td contenteditable="true"  aria-placeholder="Min Temp" (keyup)="editValue(id, 'TemperatureMin', $event)"  (blur)="newList(id, 'TemperatureMin', $event)">{{beacon.TemperatureMin}}</td>
+                      <td contenteditable="true"  aria-placeholder="Max Temp" (keyup)="editValue(id, 'TemperatureMax', $event)"  (blur)="newList(id, 'TemperatureMax', $event)">{{beacon.TemperatureMax}}</td>
+                      <td contenteditable="true"  aria-placeholder="Temp Threshold" (keyup)="editValue(id, 'TemperatureAlertThreshold', $event)"  (blur)="newList(id, 'TemperatureAlertThreshold', $event)">{{beacon.TemperatureAlertThreshold}}</td>
+                      <td contenteditable="true"  aria-placeholder="Min Humidity" (keyup)="editValue(id, 'HumidityMin', $event)"  (blur)="newList(id, 'HumidityMin', $event)">{{beacon.HumidityMin}}</td>
+                      <td contenteditable="true"  aria-placeholder="Max Humidity" (keyup)="editValue(id, 'HumidityMax', $event)"  (blur)="newList(id, 'HumidityMax', $event)">{{beacon.HumidityMax}}</td>
+                      <td contenteditable="true" aria-placeholder="Humidity Threshold" (keyup)="editValue(id, 'HumidityAlertThreshold', $event)"  (blur)="newList(id, 'HumidityAlertThreshold', $event)">{{beacon.HumidityAlertThreshold}}</td>
+                    </tr> 
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer-button">
+                <button class="button-align" (click)="UpdateRecord()">Update</button>
+                <button class="button-align" (click)="AbortOperation()"> Cancel</button>
+              </div>
+      </div>
+  </div> 
+  </div>
+  
+  
+  
+  <app-ahierarchy *ngIf="displayAssoc"></app-ahierarchy>
+  

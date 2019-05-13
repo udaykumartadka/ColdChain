@@ -1,0 +1,182 @@
+.incidentContainer{
+    width:260px;
+    height:48px;
+    background:whitesmoke;
+    border: 2px solid #cccccc;
+    margin-top:2px;
+    margin-left:1px;
+
+    display:grid;
+    grid-template-columns: 60% 40%
+}
+
+.RightSection{
+    margin:4px;
+    border-left:2px solid #cccccc
+}
+#IncidentNote{
+    font-size: 11px;
+    font-weight: bolder;
+    text-align: center;
+    background: #ffe680;
+    border-radius: 35px;
+    padding: 3px;
+}
+
+#loader{
+    height: 100px;
+    margin-left: 80px;
+    margin-top: 20px;
+}
+.incidentsWrapper{
+    width:273px;
+    height:158px;
+    overflow-y:scroll;
+}
+
+/* Changing Scrollbar Styling for Incident Wrapper Here */
+
+.incidentsWrapper::-webkit-scrollbar{
+    width:8px;
+}
+
+.incidentsWrapper::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background: rgba(0,0,0,0.1);
+    border: 1px solid #ccc;
+}
+
+.incidentsWrapper::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(#f00, #cc0000);
+    border: 1px solid #aaa;
+  }
+
+  .incidentsWrapper::-webkit-scrollbar-thumb:hover{
+    background: #cc0000;
+  }
+
+  .incidentsWrapper::-webkit-scrollbar-thumb:active{
+    background: linear-gradient(left, #22ADD4, rgb(186, 170, 30));
+  }
+
+  /* Scrollbar Styling Ends Here */
+
+  /* Incident Container Left Section */
+.LeftSection{
+    display:grid;
+    grid-template-rows:60% 40%;
+    grid-row-gap: 1px
+}
+
+.leftTopSection{
+    /* background:red; */
+    display:grid;
+    grid-template-columns: 45% 55%
+
+}
+
+.ObjectSection{
+    display:grid;
+    grid-template-columns: 25% 75%
+}
+/* .ObjectType{
+    /* background:yellow; 
+} */
+
+/* Object Type Icon */
+#ObjectType{
+    height:15px;
+    width:15px;
+    margin-left:2px;
+    margin-top:-2px
+}
+.ObjectNumber{
+    color:green;
+    font-size:11px;
+    font-weight:bolder;
+    margin:2px
+}
+
+.LocationSection{
+    /* background: #22ADD4; */
+    display:grid;
+    grid-template-rows: 40% 60%;
+    /* margin-top:10px */
+}
+.dateSection{
+    /* background:orange; */
+    font-size:8px;
+    font-weight:bolder;
+    margin-left:5px
+}
+
+.CurrLocSection{
+    /* background:olive; */
+    font-size:10px;
+    font-weight:bolder
+}
+
+/* Need This */
+.leftBottomSection{
+    display:grid;
+    grid-template-columns: 15% 40% 45% !important; 
+}
+
+#AlertStart{
+    color: #CC0000;
+    font-weight:bolder;
+    font-size:11px;
+}
+
+#AlertClose{
+    color: #E57433;
+    font-weight:bolder;
+    font-size:11px;
+}
+/* Need this */
+#LocIcon{
+    height:12px;
+    width:12px
+}
+.CurrLocSection{
+    display:grid;
+    grid-template-columns: 15% 80%
+}
+
+#PalletIcon{
+    height: 15px;
+    width:15px;
+    margin-top:-12px
+}
+
+.PalletNumber{
+    font-size:11px;
+    font-weight:bolder;
+    color:#0086b3
+}
+
+.RightSection{
+    display:grid;
+    grid-template-columns: 50% 50%;
+    height:35px
+}
+
+#AlertIcon{
+    height:33px !important;
+    width:44px !important
+}
+
+.AlertValue{
+    font-size:12px;
+    font-weight:bolder;
+    margin-top: 8px;
+}
+
+/* .NoAlertContainer h4{
+    background:whitesmoke;
+    padding:1em;
+    font-size:14px;
+    font-weight:bolder;
+    color: #99cc00
+} */

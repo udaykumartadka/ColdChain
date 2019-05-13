@@ -1,0 +1,63 @@
+<div *ngIf = "displayAssociation">
+    <div>
+        <ul id="head" class="nav nav-tabs">
+          <li >Map Beacons</li>
+          <li >Associate Hierarchy</li>
+          <li class="active">Associate Objects</li>
+          <li>Assign Gateways</li>
+        </ul>
+    </div>
+    <div class="row justify-content-center" >
+        <div class="col-12" >
+        <ul class="nav nav-tabs">
+          <li *ngIf = "boxToprod">
+          <img class="icon-custom" src='../assets/icons/pills-bottle.svg'>
+          <img class="icon-custom" src='../assets/icons/link-building-symbol-of-two-chain-links-union-with-a-plus-sign.svg'>
+          <img class="icon-custom" src='../assets/icons/empty-blackbox-open.svg'>
+        </li>
+          <li *ngIf = "cartTobox" >
+            <img class="icon-custom" src='../assets/icons/empty-blackbox-open.svg'>
+            <img class="icon-custom" src='../assets/icons/link-building-symbol-of-two-chain-links-union-with-a-plus-sign.svg'>
+            <img class="icon-custom" src='../assets/icons/black-box.svg'>
+          </li>
+          <li *ngIf = "palletToCart">
+            <img class="icon-custom" src='../assets/icons/black-box.svg'>
+            <img class="icon-custom" src='../assets/icons/link-building-symbol-of-two-chain-links-union-with-a-plus-sign.svg'>
+            <img class="icon-custom" src='../assets/icons/pallet-black.svg'>
+          </li>
+          <li class="active"><img class="icon-custom" src='../assets/icons/shuffle.svg'></li>
+          <div class="footer-button">
+            <button class="button-align" (click) = "gotoNext()"> Next></button>
+          <button class="button-align" (click) = "gotoPrevious()"><Previous</button>
+          </div>
+        </ul>
+      </div>
+        </div>
+        <div class="row justify-content-center" style="margin-top:10px">
+            <div class="col-6 destroy-margin column-style">
+              <p class="heading"> Association </p>
+                <!-- <img class="icon-custom" src='../assets/icons/magnifier.svg'> -->
+                <div class="col">
+                    <app-tree-view [TreeResponse]="TreeResponse"></app-tree-view>
+                  </div>
+            </div>
+            <div class="col-6 destroy-margin column-style">
+              <p class="heading"> Summary</p>
+                  <div class="col container-summary">
+                      <div class="col-Summary">
+                      <p id="Summary">Unlinked</p>
+                      <div><img class="icon-Summary" src='../assets/icons/Green-pills-bottle.svg'>{{UnlinkedProducts}}</div>
+                      <div><img class="icon-Summary" src='../assets/icons/Green-empty-box-open.svg'>{{UnlinkedBoxes}}</div>
+                      <div><img class="icon-Summary" src='../assets/icons/Green-box.svg'>{{UnlinkedCartons}}</div>
+                      </div>
+                      <div class="col-summary">
+                          <p id="Summary">Not Utilized</p>
+                          <div><img class="icon-Summary" src='../assets/icons/Green-empty-box-open.svg'></div>
+                          <div><img class="icon-Summary" src='../assets/icons/Green-box.svg'></div>
+                          <img class="icon-Summary" src='../assets/icons/Green-Pallet.svg'>
+                      </div>
+                  </div>
+            </div>
+          </div>
+</div>
+<app-agateways [childMessage]="childMessage" *ngIf = "displayGateway"></app-agateways>

@@ -1,0 +1,26 @@
+<mat-tree [dataSource]="TreeResponse" [treeControl]="tc">
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+      <div id = "box">
+        <span [ngClass]='node.Type'></span>
+        {{node.ObjectId}}
+        </div>
+    </mat-tree-node>
+  
+    <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+      <li>
+        <div class="mat-tree-node">
+          <button mat-icon-button matTreeNodeToggle>
+            <mat-icon>
+              {{tc.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+      </button>       <div id = "box">
+            <span [ngClass]='node.Type'></span>
+            {{node.ObjectId}}
+            </div>
+        </div>
+        <ul [hidden]="!tc.isExpanded(node)">
+          <ng-container matTreeNodeOutlet></ng-container>
+        </ul>
+      </li>
+    </mat-nested-tree-node>
+  </mat-tree>

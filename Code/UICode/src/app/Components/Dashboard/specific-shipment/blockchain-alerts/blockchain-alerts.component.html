@@ -1,0 +1,38 @@
+<div class="container-fluid" id="TabContent">
+ 
+   <table class="table table-hover">
+     <thead class="thead-dark">
+       <tr>
+         <th class="Object">Object</th>
+         <th>Beacon ID</th>
+         <th>Block Timestamp (UTC)</th>
+         <th>Location</th>
+         <th>Type</th>
+         <th>Value</th>
+         <th>Alert Start Time <br> (Local Time)</th>
+         <th>Alert End Time <br> (Local Time)</th>
+         
+       </tr>
+     </thead>
+ 
+    
+     <tbody>
+       <tr *ngFor="let alert of alertDetails">
+         <td class="Object">{{alert.Object_Type}}</td>
+         <td>{{alert.Beacon_ID}}</td>
+         <td>{{alert.blockTimestamp*1000 | date:'medium':'Z'}}</td>
+         <td class="Location">{{alert.Alert_Loc}}</td>
+         <td>{{alert.Alert_Type}}</td>
+         <td *ngIf="alert.Alert_Type == 'Temperature'">{{alert.Alert_Value}} &#8451; </td>
+         <td *ngIf="alert.Alert_Type == 'Humidity'">{{alert.Alert_Value}} % </td>
+         <td *ngIf="alert.Alert_Type == 'Shock' && alert.Alert_End_Time==''"><img style="height:20px;width:20px;box-shadow: 0px 0px 10px #f00;border-radius:50%" src="../../../../../assets/icons/Redcircle.svg"></td>
+         <td *ngIf="alert.Alert_Type == 'Shock' && alert.Alert_End_Time!=''"><img style="height:20px;width:20px;box-shadow: 0px 0px 10px #0c0;border-radius:50%" src="../../../../../assets/icons/green_circle .svg"></td>
+         <td *ngIf="alert.Alert_Type == 'Tamper'"><img style="height:20px;width:20px;box-shadow: 0px 0px 10px #f00;border-radius:50%" src="../../../../../assets/icons/Redcircle.svg"></td>
+         <td>{{alert.Alert_Start_Time| date:'medium'}}</td>
+         <td>{{alert.Alert_End_Time | date:'medium'}}</td>
+        </tr> 
+     </tbody>
+   </table>
+ 
+ 
+ </div>

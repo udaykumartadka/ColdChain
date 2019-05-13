@@ -1,0 +1,54 @@
+<div class="left-block">
+
+  <div class="box">
+
+    <div class="row" id="Box-Header">
+      <div class="col-12">
+        TITAN
+      </div>
+   
+    </div>
+   
+    <br>
+    <br>
+
+  <div class="row">
+    <div class="col-12" style="text-align:center;color:white;font-weight: bold">Sign In</div>
+  </div>
+
+  <div class="container" style="padding:30px;color:white;">
+    
+    <div class="floating-form">
+        <div class="floating-label">      
+          <input class="floating-input" type="text" placeholder=" " [(ngModel)]="username">
+          <span class="highlight"></span>
+          <label>Username</label>
+        </div>
+    
+               
+        <div class="floating-label">      
+          <input class="floating-input" type="password" placeholder=" ">
+          <span class="highlight"></span>
+          <label>Password</label>
+        </div>
+         
+    </div>
+  
+    <div class="wrapper">
+
+  <div class="checkbox" style="position:relative">
+    <label><input type="checkbox" value=""> Stay Logged In</label>
+  
+</div>
+<div class="loginButton">
+  <button  type="button" id="loginButton" class="btn btn-light" (click)="navigator()"><div class="loginText"> Login</div></button>
+</div>
+    </div>
+
+  </div>
+    
+  <hr style="background:#99ccff;margin-left:10px;margin-right:10px">
+      
+<!-- <h6 id="ADLogin" (click)="AzureLogin()"> Login Using Azure AD?</h6> -->
+  </div>
+</div>

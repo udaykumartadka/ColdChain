@@ -1,0 +1,379 @@
+body {
+    
+    padding: 1em;
+    margin: 0px;
+    height: 90vh;
+    background: white;
+}
+#table-container{
+    height: 500px;
+    overflow-y: scroll;
+}
+#table{
+    max-height: 510px;
+    overflow-y: scroll; 
+}
+.container{
+    height: 430px;
+    overflow-y: auto;
+    max-width: 1300px;
+}
+.modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    border: 1px solid #888;
+    width: 80%;
+    height: 30%;
+}
+.modal-footer-button{
+    bottom:0;
+    right:0;
+    position:absolute;
+    padding: 5px;
+  }
+.button-align{
+    background-color:#669900;
+    cursor: pointer;
+    float: right;
+    font-size: 14px;
+    color: white;
+    width: 75px;
+    border-radius: 5px;
+    bottom:0;
+  }
+td{
+    font-size:12px;
+    font-weight:bolder;
+
+}
+tbody {
+    height: 250px;
+    overflow-y: auto;
+}
+
+
+tbody td, thead th {
+    width: 850px;
+
+}
+/*.container{
+    height: 430px;
+    overflow-y: auto;
+    max-width: 1300px;
+}*/
+.button-align{
+    background-color:#669900;
+    cursor: pointer;
+    float: right;
+    font-size: 14px;
+    color: white;
+    width: 75px;
+    border-radius: 5px;
+    bottom:0;
+  }
+  /* thead, tbody {
+    display: block;
+} */
+.form-control{
+    
+    width: none;
+}
+th {
+     
+   
+    font-size: 11px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #2799CF;
+    color: white;
+   
+   
+   
+}
+
+/* CSS Details for MAP Button Image */
+
+img {
+    width: 30px;
+    height: 20px;
+}
+
+/* tr {
+    width: 60%;
+    height: 50%;
+    
+} */
+
+td {
+    font-size:12px;
+    width:200px;
+    white-space: nowrap;
+    /* height: 100%; */
+    text-align: center;
+}
+/* th{width:150px !important;} */
+
+input[type=text] {
+    padding: 0;
+    height: 30px;
+    width: 95px;
+    position: relative;
+    left: 0;
+    outline: none;
+    border: 1px solid #cdcdcd;
+    border-color: rgba(0, 0, 0, .15);
+    background-color: white;
+    font-size: 13px;
+}
+
+tbody {
+    
+    overflow-y: auto;
+    max-height: 800px !important;
+}
+
+/* Styling Scrollbar */
+tbody::-webkit-scrollbar {
+    width: 8px;
+}
+
+tbody::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+}
+
+tbody::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(#999966, #aaaa55);
+    border: 1px solid #aaa;
+}
+
+tbody::-webkit-scrollbar-thumb:hover {
+    background: #cccc00;
+}
+
+tbody::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(left, #22ADD4, rgb(186, 170, 30));
+}
+
+/* Map Button */
+
+button {
+    /* margin: 2em 0; */
+    /*  padding:1em 4em; */
+    display: block;
+    background: #669900;
+    /* background-color:#0086b3; */
+    color: white;
+    font-size: 15px;
+}
+
+
+table {
+    margin: 20px;
+    border:1;
+    width:70%;
+    overflow-y: scroll;
+   
+ }
+
+table.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+colgroup {
+    width: 40%
+}
+
+.custom-select {
+    width: 85px;
+}
+.footer-button{
+    padding-bottom: 3px;
+    margin-right: 10px;
+    position:absolute;
+    right: 0;
+    margin-top: 5px;
+  }
+@media screen and (max-width:1440px) {
+    body {
+       padding: 1em;
+        margin: 0px;
+        height: 50vh;
+        background: white;
+    }
+    #table-container{
+        height: 300px;
+        overflow-y: scroll;
+    }
+    #table{
+        max-height: 435px;
+        overflow-y: scroll; 
+    }
+    .container{
+        height: 380px;
+        overflow-y: auto;
+        max-width: 1300px;
+    }
+    th {
+        font-size: 11px;
+        text-align: center;
+        font-weight: bold;
+        background-color: #2799CF;
+        color: white;
+        width: 70px !important;
+        height: 30px;
+    }
+    /* CSS Details for MAP Button Image */
+    img {
+        width: 30px;
+        height: 20px;
+    }
+    tr {
+        width: 70%;
+        height: 100%;
+        background: #f2f2f2
+    }
+    td {
+        font-size: 12px;
+       
+        max-width: 50%;
+        white-space: nowrap;
+        height: 70%;
+        text-align: center;
+    }
+    input[type=text] {
+        padding: 0;
+        height: 30px;
+        width: 60px;
+        position: relative;
+        left: 0;
+        outline: none;
+        border: 1px solid #cdcdcd;
+        border-color: rgba(0, 0, 0, .15);
+        background-color: white;
+        font-size: 16px;
+    }
+    
+    tbody {
+        background: #f2f2f2;
+        overflow-y: auto;
+       
+    }
+    /* Styling Scrollbar */
+ tbody::-webkit-scrollbar{
+    width:8px;
+}
+
+tbody::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background: rgba(0,0,0,0.1);
+    border: 1px solid #ccc;
+}
+
+tbody::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(#999966, #aaaa55);
+    border: 1px solid #aaa;
+  }
+
+  tbody::-webkit-scrollbar-thumb:hover{
+    background: #cccc00;
+  }
+
+  tbody::-webkit-scrollbar-thumb:active{
+    background: linear-gradient(left, #22ADD4, rgb(186, 170, 30));
+  }
+    /* Map Button */
+    button {
+        display: block;
+        background: #297326;
+        color: white;
+        font-size: 15px;
+    }
+    table {
+        margin: 20px;
+        border: 1;
+        width: 70%;
+        max-width: 1000px;
+        overflow-y: scroll;
+       
+    }
+    table.center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .table{
+        max-height: 500px;
+        overflow-y: scroll;
+    }
+    colgroup {
+        width: 40%
+    }
+    .custom-select {
+        width: 85px;
+    }
+    .footer-button{
+        padding-bottom: 3px;
+        margin-right: 10px;
+        position:absolute;
+        right: 0;
+        margin-top: 5px;
+      }
+}
+
+li {
+    padding: 5px 20px 5px 5px;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+ul {
+    background-color: whitesmoke;
+    font-size:14px
+}
+
+.active {
+    background-color: white;
+    border-bottom: white
+}
+
+.container {
+    border: 1px solid #dadada;
+    padding: 5px;
+}
+
+.destroy-margin {
+    padding-right: 0px;
+}
+::-webkit-scrollbar-track {
+    background: whitesmoke;
+    }
+    ::-webkit-scrollbar{
+    width:3px;
+    }
+    /* Handle */
+    :-webkit-scrollbar-thumb {
+    background: yellow;
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover { 
+    background: yellow;
+    }

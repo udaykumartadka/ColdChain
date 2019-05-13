@@ -1,0 +1,67 @@
+/* Laptop Screen CSS ------> max-width:1440px */
+
+.shipmentListSection{
+    background:#f2f2f2;
+    /* height: 50vh; */
+    width:272px;
+    margin-top:-20px
+}
+
+.singleShipment{
+    height:30px;
+    font-family:"Muli";
+    font-size:14px;
+    font-weight:bolder;
+    padding-top: 4px;
+    /* display:block */
+}
+
+#alertIcon{
+    float: right;
+    margin-right: 20px;
+    height: 17px;
+    /* margin-top: 2px; */
+}
+
+.singleShipment:hover{
+    background:#cccc99 !important
+}
+.singleShipment:nth-child(even){
+    background:#e7e7e7;
+ 
+}
+.singleShipment:nth-child(odd){
+    background:whitesmoke;
+ 
+}
+.singleShipment{
+    display:grid;
+    grid-template-columns:20% 50% 30%;
+    grid-column-gap: 2px;
+
+}
+
+.infoSection:hover{
+    cursor:help
+}
+.shipmentIdSection{
+    text-align:center
+}
+
+#viewShipmentDetails:hover{
+    cursor:pointer
+}
+/* CSS for bigger screen width > 1440px */
+@media screen and (min-width:1440px){
+   
+    .shipmentListSection{
+        margin-top:5px;
+        width:375px;
+        margin-top:-20px
+    }
+
+    #alertIcon{
+        height:20px;
+        float:right;
+    }
+}

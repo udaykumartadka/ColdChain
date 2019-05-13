@@ -1,0 +1,64 @@
+.DateRangeSelector{
+    padding: 0.5em;
+    border: 2px dashed #f7d5a3;
+    margin-top: 1em;
+}
+
+.label{
+    font-weight: bolder;
+    font-size: 14px;
+    margin-top: 5px
+}
+
+.RangePicker{
+    font-weight:bolder;
+}
+.togglerDiv{ padding-top: 1em;margin: 5px;
+}
+
+.bs-datepicker-container {
+    /* padding: 15px; */
+    margin-top: -282px;
+    display: block;
+    background: white;
+}
+
+#togglerButton{
+    border-radius:50%
+}
+
+
+.minMax{
+    display:grid;
+    grid-template-columns: 33% 33% 34%;
+    grid-row-gap:4px;
+    border: 2px dashed whitesmoke
+}
+
+#paramater{
+    font-weight: bolder;
+    font-size: 13px;
+}
+#paraValue{
+    font-size:12px
+}
+
+.minSection,.maxSection{
+    background:whitesmoke;
+    text-align:center
+}
+
+.avgSection{
+    background:whitesmoke;
+    text-align: center;
+    border-left:2px solid white;
+    border-right:2px solid white;
+}
+
+#time{
+    height:18px
+}
+#timeValue{
+    font-size: 12px;
+    font-weight:bolder
+}

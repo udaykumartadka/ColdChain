@@ -1,0 +1,87 @@
+
+  <div class="row">
+    <div class="col-10">
+      <h3>User Management</h3>
+    </div>
+
+  </div>
+<!-- Editable table -->
+<div class="card">
+  <div class="card-body">
+    <div id="table" class="table-editable">
+        <span class="table-add float-right mb-3 mr-2">
+          <img class="icon-custom" src='../../../../../assets/icons/add-circular-outlined-button.svg' (click)="add()">
+          </span>
+      <table class="table table-bordered table-responsive-md table-striped text-center">
+        <tr>
+          <th class="text-center">Full Username</th>
+          <th class="text-center">Email</th>
+          <th class="text-center">Role</th>
+          <th class="text-center">Status</th>
+          <th class="text-center">Action</th>
+        </tr>
+        <tr *ngFor="let person of personList; let id = index">
+          <td >{{person.Username}}</td>
+          <td >{{person.Email}}</td>
+          <td>
+          <mat-select placeholder={{person.Role}} (change)="changeValue(id, 'Role', $event)" (blur)="updateList(id, 'Role', $event)">
+              <mat-option *ngFor="let role of Roles" [value]="role.Name" >
+                {{ role.Name }}
+              </mat-option>
+            </mat-select>
+          </td>
+          <td>{{person.Status}}</td>
+         
+          <td>
+            <span class="table-remove">
+                <img class="icon-custom-small" src='../../../../../assets/icons/green-check.svg' (click)="SaveChanges(id)">
+                <img class="icon-custom-small" src='../../../../../assets/icons/bin.svg' (click)="remove(id)">
+            </span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<div *ngIf="toggleView" id="myModal" class="modal row justify-content-center">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="card">
+            <div class="card-body-modal">
+              <div id="table" class="table-editable">
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                  <tr>
+                    <th class="text-center">Full Username</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center">Role</th>
+                    <th class="text-center">Status</th>
+                  </tr>
+                  <tr *ngFor="let person of NewRowList; let id = index">
+                    <td>
+                      <mat-select placeholder="Username" (selectionChange)="changeMatValue(id, 'Username', $event)" (blur)="updateRowList(id, 'Username', $event)">
+                          <mat-option *ngFor="let item of list" [value]="item.Name" >
+                            {{ item.Name }}
+                          </mat-option>
+                        </mat-select>
+                        </td>
+                      <td contenteditable="true" (keyup)="changeValue(id, 'Email', $event)" (blur)="updateRowList(id, 'Email', $event)">{{person.Email}}</td>
+                      <td>
+                      <mat-select placeholder={{person.Role}} (change)="changeMatValue(id, 'Role', $event)" (blur)="updateRowList(id, 'Role', $event)">
+                          <mat-option *ngFor="let role of Roles" [value]="role.Name" >
+                            {{ role.Name }}
+                          </mat-option>
+                        </mat-select>
+                      </td>
+                      <td contenteditable="true" (keyup)="changeValue(id, 'Status', $event)" (blur)="updateRowList(id, 'Status', $event)">{{person.Status}}</td>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer-button">
+              <button class="button-align" (click)="SaveUser()">Save</button>
+              <button class="button-align" (click)="AbortOperation()"> Cancel</button>
+            </div>
+    </div>
+</div>
+<!-- Editable table -->

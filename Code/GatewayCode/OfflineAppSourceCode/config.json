@@ -1,0 +1,13 @@
+{
+  "azureFunction": {
+    "connStringPrefix": "HostName=TitanIOTHub.azure-devices.net;DeviceId=",
+    "connectionString": "https://pj-titan-fn.azurewebsites.net/api/GetDeviceConnectionString?DeviceId=",
+    "gateway_beacon_data": "https://pj-titan-fn.azurewebsites.net/api/GetAssociateBeaconList?MacId=",
+    "gpsAzureFunctionUrl": "https://pj-titan-fn.azurewebsites.net/api/GetGPSTracker?MacId=",
+    "gpsTrackerDataUrl": "https://pj-titan-fn.azurewebsites.net/api/GetGPSData?deviceid="
+  },
+  "gps": {
+    "port": "/dev/serial-port-067b2303",
+    "baudRate": 4800
+  }
+}

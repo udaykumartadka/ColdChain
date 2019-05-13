@@ -1,0 +1,17 @@
+<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <defs>
+  <pattern height="100" width="100" y="0" x="0" patternUnits="userSpaceOnUse" id="gridpattern">
+   <image height="100" width="100" y="0" x="0" id="svg_46"/>
+  </pattern>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_4"/>
+  <g id="svg_50"/>
+  <g id="svg_17"/>
+  <line stroke="#FFF" stroke-width="65" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x1="300.50002" y1="2.99999" x2="300.50002" y2="100.51153" id="svg_30"/>
+  <line id="svg_1" fill="none" stroke="#FFF" stroke-width="85" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x1="300.99999" y1="121.24424" x2="300.99999" y2="218.75578"/>
+  <line id="svg_2" fill="none" stroke="#FFF" stroke-width="85" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x1="300.99999" y1="241.24422" x2="300.99999" y2="338.75576"/>
+  <line id="svg_3" fill="none" stroke="#FFF" stroke-width="85" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x1="300.99999" y1="360.24423" x2="300.99999" y2="457.75577"/>
+ </g>
+</svg>

@@ -1,0 +1,68 @@
+
+
+    <div class="OverviewSection">
+        <div class="leftSection">
+            <div class="leftTopSection">
+                <div class="statusSection">
+                    <div class="statusTopSection">Status</div>
+                    <div class="statusBottomSection">
+                        <div class="StatusLabel">
+                            {{this.ShipmentStatus}}
+                        </div>
+                    </div>
+                </div>
+                <div class="po_Section">
+                    <div class="po_TopSection"> Purchase Order</div>
+                    <div class="po_BottomSection">{{this.PONumber}}</div>
+                </div>
+            </div>
+            <div class="leftBottomSection">
+                <div class="SourceDestinationIconSection">
+                    <div class="Section"><img id="circle" src="../../../../assets/icons/emptyCircle.svg"></div>
+                    <div class="Section"><img id="dash" src="../../../../assets/icons/dashLines.svg"></div>
+                    <div class="Section"><img id="pin" src="../../../../assets/icons/whitePin.svg"></div>
+                </div>
+                <div class=" SourceDestinationDetailsSection">
+                    <div class="sourceDetails">
+                        <div class="sourceData">{{ this.SourceLoc}}</div>
+                        <div class="SourceTime">{{this.CreatedDateTime | date:'medium'}}</div>
+                    </div>
+                    <div class="destinationdetails">{{this.DestinationLoc}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="rightSection">
+            <div class="rightTopSection"> <img id="icons" src="../../../../../assets/icons/TiltedBell.svg"> Incidents</div>
+            <div class="rightBottomSection">
+                    <div class="IncidentTopBoxes">
+                            <div class="TemperatureAlertBox">
+                              <div class="AlertIcon">
+                                <img id="AlertIcon" src="../../../../../assets/icons/icons/thermometer (5).svg">
+                              </div>
+                              <div class="AlertNumber">{{this.TemperatureBreachCount}}</div>
+                            </div>
+                            <div class="HumidityAlertBox">
+                                <div class="AlertIcon">
+                                    <img id="AlertIcon" src="../../../../../assets/icons/icons/humidity (2).svg">
+                                </div>
+                                <div class="AlertNumber">{{this.HumidityBreachCount}}</div>
+                            </div>
+                          </div>
+                          <div class="IncidentBottomBoxes">
+                            <div class="ShockAlertBox">
+                                <div class="AlertIcon">
+                                    <img id="AlertIcon" src="../../../../../assets/icons/icons/vibration (2).svg">
+                                </div>
+                                <div class="AlertNumber">{{this.ShockVibrationCount}}</div>
+                            </div>
+                            <div class="TamperAlertBox">
+                                <div class="AlertIcon">
+                                    <img id="TamperIcon"  src="../../../../../assets/icons/Tamperbox - white.svg">
+                                </div>
+                                <div class="AlertNumber">{{ this.TamperBreachCount}}</div>
+                            </div>
+                          </div>
+            </div>
+        </div>
+    </div>
+
