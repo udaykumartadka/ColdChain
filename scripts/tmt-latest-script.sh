@@ -35,17 +35,19 @@ tmtip=`getent hosts ${dnsname} | awk '{ print $1 }'`
 
 cd /home/${vmusername}
 
-wget "https://storageccqia.blob.core.windows.net/cc-iot/arm-nested/VMCronJob.zip"
+#Downloading the CronJobs for TMT-VM.The below URL will change if you move the TMT-VM-CronJobs.zip folder to another folder/location
+
+wget "https://github.com/sysgain/ColdChain/raw/master/cc-packages/TMT-VM-CronJobs.zip"
 
 sudo apt-get install unzip -y
 
-unzip VMCronJob.zip -d VMCronJobs
+unzip TMT-VM-CronJobs.zip -d VMCronJobs
 
 sleep 30
 
 cd /home/${vmusername}
 
-cd VMCronJobs/VMCronJob/TCP\ GPS\ Job/
+cd VMCronJobs/TCPGPSCode/
 
 sudo sed -i "s/.TitanAdmin./\'$dbusername\' /" application_config.js
 sudo sed -i "s/.Titan123./\'$dbpassword\' /" application_config.js
@@ -57,7 +59,7 @@ sudo nohup forever start server.js
 
 cd ..
 
-cd sp_alert_Process
+cd SPAlertProcess
 
 sudo sed -i "s/.TitanAdmin./\'$dbusername\' /" config.js
 sudo sed -i "s/.Titan123./\'$dbpassword\' /" config.js
@@ -68,7 +70,7 @@ sudo nohup forever start sp_alert_process.js
 
 cd ..
 
-cd Blockchain/cold_chain_blockchain
+cd Blockchain
 
 sudo sed -i "s/.TitanAdmin./\'$dbusername\' /" config.js
 sudo sed -i "s/.Titan123./\'$dbpassword\' /" config.js
