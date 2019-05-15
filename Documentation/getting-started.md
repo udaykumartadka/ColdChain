@@ -2,7 +2,7 @@
 
 # ColdChain Solution
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/0.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/0.png)
 
 ### Table of Contents 
 
@@ -13,13 +13,18 @@
      - [1.2 Cold Chain an Overview](#12-cold-chain-an-overview)
      - [1.3 The Cold Chain-Core Components](#13-the-cold-chain-core-components)
      - [1.4 The Workflow](#14-the-workflow)
-- [2.0 Core Structure](#20-core-structure)
-    - [2.1 Core Architecture Components ](#21-core-architecture-components)
+- [Microsoft](#microsoft)
+- [ColdChain Solution](#coldchain-solution)
+    - [Table of Contents](#table-of-contents)
+  - [1.0 Introduction](#10-introduction)
+    - [1.1 The Internet of Things](#11-the-internet-of-things)
+    - [1.2 Cold Chain an Overview](#12-cold-chain-an-overview)
+    - [1.3 The Cold Chain-Core Components](#13-the-cold-chain-core-components)
     - [2.2 Solution Architecture](#22-solution-architecture)
     - [2.3 Basic Architecture](#23-basic-architecture)
     - [2.4 Standard Architecture](#24-standard-architecture)
     - [2.5 Premium Architecture](#25-premium-architecture)
-- [3.0 Azure Components and their Functionality](#30-azure-components-and-their-functionality)
+  - [3.0 Azure Components and their Functionality](#30-azure-components-and-their-functionality)
     - [3.1 IoT Hub](#31-iot-hub)
     - [3.2 Web Application](#32-web-application)
     - [3.3 Azure Function App](#33-azure-function-app)
@@ -32,22 +37,22 @@
     - [3.10 Automation Account](#310-automation-account)
     - [3.11 Availability Set](#311-availability-set)
     - [3.12 Stream Analytics Job](#312-stream-analytics-job)
-    - [3.13 Virtual Machine](#313-virtual-machine)
+    - [3.13 Virtual Machine (VM)](#313-virtual-machine-vm)
     - [3.14 Traffic Manager](#314-traffic-manager)
-    - [3.15 Quorum Blockchain](#315-quorum-blockchain )
-- [4.0 Solution Types and Cost Mechanism](#40-solution-types-and-cost-mechanism)
+    - [3.15 Quorum Blockchain](#315-quorum-blockchain)
+  - [4.0 Solution Types and Cost Mechanism](#40-solution-types-and-cost-mechanism)
     - [4.1 Solutions and Associated Costs](#41-solutions-and-associated-costs)
     - [4.2 Basic](#42-basic)
     - [4.3 Standard](#43-standard)
     - [4.4 Premium](#44-premium)
     - [4.5 Cost Comparison](#45-cost-comparison)
     - [4.6 In terms of features](#46-in-terms-of-features)
-    - [4.7 Dollar Impact](#47-dollar-impact)
-    - [4.8 Estimated Monthly Cost for each Solution](#48-estimated-monthly-cost-for-each-solution)
- - [5.0 Further References](#50-further-references)
+    - [4.7 Dollar Impact:](#47-dollar-impact)
+    - [4.8 Estimated Monthly Cost for each Solution:](#48-estimated-monthly-cost-for-each-solution)
+  - [5.0 Further References](#50-further-references)
     - [5.1 Deployment Guide](#51-deployment-guide)
     - [5.2 Admin Guide](#52-admin-guide)
-    - [5.3 User Guided](#53-user-guide)  
+    - [5.3 User Guide](#53-user-guide)
  <!--te--> 
     
     
@@ -87,15 +92,15 @@ Cold Chain management solution for Pharma addresses the challenges and concerns 
 
    Quorum is an Ethereum based DLT (Distributed Ledger Technology). The objective behind this to provide a permissioned implementation of Ethereum which supports transactions and contract privacy. 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/1.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/1.png)
 
  ### 1.4 The Workflow 
 
- ![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/1-1.png)
+ ![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/1-1.png)
  
  ## 2.0 Core Structure
  
- ![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/2.png)
+ ![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/2.png)
  
  ### 2.1 Core Architecture Components:
  
@@ -143,7 +148,7 @@ Basic solution will have core components, in addition this solution also consist
 
 * OMS Log Analytics provide monitoring for IoT Hub, Stream Analytics, Cosmos DB, SQL Database. 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/3.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/3.png)
 
 * 1-Web App 
 
@@ -179,7 +184,7 @@ Standard Architecture diagram contains two regions
 
 The below diagram depicts the data flow between Azure Components in standard solution. 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/4.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/4.png)
 
 Standard Architecture comprises of following components: 
 
@@ -227,7 +232,7 @@ Premium Architecture comprises of two regions
 
 All the components get deployed at once in the premium architecture. The diagram below depicts the data flow between the Azure components in premium solution 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/5.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/5.png)
 
 Premium Architecture comprises of following components:  
 
