@@ -58,6 +58,9 @@
         },
         "location": {
             "type": "string"
+        },
+        "solutionType": {
+            "value": "string"
         }
     },
     "variables": {
@@ -71,6 +74,9 @@
             "type": "Microsoft.Network/networkInterfaces",
             "name": "[concat(parameters('nicPrefix'), copyindex())]",
             "location": "[parameters('location')]",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            },
             "copy": {
                 "name": "txNicLoop",
                 "count": "[parameters('numVMs')]"
@@ -107,6 +113,9 @@
             "type": "Microsoft.Compute/virtualMachines",
             "name": "[concat(parameters('vmNamePrefix'), copyIndex())]",
             "location": "[parameters('location')]",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            },
             "copy": {
                 "name": "VMloop",
                 "count": "[parameters('numVMs')]"
