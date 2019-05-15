@@ -1,0 +1,9 @@
+{
+    "threshold": "#THRESHOLD",
+    "voters": [
+  #VOTERSTRING
+    ],
+    "makers": [
+  #MAKERSTRING
+    ]
+  }

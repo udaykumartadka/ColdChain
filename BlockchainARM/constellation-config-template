@@ -1,0 +1,36 @@
+# Externally accessible URL for this node (this is what's advertised)
+url = "http://#IPADDRESS:9001/"
+
+# Port to listen on
+port = 9001
+
+# Optional IP whitelist for the external API. If unspecified/empty,
+# connections from all sources will be allowed (but the private API remains
+# accessible only via the IPC socket below.) To allow connections from
+# localhost when a whitelist is defined, e.g. when running multiple
+# Constellation nodes on the same machine, add "127.0.0.1" and "::1" to
+# this list.
+
+# Socket file to use for IPC
+socketPath = "#IPCPATH"
+
+# Initial (not necessarily complete) list of other nodes in the network.
+# Constellation will automatically connect to other nodes not in this list
+# that are advertised by the nodes below, thus these can be considered the
+# "boot nodes."
+otherNodeUrls = [#BLOCKMAKERURL]
+
+# This node's public key
+publicKeyPath = "#HOSTNAME.pub"
+
+# This node's private key
+privateKeyPath = "#HOSTNAME.key"
+
+# This node's public archival key
+archivalPublicKeyPath = "#HOSTNAME-archival.pub"
+
+# This node's private archival key
+archivalPrivateKeyPath = "#HOSTNAME-archival.key"
+
+# Where to store payloads and related information
+storagePath = "data/payloads"

@@ -1,0 +1,50 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "bmVMNamePrefix": {
+            "type": "string"
+        },
+        "numBMs": {
+            "type": "int"
+        },
+        "location": {
+            "type": "string"
+        },
+        "scriptUrl": {
+            "type": "string"
+        },
+        "ARTIFACTS_URL_PREFIX": {
+            "type": "string"
+        }
+    },
+    "variables": {
+        "apiVersionVirtualMachinesExtensions": "2016-03-30"
+    },
+    "resources": [
+        {
+            "apiVersion": "[variables('apiVersionVirtualMachinesExtensions')]",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('bmVMNamePrefix'), copyIndex(), '/newuserscript')]",
+            "copy": {
+                "name": "bmsConfigLoop",
+                "count": "[parameters('numBMs')]"
+            },
+            "location": "[parameters('location')]",
+            "properties": {
+                "publisher": "Microsoft.Azure.Extensions",
+                "type": "CustomScript",
+                "typeHandlerVersion": "2.0",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "fileUris": [
+                        "[parameters('scriptUrl')]"
+                    ]
+                },
+                "protectedSettings": {
+                    "commandToExecute": "[concat('sh script.sh', ' ', parameters('ARTIFACTS_URL_PREFIX'))]"
+                }
+            }
+        }
+    ]
+}

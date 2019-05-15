@@ -1,0 +1,110 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "bmVMNamePrefix": {
+      "type": "string"
+    },
+    "numBMs": {
+      "type": "int"
+    },
+    "voterVMNamePrefix": {
+      "type": "string"
+    },
+    "numVoters": {
+      "type": "int"
+    },
+    "observerVMNamePrefix": {
+      "type": "string"
+    },
+    "numObservers": {
+      "type": "int"
+    },
+    "adminUsername": {
+      "type": "string"
+    },
+    "ethereumAccountPsswd": {
+      "type": "securestring"
+    },
+    "passphrase": {
+      "type": "securestring"
+    },
+    "ethereumNetworkID": {
+      "type": "int"
+    },
+    "gethIPCPort": {
+      "type": "int"
+    },
+    "adminSitePort": {
+      "type": "int"
+    },
+    "cakeshopFqdn": {
+      "type": "string"
+    },
+    "cakeshopStartingPort": {
+      "type": "int"
+    },
+    "artifactsLocationURL": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "apiVersionVirtualMachinesExtensions": "2016-03-30",
+    "vnNode": 0,
+    "bmNode": 1,
+    "maxPeers": 25
+  },
+  "resources": [
+    {
+      "apiVersion": "[variables('apiVersionVirtualMachinesExtensions')]",
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('bmVMNamePrefix'), copyIndex(), '/newuserscript')]",
+      "copy": {
+        "name": "bmsConfigLoop",
+        "count": "[parameters('numBMs')]"
+      },
+      "location": "[parameters('location')]",
+      "properties": {
+        "publisher": "Microsoft.Azure.Extensions",
+        "type": "CustomScript",
+        "typeHandlerVersion": "2.0",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "fileUris": [
+            "[concat(parameters('artifactsLocationURL'), '/scripts/configure.sh')]"
+          ]
+        },
+        "protectedSettings": {
+          "commandToExecute": "[concat('/bin/bash configure.sh \"', parameters('adminUsername'), '\" \"', parameters('ethereumAccountPsswd'), '\" \"', parameters('passphrase'), '\" \"', parameters('artifactsLocationURL'), '\" \"', parameters('ethereumNetworkID'), '\" \"', variables('maxPeers'), '\" \"', variables('bmNode'), '\" \"', parameters('gethIPCPort'), '\" \"', parameters('numVoters'), '\" \"', parameters('voterVMNamePrefix'), '\" \"', parameters('numBMs'), '\" \"', parameters('bmVMNamePrefix'), '\" \"', parameters('numObservers'), '\" \"', parameters('observerVMNamePrefix'), '\" \"', copyIndex(), '\" \"', parameters('adminSitePort'), '\" \"', parameters('cakeshopFqdn'), '\" \"', parameters('cakeshopStartingPort'), '\"')]"
+        }
+      }
+    },
+    {
+      "apiVersion": "[variables('apiVersionVirtualMachinesExtensions')]",
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('voterVMNamePrefix'), copyIndex(), '/newuserscript')]",
+      "copy": {
+        "name": "votersConfigLoop",
+        "count": "[parameters('numVoters')]"
+      },
+      "location": "[parameters('location')]",
+      "properties": {
+        "publisher": "Microsoft.Azure.Extensions",
+        "type": "CustomScript",
+        "typeHandlerVersion": "2.0",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "fileUris": [
+            "[concat(parameters('artifactsLocationURL'), '/scripts/configure.sh')]"
+          ]
+        },
+        "protectedSettings": {
+          "commandToExecute": "[concat('/bin/bash configure.sh \"', parameters('adminUsername'), '\" \"', parameters('ethereumAccountPsswd'), '\" \"', parameters('passphrase'), '\" \"', parameters('artifactsLocationURL'), '\" \"', parameters('ethereumNetworkID'), '\" \"', variables('maxPeers'), '\" \"', variables('vnNode'), '\" \"', parameters('gethIPCPort'), '\" \"', parameters('numVoters'), '\" \"', parameters('voterVMNamePrefix'), '\" \"', parameters('numBMs'), '\" \"', parameters('bmVMNamePrefix'), '\" \"', parameters('numObservers'), '\" \"', parameters('observerVMNamePrefix'), '\" \"', copyIndex(), '\" \"', parameters('adminSitePort'), '\" \"', parameters('cakeshopFqdn'), '\" \"', parameters('cakeshopStartingPort'), '\"')]"
+        }
+      }
+    }
+  ]
+}
