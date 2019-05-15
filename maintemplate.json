@@ -335,7 +335,7 @@
                 "description": "The base URL for dependent assets",
                 "artifactsBaseUrl": ""
             },
-            "defaultValue": "https://raw.githubusercontent.com/sysgain/coldchain-bclocal/master/blockchain"
+            "defaultValue": "https://raw.githubusercontent.com/sysgain/ColdChain/master/BlockchainARM"
         }
     },
     "variables": {
