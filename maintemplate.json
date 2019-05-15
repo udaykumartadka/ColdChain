@@ -56,7 +56,7 @@
                 "ukwest"
             ],
             "metadata": {
-                "description": "Choose the location where resources to be deployed"
+                "description": "Choose the location where resources to be deployed.If your deployment type is Standard/Premium make sure both the regions which are in geo-paired condition should active(means region should work properly for all the resource deployments)."
             }
         },
         "oms-region": {
@@ -169,37 +169,37 @@
         },
         "cosmosdbModuleUri": {
             "type": "string",
-            "defaultValue": "https://github.com/sysgain/coldchain-bclocal/raw/master/code/cosmosdb.2.1.15.239.zip",
+            "defaultValue": "https://github.com/sysgain/ColdChain/raw/master/cc-packages/cosmosdb.2.1.15.239.zip",
             "metadata": {
-                "description": "Please use the cosmosdb module which placed under /code folder by placing it in any public storage"
+                "description": "Provide the cosmosdb module URL which placed under /cc-packages folder"
             }
         },
         "azureAdPreviewModuleUri": {
             "type": "string",
-            "defaultValue": "https://github.com/sysgain/coldchain-bclocal/raw/master/code/AzureADPreview.zip",
+            "defaultValue": "https://github.com/sysgain/ColdChain/raw/master/cc-packages/AzureADPreview.zip",
             "metadata": {
-                "description": "please provide the Azure AD Preview module which placed under /code folder by placing it in any public storage"
+                "description": "Provide the Azure AD Preview module URL which placed under /cc-packages folder "
             }
         },
         "functionAppUrl": {
             "type": "string",
-            "defaultValue": "https://storageccqia.blob.core.windows.net/cc-iot/cc-functionapp-1203.zip",
+            "defaultValue": "https://github.com/sysgain/ColdChain/raw/master/cc-packages/cc-functionapp.zip",
             "metadata": {
-                "description": "Please use function app build file url here which is in public storage"
+                "description": "Provide the function app build file url which placed under /cc-packages folder"
             }
         },
         "webAppBuildfileUrl": {
             "type": "string",
-            "defaultValue": "https://storageccqia.blob.core.windows.net/cc-iot/AngularFrontEnd.zip",
+            "defaultValue": "https://github.com/sysgain/ColdChain/raw/master/cc-packages/AngularFrontEnd.zip",
             "metadata": {
-                "description": "Please use web app build file url here which is in public storage"
+                "description": "Provide the AngularFrontEnd build code URL which placed under /cc-packages folder"
             }
         },
         "sqldbbacpacUrl": {
             "type": "string",
             "defaultValue": "https://storageccqia.blob.core.windows.net/cc-iot/cctitandb-lt.bacpac",
             "metadata": {
-                "description": "Please use the sql bacpac file which placed under /scripts folder by placing it in any public storage"
+                "description": "Please use the sql bacpac file which placed under /cc-packages folder and upload it to any public storageAccount then provide the storage URL of the bacpac file."
             }
         },
         "namePrefix": {
