@@ -60,7 +60,7 @@
             "type": "string"
         },
         "solutionType": {
-            "value": "string"
+            "type": "string"
         }
     },
     "variables": {
