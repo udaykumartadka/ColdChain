@@ -1249,7 +1249,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/trafficmanager-tmt-prem.json')]",
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/trafficmanager-fun-prem.json')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -1579,6 +1579,9 @@
                     },
                     "scriptUrl":{
                         "value":"[variables('scriptUrl')]"
+                    },
+                    "solutionType":{
+                        "value":"[parameters('solutionType')]"
                     }
                 }
             }
