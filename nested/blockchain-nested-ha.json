@@ -148,6 +148,9 @@
             "type": "Microsoft.Compute/availabilitySets",
             "name": "[variables('availabilitySetName')]",
             "location": "[parameters('location')]",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            },
             "properties": {
                 "platformUpdateDomainCount": "2",
                 "platformFaultDomainCount": "2",
@@ -158,6 +161,9 @@
             "apiVersion": "[variables('apiVersionPublicIPAddresses')]",
             "type": "Microsoft.Network/publicIPAddresses",
             "name": "[variables('publicIPAddressName')]",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            },
             "location": "[parameters('location')]",
             "properties": {
                 "publicIPAllocationMethod": "Dynamic",
@@ -218,6 +224,9 @@
                     },
                     "location": {
                         "value": "[parameters('location')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
                     }
                 }
             }
@@ -228,7 +237,7 @@
             "name": "[variables('nsgName')]",
             "location": "[parameters('location')]",
             "tags": {
-                "displayName": "Network Security Group"
+                "IotSuiteType": "[parameters('solutionType')]"
             },
             "properties": {
                 "securityRules": [
@@ -330,6 +339,9 @@
             "type": "Microsoft.Network/virtualNetworks",
             "name": "[variables('vNet').name]",
             "location": "[parameters('location')]",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            },
             "dependsOn": [
                 "[concat('Microsoft.Network/networkSecurityGroups/', variables('nsgName'))]"
             ],
@@ -414,6 +426,9 @@
                     },
                     "location": {
                         "value": "[parameters('location')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
                     }
                 }
             }
@@ -490,6 +505,9 @@
                     },
                     "location": {
                         "value": "[parameters('location')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
                     }
                 }
             }
@@ -566,6 +584,9 @@
                     },
                     "location": {
                         "value": "[parameters('location')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
                     }
                 }
             }
