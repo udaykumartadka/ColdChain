@@ -120,7 +120,7 @@
             "value": 10101010
         },
         "baseUrl": {
-            "value": "https://raw.githubusercontent.com/sysgain/coldchain-bclocal/master/blockchain"
+            "value": "https://raw.githubusercontent.com/sysgain/ColdChain/master/BlockchainARM"
         }
     }
 }
