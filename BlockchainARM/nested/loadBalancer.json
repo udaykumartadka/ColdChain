@@ -40,6 +40,9 @@
         },
         "location": {
             "type": "string"
+        },
+        "solutionType": {
+            "value": "string"
         }
     },
     "variables": {
@@ -58,6 +61,9 @@
             "name": "[parameters('loadBalancerName')]",
             "type": "Microsoft.Network/loadBalancers",
             "location": "[parameters('location')]",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            },
             "properties": {
                 "frontendIPConfigurations": [
                     {
