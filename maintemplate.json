@@ -1,0 +1,1744 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "solutionType": {
+            "type": "string",
+            "defaultValue": "ColdChain",
+            "metadata": {
+                "description": "provide the name of the solution"
+            }
+        },
+        "deploymentType": {
+            "type": "string",
+            "defaultValue": "Basic-Solution",
+            "allowedValues": [
+                "Basic-Solution",
+                "Standard-Solution",
+                "Premium-Solution"
+            ],
+            "metadata": {
+                "description": "Choose the deployment type of your solution"
+            }
+        },
+        "apiManagement":{
+            "type": "string",
+            "defaultValue": "",
+            "allowedValues": [
+                "YES",
+                "NO"
+            ],
+            "metadata": {
+                "description":"Select YES/NO to deploy Api Management Service to provide security to function App.It also cost effective."
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "eastus2",
+            "allowedValues": [
+                "eastus2",
+                "centralus",
+                "westus2",
+                "westcentralus",
+                "canadacentral",
+                "canadaeast",
+                "australiaeast",
+                "australiasoutheast",
+                "centralindia",
+                "southindia",
+                "eastasia",
+                "southeastasia",
+                "japanwest",
+                "japaneast",
+                "koreacentral",
+                "koreasouth",
+                "uksouth",
+                "ukwest"
+            ],
+            "metadata": {
+                "description": "Choose the location where resources to be deployed"
+            }
+        },
+        "oms-region": {
+            "type": "string",
+            "defaultValue": "eastus",
+            "allowedValues": [
+                "australiasoutheast",
+                "canadacentral",
+                "centralindia",
+                "eastus",
+                "japaneast",
+                "southeastasia",
+                "uksouth",
+                "westeurope"
+            ],
+            "metadata": {
+                "description": "Choose location for OMS Log Analytics"
+            }
+        },
+        "appInsightsLocation": {
+            "type": "string",
+            "defaultValue": "westus2",
+            "allowedValues": [
+                "eastus",
+                "northeurope",
+                "southcentralus",
+                "southeastasia",
+                "westeurope",
+                "westus2"
+            ],
+            "metadata": {
+                "description": "specify the region for application insights"
+            }
+        },
+        "sqlAdministratorLogin": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "provide the user name for the SQL server, please make a note of Username this will be used further"
+            }
+        },
+        "sqlAdministratorLoginPassword": {
+            "type": "securestring",
+            "defaultValue": "",
+            "metadata": {
+                "description": "provide the password for the SQL server, make a note of the Password this will be used further"
+            }
+        },
+        "tenantId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Please provide Tenant Id of the subscription. This will be used to authenticate the Azure account while deploying the automation account"
+            }
+        },
+        "clientID": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "please provide the Application clientID"
+            }
+        },
+        "clientSecret": {
+            "type": "securestring",
+            "defaultValue": "",
+            "metadata": {
+                "description": "provide the Application Client Secret"
+            }
+        },
+        "objectId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "provide the Application object ID"
+            }
+        },
+        "azureAccountName": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "azure portal login username"
+            }
+        },
+        "azurePassword": {
+            "type": "securestring",
+            "defaultValue": "",
+            "metadata": {
+                "description": "azure portal login password"
+            }
+        },
+        "accountSasProperties": {
+            "type": "object",
+            "defaultValue": {
+                "signedServices": "bfqt",
+                "signedPermission": "rwdlacup",
+                "signedExpiry": "2019-06-02T00:00:00Z",
+                "signedProtocol": "https",
+                "signedResourceTypes": "sco"
+            },
+            "metadata": {
+                "description": "Here we need to provide the immediate day/time gap between the deployment start and completion time in the place of signedExpiry"
+            }
+        },
+        "sessionId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Provide the guid prefix for the runbook job to be created. Generate using https://www.guidgenerator.com/online-guid-generator.aspx"
+            }
+        },
+        "cosmosdbModuleUri": {
+            "type": "string",
+            "defaultValue": "https://github.com/sysgain/coldchain-bclocal/raw/master/code/cosmosdb.2.1.15.239.zip",
+            "metadata": {
+                "description": "Please use the cosmosdb module which placed under /code folder by placing it in any public storage"
+            }
+        },
+        "azureAdPreviewModuleUri": {
+            "type": "string",
+            "defaultValue": "https://github.com/sysgain/coldchain-bclocal/raw/master/code/AzureADPreview.zip",
+            "metadata": {
+                "description": "please provide the Azure AD Preview module which placed under /code folder by placing it in any public storage"
+            }
+        },
+        "functionAppUrl": {
+            "type": "string",
+            "defaultValue": "https://storageccqia.blob.core.windows.net/cc-iot/cc-functionapp-1203.zip",
+            "metadata": {
+                "description": "Please use function app build file url here which is in public storage"
+            }
+        },
+        "webAppBuildfileUrl": {
+            "type": "string",
+            "defaultValue": "https://storageccqia.blob.core.windows.net/cc-iot/AngularFrontEnd.zip",
+            "metadata": {
+                "description": "Please use web app build file url here which is in public storage"
+            }
+        },
+        "sqldbbacpacUrl": {
+            "type": "string",
+            "defaultValue": "https://storageccqia.blob.core.windows.net/cc-iot/cctitandb-lt.bacpac",
+            "metadata": {
+                "description": "Please use the sql bacpac file which placed under /scripts folder by placing it in any public storage"
+            }
+        },
+        "namePrefix": {
+            "type": "string",
+            "metadata": {
+                "description": "String used as a base for naming resources (6 alphanumeric characters or less).  A unique hash is prepended to the string for some resources, while resource-specific information is appended."
+            },
+            "maxLength": 6
+        },
+        "authType": {
+            "type": "string",
+            "allowedValues": [
+                "password",
+                "sshPublicKey"
+            ],
+            "metadata": {
+                "description": "Authorization type for SSH access to VMs"
+            }
+        },
+        "adminUsername": {
+            "type": "string",
+            "defaultValue": "gethadmin",
+            "metadata": {
+                "description": "Administrator username of each deployed VM (alphanumeric characters only)"
+            }
+        },
+        "adminPassword": {
+            "type": "securestring",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Administrator password for each deployed VM"
+            }
+        },
+        "adminSSHKey": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "SSH RSA public key file as a string"
+            }
+        },
+        "restrictAccess": {
+            "type": "int",
+            "defaultValue": 0,
+            "metadata": {
+                "description": "If 1, use specified IP address/subnet to restrict access to all endpoints.  If 0, access is open to any IP address."
+            }
+        },
+        "ipAddressOrSubnet": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "If restrictAccess is set to 1, specify an individual IP address or IP subnet/address range here from where access to all endpoints will be allowed."
+            }
+        },
+        "numBlockMakers": {
+            "type": "int",
+            "defaultValue": 1,
+            "metadata": {
+                "description": "Number of mining nodes to create for each consortium member.If you choose deployment type as Standard (or)Premium make the default value as 2"
+            },
+            "minValue": 1,
+            "maxValue": 2
+        },
+        "numVoters": {
+            "type": "int",
+            "defaultValue": 1,
+            "metadata": {
+                "description": "Number of mining nodes to create for each consortium member."
+            },
+            "minValue": 1,
+            "maxValue": 9
+        },
+        "numObservers": {
+            "type": "int",
+            "defaultValue": 1,
+            "metadata": {
+                "description": "Number of mining nodes to create for each consortium member."
+            },
+            "minValue": 0,
+            "maxValue": 9
+        },
+        "storagePerformance": {
+            "type": "string",
+            "defaultValue": "Standard",
+            "allowedValues": [
+                "Standard",
+                "Premium"
+            ],
+            "metadata": {
+                "description": "Storage performance level for virtual machines"
+            }
+        },
+        "vmSize": {
+            "type": "string",
+            "defaultValue": "Standard_D1_v2",
+            "allowedValues": [],
+            "metadata": {
+                "description": "Size of the virtual machine used for mining nodes"
+            }
+        },
+        "consortiumMemberId": {
+            "type": "int",
+            "metadata": {
+                "description": "In a multi-member setup, each member should have a unique value to ensure they can connect"
+            },
+            "defaultValue": 0,
+            "minValue": 0,
+            "maxValue": 255
+        },
+        "ethereumAccountPsswd": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Password used to secure the Ethereum accounts that will be generated"
+            }
+        },
+        "passphrase": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Password used to generate the private keys associated with the Ethereum accounts that are generated.  Consider a password with sufficient randomness to ensure a strong private key"
+            }
+        },
+        "ethereumNetworkID": {
+            "type": "int",
+            "defaultValue": 10101010,
+            "metadata": {
+                "description": "Private Ethereum network ID to which to connect (max 9 digit number)"
+            },
+            "maxValue": 2147483647
+        },
+        "baseUrl": {
+            "type": "string",
+            "metadata": {
+                "description": "The base URL for dependent assets",
+                "artifactsBaseUrl": ""
+            },
+            "defaultValue": "https://raw.githubusercontent.com/sysgain/coldchain-bclocal/master/blockchain"
+        }
+    },
+    "variables": {
+        "omsSettings": {
+            "omsWorkspaceName": "[concat('omscc', variables('suffix'))]",
+            "omsWorkspaceRegion": "[parameters('oms-region')]",
+            "omsAutomationAccountName": "[concat('autoupdateccbc', variables('suffix'))]",
+            "dataRetention": 7,
+            "omsLogAnalyticsSku": "Standalone",
+            "omsEnableApiVersion": "2016-09-01"
+        },
+        "appInsights": {
+            "appInsightsLocation": "[parameters('appInsightsLocation')]",
+            "appInsightsApiVersion": "2014-04-01",
+            "appInsightResourceName": "[concat('AppInsights', variables('suffix'))]"
+        },
+        "storageAccount": {
+            "storageAccountName": "[concat('storageaccount',variables('suffix'))]",
+            "location": "[parameters('location')]",
+            "storageAccountType": "Standard_LRS",
+            "storageAccountType1": "Standard_GRS",
+            "containerName": "cctitantelemetry",
+            "containerName1": "shipmentdocuments",
+            "dataxmlurl": "[concat(variables('artifactsBaseUrl'),'scripts/data.xml?token=AE6YXAD2PIAJQZ2B6JHDIFC43UHKE')]",
+            "accountSasProperties":"[parameters('accountSasProperties')]"            
+        },
+        "documentDB": {
+            "location": "[parameters('location')]",
+            "DocDBAccountName": "[variables('DocDBAccountName')]",
+            "offerType": "Standard",
+            "DocDBOfferThroughput": "400",
+            "DocDBName": "TitanCosmosDB",
+            "documentDBAuthKey": "[resourceId('Microsoft.DocumentDb/databaseAccounts', variables('DocDBAccountName'))]",
+            "readRegionLocation": "[variables('locationDR')]"
+        },
+        "automationSettings": {
+            "automationAccountName": "[concat('AutomationAcc', variables('suffix'))]",
+            "automationLocation": "eastus2",
+            "automationSku": "Free",
+            "runbookName": "container",
+            "moduleName": "CosmosDB",
+            "moduleName1": "AzureADPreview",
+            "cosmosdbModuleUri": "[parameters('cosmosdbModuleUri')]",
+            "azureAdPreviewModuleUri": "[parameters('azureAdPreviewModuleUri')]",
+            "runbookUri": "[concat(variables('artifactsBaseUrl'),'scripts/installcosmosdb.ps1?token=AE6YXAHPQPV5OOEFRTRCBYS43UHNU')]",
+            "sessionId": "[parameters('sessionId')]",
+            "tenantId": "[parameters('tenantId')]",
+            "clientId": "[parameters('clientId')]",
+            "clientSecret": "[parameters('clientSecret')]",
+            "objectId": "[parameters('objectId')]",
+            "azureAccountName": "[parameters('azureAccountName')]",
+            "azurePassword": "[parameters('azurePassword')]"
+        },
+        "iotHub": {
+            "iotHubName": "[variables('iotHubName')]",
+            "location": "[parameters('location')]",
+            "retentionTimeInDays": 1,
+            "partitionCount": 2,
+            "skuName": "F1",
+            "skuName1": "S1",
+            "skuCapacity": 1,
+            "iotHubResourceId": "[resourceId('Microsoft.Devices/Iothubs',variables('iotHubName'))]",
+            "iotHubKeyResource": "[resourceId('Microsoft.Devices/Iothubs/Iothubkeys', variables('iotHubName'), variables('iotHubKeyName'))]",
+            "iotHubKeyName": "[variables('iotHubKeyName')]"
+        },
+        "sqlServer": {
+            "serverName": "[concat('ccserver',variables('suffix'))]",
+            "recoveryServerName": "[concat('recoveryccserver',variables('suffix'))]",
+            "location": "[parameters('location')]",
+            "locationDR": "[variables('locationDR')]",
+            "sqlAdministratorLogin": "[parameters('sqlAdministratorLogin')]",
+            "sqlAdministratorLoginPassword": "[parameters('sqlAdministratorLoginPassword')]",
+            "recoverySqlAuthenticationLogin": "[parameters('sqlAdministratorLogin')]",
+            "recoverySqlAuthenticationPassword": "[parameters('sqlAdministratorLoginPassword')]",
+            "databaseName": "CCTitanDB",
+            "databaseEdition": "Standard",
+            "databaseCollation": "SQL_Latin1_General_CP1_CI_AS",
+            "databaseMaxSizeBytes": "268435456000",
+            "databaseRequestedServiceObjectiveName": "S1",
+            "databaseRequestedServiceObjectiveName1": "S4",
+            "storageKeyType": "SharedAccessKey",
+            "storageKey": "?",
+            "storageUri": "[parameters('sqldbbacpacUrl')]",
+            "sqlFailoverGroupName": "[concat('azuresqlfailover', variables('suffix'))]"
+        },
+        "streamAnalytics": {
+            "name": "[concat('StreamAnalytics',variables('suffix'))]",
+            "nameDR": "[concat('StreamAnalyticsDR',variables('suffix'))]",
+            "location": "[parameters('location')]",
+            "locationDR": "[variables('locationDR')]",
+            "sku": "Standard",
+            "tenantId": "[parameters('tenantId')]"
+        },
+        "azureFunction": {
+            "hostingPlanName": "[concat('ConsumptionPlan',variables('suffix'))]",
+            "functionAppName": "[concat('ccfunapp',variables('suffix'))]",
+            "hostingPlanNameDR": "[concat('ConsumptionPlanDR',variables('suffix'))]",
+            "functionAppNameDR": "[concat('ccfunappDR',variables('suffix'))]",
+            "location": "[parameters('location')]",
+            "locationDR": "[variables('locationDR')]",
+            "functionPackageURI": "[parameters('functionAppUrl')]",
+            "functionPackageURI1": "[parameters('functionAppUrl')]",
+            "tenantId": "[parameters('tenantId')]",
+            "clientId": "[parameters('clientId')]",
+            "clientSecret": "[parameters('clientSecret')]"
+        },
+        "apiManagement":{
+            "apiServiceName":"[concat('apiservice',variables('suffix'))]",
+            "apiServiceNameDR":"[concat('apiserviceDR',variables('suffix'))]",
+            "functionappName":"[variables('azureFunction').functionAppName]",
+            "functionappNameDR":"[variables('azureFunction').functionAppNameDR]",
+            "location": "[parameters('location')]",
+            "locationDR": "[variables('locationDR')]",
+            "publisherEmail":"[parameters('azureAccountName')]",
+            "publisherName":"www.coldchaintest.com",
+            "skuName":"Developer",
+            "skuCapacity":1,
+            "backendApiName":"[concat('ccbackend',variables('suffix'))]",
+            "backendApiNameDR":"[concat('ccbackendDR',variables('suffix'))]"
+        }, 
+        "webApp": {
+            "webSiteName": "[concat(variables('webSiteName'),variables('suffix'))]",
+            "webSiteNameDR": "[concat(variables('webSiteNameDR'),variables('suffix'))]",
+            "appSvcPlanSku": "B1",
+            "appSvcPlanSku1": "S1",
+            "appSvcPlanName": "[concat('AppServPlan',variables('suffix'))]",
+            "appSvcPlanNameDR": "[concat('AppServPlanDR',variables('suffix'))]",
+            "location": "[parameters('location')]",
+            "locationDR": "[variables('locationDR')]",
+            "WebAppPackageURI": "[parameters('webAppBuildfileUrl')]"
+        },
+        "trafficManagerSettings": {
+            "trafficManagerApiVersion": "2017-05-01",
+            "trafficManagerName": "[concat('cctrafficmng-web',variables('suffix'))]",
+            "trafficManagerName1": "[concat('cctrafficmng-fun',variables('suffix'))]",
+            "trafficManagerName2": "[concat('cctrafficmng-tmt',variables('suffix'))]",
+            "trafficManagerName3": "[concat('cctrafficmng-bc',variables('suffix'))]",
+            "trafficRoutingMethod": "Priority"
+        },
+        "VMSettings": {
+            "vnetName": "[concat('tmtvnet',variables('suffix'))]",
+            "subnetName": "[concat('tmtsubnet',variables('suffix'))]",
+            "vnetNameDR":"[concat('tmtvnet-dr',variables('suffix'))]",
+            "subnetNameDR":"[concat('tmtsubnet-dr',variables('suffix'))]",
+            "addressPrefix": "10.0.0.0/16",
+            "subnetPrefix": "10.0.1.0/24",
+            "pipName": "[concat('tmtpip',variables('suffix'))]",
+            "publicIPAddressType": "Dynamic",
+            "nsgName": "[concat('tmtnsg',variables('suffix'))]",
+            "dnsLabelPrefix": "[concat('tmtdns',variables('suffix'))]",
+            "location": "[parameters('location')]",
+            "nicName":  "[concat('tmt-nic',variables('suffix'))]",
+            "nicNameDR":  "[concat('tmt-nic-dr',variables('suffix'))]",
+            "VmName": "[concat('TMT-VM',variables('suffix'))]",
+            "VmNameDR": "[concat('TMT-VMDR',variables('suffix'))]",
+            "pipNameDR":"[concat('tmtpipdr',variables('suffix'))]",
+            "nsgNameDR":"[concat('tmtnsgdr',variables('suffix'))]",
+            "dnsLabelPrefixDR":"[concat('tmtdnsdr',variables('suffix'))]",
+            "locationDR":"[variables('locationDR')]",
+            "vmSize": "Standard_D2s_v3",
+            "Username": "[parameters('adminUsername')]",
+            "Password": "[parameters('adminPassword')]",
+            "imagePublisher": "Canonical",
+            "imageOffer": "UbuntuServer",
+            "ubuntuOSVersion": "18.04-LTS",
+            "availabilitysetName":"[concat('avset',variables('suffix'))]",
+            "availabilitysetNameDR":"[concat('avsetDR',variables('suffix'))]",
+            "fileUri": "[concat(variables('artifactsBaseUrl'),'scripts/tmt-latest-script.sh?token=AE6YXADJICIFRWW2GMHCTSK43UH44')]"
+        },
+        "artifactsBaseUrl": "https://raw.githubusercontent.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/dev/",
+        "scriptUrl": "[concat(variables('artifactsBaseUrl'),'scripts/script.sh?token=AE6YXAFDB7L42SYPB43S6LK43UH2Y')]",
+        "suffix": "[substring(uniqueString(resourceGroup().id), 0, 5)]",
+        "DocDBAccountName": "[concat('ccdocdb',variables('suffix'))]",
+        "iotHubName": "[concat('iothub',variables('suffix'))]",
+        "iotHubKeyName": "iothubowner",
+        "apiVersion": "2016-02-01",
+        "webSiteName": "webapi",
+        "webSiteNameDR": "recoveryapi",
+        "eastus2": "centralus",
+        "centralus": "eastus2",
+        "westus2": "westcentralus",
+        "westcentralus": "westus2",
+        "canadacentral": "canadaeast",
+        "canadaeast": "canadacentral",
+        "australiaeast": "australiasoutheast",
+        "australiasoutheast": "australiaeast",
+        "centralindia": "southindia",
+        "southindia": "centralindia",
+        "eastasia": "southeastasia",
+        "southeastasia": "eastasia",
+        "japanwest": "japaneast",
+        "japaneast": "japanwest",
+        "koreacentral": "koreasouth",
+        "koreasouth": "koreacentral",
+        "uksouth": "ukwest",
+        "ukwest": "uksouth",
+        "locationDR": "[variables(parameters('location'))]"
+    },
+    "resources": [
+        {
+            "name": "OmsWorkSpace",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/omsworkspace.json?token=AE6YXACC3FFH25BMR6MTZZ243UIBY')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "omsSettings": {
+                        "value": "[variables('omsSettings')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "ApplicationInsights",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/appInsights.json?token=AE6YXAGFHUC6DA2CJ6IVNHC43UIE2')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "appInsights": {
+                        "value": "[variables('appInsights')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "IoTHub",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Basic-Solution')]",
+            "dependsOn": [
+                "OmsWorkSpace"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/iothub.json?token=AE6YXAG5XL4JKLHSHPVLAK243UIHQ')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "iotHub": {
+                        "value": "[variables('iotHub')]"
+                    },
+                    "omsSettings": {
+                        "value": "[variables('omsSettings')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "storageAccount",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Basic-Solution')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/storageAccount.json?token=AE6YXACD56ISC5HCBPVAF4C43UIJ2')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "storageAccount": {
+                        "value": "[variables('storageAccount')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    },
+                    "accountSasProperties": {
+                        "value": "[parameters('accountSasProperties')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "DocumentDB",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Basic-Solution')]",
+            "dependsOn": [
+                "OmsWorkSpace"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/docdb.json?token=AE6YXAEWBB3C3E3YJ6LPEJK43UIMI')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "documentDB": {
+                        "value": "[variables('documentDB')]"
+                    },
+                    "omsSettings": {
+                        "value": "[variables('omsSettings')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "SqlServer",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Basic-Solution')]",
+            "dependsOn": [
+                "OmsWorkSpace"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/sqldb.json?token=AE6YXAAII6JLTT4ND4N7EXC43UIPA')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "sqlServer": {
+                        "value": "[variables('sqlServer')]"
+                    },
+                    "omsSettings": {
+                        "value": "[variables('omsSettings')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "AutomationAccount",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Basic-Solution')]",
+            "dependsOn": [
+                "DocumentDB"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/automationaccount.json?token=AE6YXAB5JBJBBDBCJWEIAXK43UIRO')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "automationSettings": {
+                        "value": "[variables('automationSettings')]"
+                    },
+                    "documentDB": {
+                        "value": "[variables('documentDB')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    },
+                    "deviceManagementUri": {
+                        "value": "[concat('http://',variables('webApp').webSiteName,'.azurewebsites.net')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "StreamAnalytics",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Basic-Solution')]",
+            "dependsOn": [
+                "IoTHub",
+                "sqlServer",
+                "OmsWorkSpace",
+                "AutomationAccount",
+                "storageAccount"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/streamanalytics.json?token=AE6YXAEFGVK3TGWM7RZA64C43UIUM')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "streamAnalytics": {
+                        "value": "[variables('streamAnalytics')]"
+                    },
+                    "iotHub": {
+                        "value": "[variables('iotHub')]"
+                    },
+                    "documentDB": {
+                        "value": "[variables('documentDB')]"
+                    },
+                    "sqlServer": {
+                        "value": "[variables('sqlServer')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    },
+                    "storageAccount": {
+                        "value": "[variables('storageAccount')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "functionApp",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Basic-Solution')]",
+            "dependsOn": [
+                "sqlServer",
+                "storageAccount",
+                "DocumentDB"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/functionapp.json?token=AE6YXAHRZTZRWMXZBTTMRC243UIWW')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "azureFunction": {
+                        "value": "[variables('azureFunction')]"
+                    },
+                    "storageAccount": {
+                        "value": "[variables('storageAccount')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    },
+                    "appInsights": {
+                        "value": "[variables('appInsights')]"
+                    },
+                    "iotHub": {
+                        "value": "[variables('iotHub')]"
+                    },
+                    "documentDB": {
+                        "value": "[variables('documentDB')]"
+                    },
+                    "sqlServer": {
+                        "value": "[variables('sqlServer')]"
+                    },
+                    "webApp": {
+                        "value": "[variables('webApp')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "apiManagement",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[and(equals(parameters('apiManagement'),'YES'),equals(parameters('deploymentType'),'Basic-Solution'))]",
+            "dependsOn": [
+               "functionApp"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/apimanagement-HA.json?token=AE6YXAFX2LVGKDJIKKLVD5C43UIZO')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "apiManagement":{
+                        "value": "[variables('apiManagement')]"
+                    }
+                   
+                }
+            }
+        },
+        {
+            "name": "WebApp",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Basic-Solution')]",
+            "dependsOn": [
+                "functionApp",
+                "ApplicationInsights"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/webapp.json?token=AE6YXAG2ZY42LQFA63HTT6K43UI3U')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "webApp": {
+                        "value": "[variables('webApp')]"
+                    },
+                    "appInsights": {
+                        "value": "[variables('appInsights')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    },
+                    "storageAccount": {
+                        "value": "[variables('storageAccount')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "TMT-VM",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Basic-Solution')]",
+            "dependsOn": [
+                "sqlServer",
+                "storageAccount"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/tmt-vm.json?token=AE7OLVOF22R6YKDXFPQTG7S44TJIC')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "VMSettings": {
+                        "value": "[variables('VMSettings')]"
+                    },
+                    "sqlServer": {
+                        "value": "[variables('sqlServer')]"
+                    },
+                    "storageAccount": {
+                        "value": "[variables('storageAccount')]"
+                    },
+                    "azureAccountName":{
+                        "value": "[parameters('azureAccountName')]"
+                    },
+                    "adminUsername":{
+                        "value":"[parameters('adminUsername')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    },
+                }
+            }
+        },
+        {
+            "name": "storageAccountHA",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[or(equals(parameters('deploymentType'),'Standard-Solution'),equals(parameters('deploymentType'),'Premium-Solution'))]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/storageAccount-ha.json?token=AE6YXADXF74HPHLIG4VSJTK43UJA6')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "storageAccount": {
+                        "value": "[variables('storageAccount')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    },
+                    "accountSasProperties": {
+                        "value": "[parameters('accountSasProperties')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "IoTHubHA",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[or(equals(parameters('deploymentType'),'Standard-Solution'),equals(parameters('deploymentType'),'Premium-Solution'))]",
+            "dependsOn": [
+                "OmsWorkSpace"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/iothub-ha.json?token=AE6YXAA2SVFVNACKTFCM66C43UJDM')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "iotHub": {
+                        "value": "[variables('iotHub')]"
+                    },
+                    "omsSettings": {
+                        "value": "[variables('omsSettings')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "DocumentDBHA",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[or(equals(parameters('deploymentType'),'Standard-Solution'),equals(parameters('deploymentType'),'Premium-Solution'))]",
+            "dependsOn": [
+                "OmsWorkSpace"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/docdb-ha.json?token=AE6YXAABCRJTC7WJSXW5VKS43UJFK')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "documentDB": {
+                        "value": "[variables('documentDB')]"
+                    },
+                    "omsSettings": {
+                        "value": "[variables('omsSettings')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "SqlServerHA",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[or(equals(parameters('deploymentType'),'Standard-Solution'),equals(parameters('deploymentType'),'Premium-Solution'))]",
+            "dependsOn": [
+                "OmsWorkSpace"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/sql-ha.json?token=AE6YXAD7IDBKL63GZDPYBIC43UJHE')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "sqlServer": {
+                        "value": "[variables('sqlServer')]"
+                    },
+                    "omsSettings": {
+                        "value": "[variables('omsSettings')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "AutomationAccountHA",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[or(equals(parameters('deploymentType'),'Standard-Solution'),equals(parameters('deploymentType'),'Premium-Solution'))]",
+            "dependsOn": [
+                "DocumentDBHA"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/automationaccount.json?token=AE6YXAGTOBH7KM3PFEKFSTC43UJJM')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "automationSettings": {
+                        "value": "[variables('automationSettings')]"
+                    },
+                    "documentDB": {
+                        "value": "[variables('documentDB')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    },
+                    "deviceManagementUri": {
+                        "value": "[concat('http://',variables('trafficManagerSettings').trafficManagerName,'.trafficmanager.net')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "StreamAnalyticsHA",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[or(equals(parameters('deploymentType'),'Standard-Solution'),equals(parameters('deploymentType'),'Premium-Solution'))]",
+            "dependsOn": [
+                "IoTHubHA",
+                "sqlServerHA",
+                "OmsWorkSpace",
+                "AutomationAccountHA",
+                "storageAccountHA"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/streamanalytics-HA.json?token=AE6YXABJ4TZ644Q4DNM6WZK43UJLU')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "streamAnalytics": {
+                        "value": "[variables('streamAnalytics')]"
+                    },
+                    "iotHub": {
+                        "value": "[variables('iotHub')]"
+                    },
+                    "documentDB": {
+                        "value": "[variables('documentDB')]"
+                    },
+                    "sqlServer": {
+                        "value": "[variables('sqlServer')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    },
+                    "storageAccount": {
+                        "value": "[variables('storageAccount')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "StreamAnalyticsDR",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Premium-Solution')]",
+            "dependsOn": [
+                "IoTHubHA",
+                "sqlServerHA",
+                "OmsWorkSpace",
+                "AutomationAccountHA",
+                "storageAccountHA"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/streamanalytics-DR.json?token=AE6YXAGLEEZ5HSR5QLAXI5243UJNM')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "streamAnalytics": {
+                        "value": "[variables('streamAnalytics')]"
+                    },
+                    "iotHub": {
+                        "value": "[variables('iotHub')]"
+                    },
+                    "documentDB": {
+                        "value": "[variables('documentDB')]"
+                    },
+                    "sqlServer": {
+                        "value": "[variables('sqlServer')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    },
+                    "storageAccount": {
+                        "value": "[variables('storageAccount')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "functionAppHA",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[or(equals(parameters('deploymentType'),'Standard-Solution'),equals(parameters('deploymentType'),'Premium-Solution'))]",
+            "dependsOn": [
+                "sqlServerHA",
+                "storageAccountHA",
+                "DocumentDBHA"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/functionapp-ha.json?token=AE6YXAHJH5VNBYPCRFPHD6S43UJPC')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "azureFunction": {
+                        "value": "[variables('azureFunction')]"
+                    },
+                    "storageAccount": {
+                        "value": "[variables('storageAccount')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    },
+                    "appInsights": {
+                        "value": "[variables('appInsights')]"
+                    },
+                    "iotHub": {
+                        "value": "[variables('iotHub')]"
+                    },
+                    "documentDB": {
+                        "value": "[variables('documentDB')]"
+                    },
+                    "sqlServer": {
+                        "value": "[variables('sqlServer')]"
+                    },
+                    "trafficManagerSettings": {
+                        "value": "[variables('trafficManagerSettings')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "functionAppDR",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Premium-Solution')]",
+            "dependsOn": [
+                "sqlServerHA",
+                "storageAccountHA",
+                "DocumentDBHA",
+                "functionAppHA"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/functionapp-dr.json?token=AE6YXAETVZNB3YLZYXSCEQ243UJQ6')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "azureFunction": {
+                        "value": "[variables('azureFunction')]"
+                    },
+                    "storageAccount": {
+                        "value": "[variables('storageAccount')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    },
+                    "appInsights": {
+                        "value": "[variables('appInsights')]"
+                    },
+                    "iotHub": {
+                        "value": "[variables('iotHub')]"
+                    },
+                    "documentDB": {
+                        "value": "[variables('documentDB')]"
+                    },
+                    "sqlServer": {
+                        "value": "[variables('sqlServer')]"
+                    },
+                    "trafficManagerSettings": {
+                        "value": "[variables('trafficManagerSettings')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "apiManagementHA",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[or(and(equals(parameters('apiManagement'),'YES'),equals(parameters('deploymentType'),'Standard-Solution')),and(equals(parameters('apiManagement'),'YES'),equals(parameters('deploymentType'),'Premium-Solution')))]",
+            "dependsOn": [
+               "functionAppHA"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/apimanagement-HA.json?token=AE6YXAH3666RCQRFPZH3JKC43UJS6')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "apiManagement":{
+                        "value": "[variables('apiManagement')]"
+                    }
+                   
+                }
+            }
+        },
+        {
+            "name": "TrafficManagerFunStd",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[and(equals(parameters('apiManagement'),'NO'),equals(parameters('deploymentType'),'Standard-Solution'))]",
+            "dependsOn": [
+                "functionAppHA"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/trafficmanager-fun-std.json?token=AE6YXAHJAUO2BEP6O5KX2C243UJWA')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "azureFunction": {
+                        "value": "[variables('azureFunction')]"
+                    },
+                    "trafficManagerSettings": {
+                        "value": "[variables('trafficManagerSettings')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "TrafficManagerFunPremium",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[and(equals(parameters('apiManagement'),'NO'),equals(parameters('deploymentType'),'Premium-Solution'))]",
+            "dependsOn": [
+                "functionAppHA",
+                "functionAppDR"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/trafficmanager-tmt-prem.json?token=AE6YXAETVPIHADS6FEOIQ5S43UJYK')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "azureFunction": {
+                        "value": "[variables('azureFunction')]"
+                    },
+                    "trafficManagerSettings": {
+                        "value": "[variables('trafficManagerSettings')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "WebAppHA",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[or(equals(parameters('deploymentType'),'Standard-Solution'),equals(parameters('deploymentType'),'Premium-Solution'))]",
+            "dependsOn": [
+                "functionAppHA",
+                "ApplicationInsights"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/webapp-ha.json?token=AE6YXAC5GAYAE3BCZ7DTHG243UJ2S')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "webApp": {
+                        "value": "[variables('webApp')]"
+                    },
+                    "appInsights": {
+                        "value": "[variables('appInsights')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    },
+                    "storageAccount": {
+                        "value": "[variables('storageAccount')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "RecoveryWebApp",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Premium-Solution')]",
+            "dependsOn": [
+                "functionAppDR",
+                "ApplicationInsights"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/webapp-dr.json?token=AE6YXAFAWGKSYTFMQACA7WK43UJ4E')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "webApp": {
+                        "value": "[variables('webApp')]"
+                    },
+                    "appInsights": {
+                        "value": "[variables('appInsights')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    },
+                    "storageAccount": {
+                        "value": "[variables('storageAccount')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "TrafficManagerWebStandard",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Standard-Solution')]",
+            "dependsOn": [
+                "WebAppHA"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/trafficmanager-web-std.json?token=AE6YXAC5NC37XMROP7BSLFK43UJ6C')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "webApp": {
+                        "value": "[variables('webApp')]"
+                    },
+                    "trafficManagerSettings": {
+                        "value": "[variables('trafficManagerSettings')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "TrafficManagerWebPremium",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Premium-Solution')]",
+            "dependsOn": [
+                "WebAppHA",
+                "RecoveryWebApp"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/trafficmanager-web-prem.json?token=AE6YXAFGWPL6YO5MVZVWJ5C43UKAM')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "webApp": {
+                        "value": "[variables('webApp')]"
+                    },
+                    "trafficManagerSettings": {
+                        "value": "[variables('trafficManagerSettings')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "TMT-VM-HA",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[or(equals(parameters('deploymentType'),'Standard-Solution'),equals(parameters('deploymentType'),'Premium-Solution'))]",
+            "dependsOn": [
+                "sqlServerHA",
+                "storageAccountHA"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/tmt-vm-ha.json?token=AE7OLVNODVMHKAL76HCGHRK44TJIE')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "VMSettings": {
+                        "value": "[variables('VMSettings')]"
+                    },
+                    "sqlServer": {
+                        "value": "[variables('sqlServer')]"
+                    },
+                    "storageAccount": {
+                        "value": "[variables('storageAccount')]"
+                    },
+                    "azureAccountName":{
+                        "value": "[parameters('azureAccountName')]"
+                    },
+                    "adminUsername":{
+                        "value":"[parameters('adminUsername')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "TMT-VM-DR",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Premium-Solution')]",
+            "dependsOn": [
+                "sqlServerHA",
+                "storageAccountHA"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/tmt-vm-dr.json?token=AE7OLVJ6G52JILX2VMFFR6K44TJII')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "VMSettings": {
+                        "value": "[variables('VMSettings')]"
+                    },
+                    "sqlServer": {
+                        "value": "[variables('sqlServer')]"
+                    },
+                    "storageAccount": {
+                        "value": "[variables('storageAccount')]"
+                    },
+                    "azureAccountName":{
+                        "value": "[parameters('azureAccountName')]"
+                    },
+                    "adminUsername":{
+                        "value":"[parameters('adminUsername')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "TrafficManagerTMTStandard",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Standard-Solution')]",
+            "dependsOn": [
+                "TMT-VM-HA"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/trafficmanager-tmt-std.json?token=AE6YXABA3ZYFYSTH6NVTLKK43UKHG')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "VMSettings": {
+                        "value": "[variables('VMSettings')]"
+                    },
+                    "trafficManagerSettings": {
+                        "value": "[variables('trafficManagerSettings')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "TrafficManagerTMTPremium",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Premium-Solution')]",
+            "dependsOn": [
+                "TMT-VM-HA",
+                "TMT-VM-DR"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested//trafficmanager-tmt-prem.json?token=AE6YXAH5V7PMWCJGSBUKO7S43UKJA')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "VMSettings": {
+                        "value": "[variables('VMSettings')]"
+                    },
+                    "trafficManagerSettings": {
+                        "value": "[variables('trafficManagerSettings')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "BlockchainDeployment",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[equals(parameters('deploymentType'),'Basic-Solution')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/blockchain-nested.json?token=AE6YXAEINBWXY53HQZTO2AS43UKLI')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "location": {
+                        "value":"[resourceGroup().location]"
+                    },
+                    "namePrefix": {
+                        "value":"[concat(parameters('namePrefix'),'1')]"
+                    },
+                    "authType": {
+                        "value": "[parameters('authType')]"        
+                    },
+                    "adminUsername": {
+                         "value": "[parameters('adminUsername')]"        
+                    },
+                    "adminPassword": {
+                        "value": "[parameters('adminPassword')]"  
+                    },
+                    "adminSSHKey": {
+                        "value": "[parameters('adminSSHKey')]"  
+                    },
+                    "restrictAccess": {
+                        "value": "[parameters('restrictAccess')]"  
+                    },
+                    "ipAddressOrSubnet": {
+                        "value": "[parameters('ipAddressOrSubnet')]"  
+                    },
+                    "numBlockMakers": {
+                        "value": "[parameters('numBlockMakers')]" 
+                    },
+                    "numVoters": {
+                        "value": "[parameters('numVoters')]" 
+                    },
+                    "numObservers": {
+                        "value": "[parameters('numObservers')]" 
+                    },
+                    "storagePerformance": {
+                        "value": "[parameters('storagePerformance')]" 
+                    },
+                    "vmSize": {
+                        "value": "[parameters('vmSize')]" 
+                    },
+                    "consortiumMemberId": {
+                        "value": "[parameters('consortiumMemberId')]" 
+                    },
+                    "ethereumAccountPsswd": {
+                        "value": "[parameters('ethereumAccountPsswd')]" 
+                    },
+                    "passphrase": {
+                        "value": "[parameters('passphrase')]" 
+                    },
+                    "ethereumNetworkID": {
+                        "value": "[parameters('ethereumNetworkID')]" 
+                    },
+                    "baseUrl": {
+                        "value": "[parameters('baseUrl')]" 
+                    },
+                    "scriptUrl":{
+                        "value":"[variables('scriptUrl')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "BlockchainDeploymentHA",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('apiVersion')]",
+            "condition": "[or(equals(parameters('deploymentType'),'Standard-Solution'),equals(parameters('deploymentType'),'Premium-Solution'))]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('artifactsBaseUrl'),'nested/blockchain-nested-ha.json?token=AE6YXAAR4HZFPVJRSD6R6MC43UKNI')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "location": {
+                        "value":"[resourceGroup().location]"
+                    },
+                    "namePrefix": {
+                        "value":"[concat(parameters('namePrefix'),'1')]"
+                    },
+                    "authType": {
+                        "value": "[parameters('authType')]"        
+                    },
+                    "adminUsername": {
+                         "value": "[parameters('adminUsername')]"        
+                    },
+                    "adminPassword": {
+                        "value": "[parameters('adminPassword')]"  
+                    },
+                    "adminSSHKey": {
+                        "value": "[parameters('adminSSHKey')]"  
+                    },
+                    "restrictAccess": {
+                        "value": "[parameters('restrictAccess')]"  
+                    },
+                    "ipAddressOrSubnet": {
+                        "value": "[parameters('ipAddressOrSubnet')]"  
+                    },
+                    "numBlockMakers": {
+                        "value": "[parameters('numBlockMakers')]" 
+                    },
+                    "numVoters": {
+                        "value": "[parameters('numVoters')]" 
+                    },
+                    "numObservers": {
+                        "value": "[parameters('numObservers')]" 
+                    },
+                    "storagePerformance": {
+                        "value": "[parameters('storagePerformance')]" 
+                    },
+                    "vmSize": {
+                        "value": "[parameters('vmSize')]" 
+                    },
+                    "consortiumMemberId": {
+                        "value": "[parameters('consortiumMemberId')]" 
+                    },
+                    "ethereumAccountPsswd": {
+                        "value": "[parameters('ethereumAccountPsswd')]" 
+                    },
+                    "passphrase": {
+                        "value": "[parameters('passphrase')]" 
+                    },
+                    "ethereumNetworkID": {
+                        "value": "[parameters('ethereumNetworkID')]" 
+                    },
+                    "baseUrl": {
+                        "value": "[parameters('baseUrl')]" 
+                    },
+                    "scriptUrl":{
+                        "value":"[variables('scriptUrl')]"
+                    },
+                    "trafficManagerSettings": {
+                        "value": "[variables('trafficManagerSettings')]"
+                    },
+                    "solutionType":{
+                        "value":"[parameters('solutionType')]"
+                    }
+                }
+            }
+        }
+
+    ],
+    "outputs": {
+        "iothubHostName": {
+            "type": "string",
+            "value": "[concat(variables('iotHub').iotHubName,'.azure-devices.net')]"
+        },
+        "sqlLogin": {
+            "type": "string",
+            "value": "[parameters('sqlAdministratorLogin')]"  
+        },
+        "sqlLoginPassword": {
+            "type": "string",
+            "value": "[parameters('sqlAdministratorLoginPassword')]"
+        },
+        "sqlDatabaseName":{
+            "type": "string",
+            "value": "[variables('sqlServer').databaseName]"
+        },
+        "VM'sLoginUserName": {
+            "type": "string",
+            "value": "[parameters('adminUsername')]"
+        },
+        "VM'sLoginPassword": {
+            "type": "string",
+            "value": "[parameters('adminPassword')]"
+        },
+        "websiteURL":{
+            "condition": "[equals(parameters('deploymentType'),'Basic-Solution')]",
+            "type": "string",
+            "value": "[concat('http://',variables('webApp').webSiteName,'.azurewebsites.net')]"
+        },
+        "websiteURLHA":{
+            "condition": "[or(equals(parameters('deploymentType'),'Standard-Solution'),equals(parameters('deploymentType'),'Premium-Solution'))]",
+            "type": "string",
+            "value": "[concat('http://',variables('trafficManagerSettings').trafficManagerName,'.trafficmanager.net')]"
+        },
+        "API_Endpoint":{
+            "condition": "[equals(parameters('deploymentType'),'Basic-Solution')]",
+            "type": "string",
+            "value": "[concat('https://',variables('azureFunction').functionAppName,'.azurewebsites.net')]"
+        },
+        "API_EndpointHA":{
+            "condition": "[or(equals(parameters('deploymentType'),'Standard-Solution'),equals(parameters('deploymentType'),'Premium-Solution'))]",
+            "type": "string",
+            "value": "[concat('http://',variables('trafficManagerSettings').trafficManagerName1,'.trafficmanager.net')]"
+        },
+        "blobAccessUrl(or)StorageLink":{
+            "type": "string",
+            "value": "[concat('https://',variables('storageAccount').storageAccountName,'.blob.core.windows.net')]"
+        },
+        "SAS_Token": {
+            "condition": "[equals(parameters('deploymentType'),'Basic-Solution')]",
+            "type": "string",
+            "value": "[concat('?',reference('storageAccount').outputs.storageAccountSasToken.value)]"
+        },
+        "SAS_TokenHA":{
+            "condition": "[or(equals(parameters('deploymentType'),'Standard-Solution'),equals(parameters('deploymentType'),'Premium-Solution'))]",
+            "type": "string",
+            "value": "[concat('?',reference('storageAccountHA').outputs.storageAccountSasToken.value)]"
+        },
+        "HttpProvider":{
+            "condition": "[equals(parameters('deploymentType'),'Basic-Solution')]",
+            "type": "string",
+            "value": "[concat('http://',reference('BlockchainDeployment').outputs.BlockchainLBIP.value,':8545')]"
+        },
+        "HttpProviderHA":{
+            "condition": "[or(equals(parameters('deploymentType'),'Standard-Solution'),equals(parameters('deploymentType'),'Premium-Solution'))]",
+            "type": "string",
+            "value": "[concat('http://',variables('trafficManagerSettings').trafficManagerName3,'.trafficmanager.net')]"
+        },
+        "web3_password": {
+            "type": "string",
+            "value":"[parameters('ethereumAccountPsswd')]"
+        },
+        "passphrase": {
+            "type": "string",
+            "value":"[parameters('passphrase')]"
+        }
+    }
+}

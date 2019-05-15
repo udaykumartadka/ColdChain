@@ -1,0 +1,64 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "trafficManagerSettings": {
+            "type": "object"
+        },
+        "VMSettings": {
+            "type": "object"
+        },
+        "solutionType":{
+            "type": "string"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "apiVersion": "[parameters('trafficManagerSettings').trafficManagerApiVersion]",
+            "type": "Microsoft.Network/trafficmanagerprofiles",
+            "name": "[parameters('trafficManagerSettings').trafficManagerName2]",
+            "location": "global",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            },
+            "properties": {
+                "trafficRoutingMethod": "[parameters('trafficManagerSettings').trafficRoutingMethod]",
+                "dnsConfig": {
+                    "relativeName": "[parameters('trafficManagerSettings').trafficManagerName2]",
+                    "ttl": "100"
+                },
+                "monitorConfig": {
+                    "protocol": "TCP",
+                    "port": "21684",
+                    "path": ""
+                },
+                "endpoints": [
+                    {
+                        "name": "[parameters('VMSettings').pipName]",
+                        "type": "Microsoft.Network/trafficManagerProfiles/azureEndpoints",
+                        "properties": {
+                            "endpointStatus": "Enabled",
+                            "targetResourceId": "[resourceId('Microsoft.Network/publicIPAddresses/', parameters('VMSettings').pipName)]",
+                            "weight": 1,
+                            "priority": 1,
+                            "endpointLocation": "[parameters('VMSettings').location]"
+                        }
+                    },
+                    {
+                        "name": "[parameters('VMSettings').pipNameDR]",
+                        "type": "Microsoft.Network/trafficManagerProfiles/azureEndpoints",
+                        "properties": {
+                            "endpointStatus": "Enabled",
+                            "targetResourceId": "[resourceId('Microsoft.Network/publicIPAddresses/', parameters('VMSettings').pipNameDR)]",
+                            "weight": 1,
+                            "priority": 2,
+                            "endpointLocation": "[parameters('VMSettings').locationDr]"
+                        }
+                    }
+                ]
+            }
+        }   
+       
+    ]
+}

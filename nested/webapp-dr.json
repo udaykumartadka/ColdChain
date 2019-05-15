@@ -1,0 +1,129 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "webApp": {
+            "type": "Object"
+        },
+        "appInsights": {
+            "type": "Object"
+        },
+        "solutionType": {
+            "type": "String"
+        },
+        "storageAccount": {
+            "type": "Object"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Web/serverfarms",
+            "sku": {
+                "name": "[parameters('webApp').appSvcPlanSku1]"
+            },
+            "kind": "app",
+            "name": "[parameters('webApp').appSvcPlanNameDR]",
+            "apiVersion": "2017-08-01",
+            "location": "[parameters('webApp').locationDR]",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "kind": "app",
+            "name": "[parameters('webApp').webSiteNameDR]",
+            "apiVersion": "2016-08-01",
+            "location": "[parameters('webApp').locationDR]",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            },
+            "properties": {
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('webApp').appSvcPlanNameDR)]"
+            },
+            "resources": [
+                {
+                    "type": "config",
+                    "name": "web",
+                    "apiVersion": "2015-08-01",
+                    "tags": {
+                        "IotSuiteType": "[parameters('solutionType')]"
+                    },
+                    "properties": {
+                        "phpVersion": "5.6",
+                        "netFrameworkVersion": "v4.6",
+                        "use32BitWorkerProcess": true,
+                        "webSocketsEnabled": false,
+                        "alwaysOn": false,
+                        "remoteDebuggingEnabled": false,
+                        "cors": {
+                            "allowedOrigins": [
+                                "[concat('https://',parameters('storageAccount').storageAccountName,'.azurewebsites.net')]",
+                                "[concat('http://',parameters('storageAccount').storageAccountName,'.azurewebsites.net')]"
+                            ]
+                        }
+                    },
+                    "dependsOn": [
+                        "[concat('Microsoft.Web/sites/', parameters('webApp').webSiteNameDR)]",
+                        "[concat('Microsoft.Web/sites/', parameters('webApp').webSiteNameDR, '/extensions/MSDeploy')]"
+                    ]
+                },
+                {
+                    "type": "extensions",
+                    "name": "MSDeploy",
+                    "apiVersion": "2015-08-01",
+                    "location": "[parameters('webApp').locationDR]",
+                    "tags": {
+                        "displayName": "WebAppMSDeploy"
+                    },
+                    "properties": {
+                        "packageUri": "[parameters('webApp').WebAppPackageURI]"
+                    },
+                    "dependsOn": [
+                        "[concat('Microsoft.Web/sites/', parameters('webApp').webSiteNameDR)]"
+                    ]
+                },
+                {
+                    "type": "config",
+                    "name": "connectionstrings",
+                    "apiVersion": "2015-08-01",
+                    "tags": {
+                        "IotSuiteType": "[parameters('solutionType')]"
+                    },
+                    "properties": {},
+                    "dependsOn": [
+                        "[concat('Microsoft.Web/sites/', parameters('webApp').webSiteNameDR)]",
+                        "[concat('Microsoft.Web/sites/', parameters('webApp').webSiteNameDR, '/config/web')]",
+                        "[concat('Microsoft.Web/sites/', parameters('webApp').webSiteNameDR, '/extensions/MSDeploy')]"
+                    ]
+                },
+                {
+                    "type": "config",
+                    "name": "appsettings",
+                    "apiVersion": "2015-08-01",
+                    "tags": {
+                        "IotSuiteType": "[parameters('solutionType')]"
+                    },
+                    "properties": {
+                        "ApplicationInsights:InstrumentationKey": "[reference(resourceId('Microsoft.Insights/components', parameters('appInsights').appInsightResourceName), '2014-04-01').InstrumentationKey]"
+                    },
+                    "dependsOn": [
+                        "[concat('Microsoft.Web/sites/', parameters('webApp').webSiteNameDR)]",
+                        "[concat('Microsoft.Web/sites/', parameters('webApp').webSiteNameDR, '/config/web')]",
+                        "[concat('Microsoft.Web/sites/', parameters('webApp').webSiteNameDR, '/config/connectionstrings')]",
+                        "[concat('Microsoft.Web/sites/', parameters('webApp').webSiteNameDR, '/extensions/MSDeploy')]"
+                    ]
+                }
+            ],
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('webApp').appSvcPlanNameDR)]"
+            ]
+        }
+    ],
+    "outputs": {
+        "webDomainHostName": {
+            "type": "String",
+            "value": "[concat(parameters('webApp').webSiteNameDR,'.azurewebsites.net')]"
+        }
+    }
+}

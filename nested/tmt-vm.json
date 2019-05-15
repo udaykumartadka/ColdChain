@@ -1,0 +1,278 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "VMSettings": {
+            "type": "object"
+        },
+        "sqlServer": {
+            "type": "object"
+        },
+        "storageAccount": {
+            "type": "object"
+        },
+        "azureAccountName":{
+            "type": "string"
+        },
+        "adminUsername":{
+            "type":"string"
+        },
+        "solutionType":{
+            "type":"string"
+        }
+    },
+    "variables": {
+        "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', parameters('VMSettings').vnetName)]",
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('VMSettings').subnetName)]",
+        "singleQuotes": " ' "
+    },
+    "resources": [
+        {
+            "apiVersion": "2017-04-01",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('VMSettings').vnetName]",
+            "location": "[parameters('VMSettings').location]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('VMSettings').addressPrefix]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[parameters('VMSettings').subnetName]",
+                        "properties": {
+                            "addressPrefix": "[parameters('VMSettings').subnetPrefix]"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "2017-04-01",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[parameters('VMSettings').pipName]",
+            "location": "[parameters('VMSettings').location]",
+            "properties": {
+                "publicIPAllocationMethod": "[parameters('VMSettings').publicIPAddressType]",
+                "dnsSettings": {
+                    "domainNameLabel": "[parameters('VMSettings').dnsLabelPrefix]"
+                }
+            }
+        },
+        {
+            "apiVersion": "2017-04-01",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('VMSettings').nicName]",
+            "location": "[parameters('VMSettings').location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses/', parameters('VMSettings').pipName)]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('VMSettings').pipName)]"
+                            },
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            }
+                        }
+                    }
+                ],
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('VMSettings').nsgName)]"
+                }
+            }
+        },
+        {
+            "name": "[parameters('VMSettings').nsgName]",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2018-01-01",
+            "location": "[parameters('VMSettings').location]",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "allow-ssh",
+                        "properties": {
+                            "description": "Allow SSH",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "22",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 100,
+                            "direction": "Inbound"
+                        }
+                    },
+                    {
+                        "name": "allow-http",
+                        "properties": {
+                            "description": "Allow http",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "443",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 101,
+                            "direction": "Inbound"
+                        }
+                    },
+                    {
+                        "name": "allow-http1",
+                        "properties": {
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "443",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 102,
+                            "direction": "Outbound"
+                        }
+                    },
+                    {
+                        "name": "web-rule",
+                        "properties": {
+                            "description": "Allow WEB",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "80",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1001,
+                            "direction": "Inbound"
+                        }
+                    },
+                    {
+                        "name": "web-rule1",
+                        "properties": {
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "80",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1002,
+                            "direction": "Outbound"
+                        }
+                    },
+                    {
+                        "name": "TMT_21684",
+                        "properties": {
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "21684",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 113,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "TMT_OUT_21684",
+                        "properties": {
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "21684",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 110,
+                            "direction": "Outbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "2017-03-30",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[parameters('VMSettings').VmName]",
+            "location": "[parameters('VMSettings').location]",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces/', parameters('VMSettings').nicName)]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('VMSettings').vmSize]"
+                },
+                "osProfile": {
+                    "computerName": "[parameters('VMSettings').VmName]",
+                    "adminUsername": "[parameters('VMSettings').Username]",
+                    "adminPassword": "[parameters('VMSettings').Password]"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "[parameters('VMSettings').imagePublisher]",
+                        "offer": "[parameters('VMSettings').imageOffer]",
+                        "sku": "[parameters('VMSettings').ubuntuOSVersion]",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "createOption": "FromImage"
+                    },
+                    "dataDisks": [
+                        {
+                            "diskSizeGB": 1023,
+                            "lun": 0,
+                            "createOption": "Empty"
+                        }
+                    ]
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces',parameters('VMSettings').nicName)]"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('VMSettings').VmName,'/Extensions')]",
+            "location": "[parameters('VMSettings').location]",
+            "apiVersion": "2017-03-30",
+            "dependsOn": [
+                "[concat('Microsoft.Compute/virtualMachines/',parameters('VMSettings').VmName)]"
+            ],
+            "properties": {
+                "publisher": "Microsoft.Azure.Extensions",
+                "type": "CustomScript",
+                "typeHandlerVersion": "2.0",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "fileUris": [
+                        "[parameters('VMSettings').fileUri]"
+                    ],
+                    "commandToExecute": "[concat('sh tmt-latest-script.sh', ' ', variables('singleQuotes'),parameters('sqlServer').serverName,'.database.windows.net',variables('singleQuotes'), ' ',variables('singleQuotes'),parameters('sqlServer').sqlAdministratorLogin,variables('singleQuotes'), ' ',variables('singleQuotes'),parameters('sqlServer').sqlAdministratorLoginPassword,variables('singleQuotes'), ' ',variables('singleQuotes'),parameters('sqlServer').databaseName,variables('singleQuotes'), ' ',variables('singleQuotes'),reference(parameters('VMSettings').pipName).dnsSettings.fqdn,variables('singleQuotes'), ' ',variables('singleQuotes'),'https://',parameters('storageAccount').storageAccountName,'.blob.core.windows.net',variables('singleQuotes'), ' ',variables('singleQuotes'),listAccountSas(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccount').storageAccountName), '2018-02-01',parameters('storageAccount').accountSasProperties).accountSasToken,variables('singleQuotes'),' ',variables('singleQuotes'),parameters('storageAccount').dataxmlurl,variables('singleQuotes'), ' ',variables('singleQuotes'),parameters('azureAccountName'),variables('singleQuotes'),' ',variables('singleQuotes'),parameters('adminUsername'),variables('singleQuotes'))]"
+                }
+            }
+        }
+    ],
+    "outputs": {
+        "dnshostname": {
+            "type": "string",
+            "value": "[reference(parameters('VMSettings').pipName).dnsSettings.fqdn]"
+        }
+    }
+}

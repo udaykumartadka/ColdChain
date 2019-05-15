@@ -1,0 +1,180 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "streamAnalytics": {
+            "type": "object"
+        },
+        "iotHub": {
+            "type": "object"
+        },
+        "documentDB": {
+            "type": "object"
+        },
+        "sqlServer": {
+            "type": "object"
+        },
+        "solutionType": {
+            "type": "string"
+        },
+        "storageAccount":{
+            "type": "object"
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "2017-04-01-preview",
+            "name": "[parameters('streamAnalytics').name]",
+            "location": "[parameters('streamAnalytics').location]",
+            "type": "Microsoft.StreamAnalytics/StreamingJobs",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            },
+            "Identity": {
+                "Type": "SystemAssigned"
+            },
+            "properties": {
+                "sku": {
+                    "name": "standard"
+                },
+                "outputStartMode": "CustomTime",
+                "outputStartTime": "2018-11-01T01:00Z",
+                "outputErrorPolicy": "stop",
+                "eventsOutOfOrderPolicy": "adjust",
+                "eventsOutOfOrderMaxDelayInSeconds": 0,
+                "eventsLateArrivalMaxDelayInSeconds": 5,
+                "dataLocale": "en-US",
+                "inputs": [
+                    {
+                        "Name": "TitanTelemetry",
+                        "Properties": {
+                            "DataSource": {
+                                "Properties": {
+                                    "iotHubNamespace": "[parameters('iotHub').iotHubName]",
+                                    "sharedAccessPolicyKey": "[listkeys(resourceId('Microsoft.Devices/IotHubs/IotHubKeys',parameters('iotHub').iotHubName, 'iothubowner'),'2016-02-03').primaryKey]",
+                                    "sharedAccessPolicyName": "iothubowner",
+                                    "endpoint": "messages/events",
+                                    "consumerGroupName":"$Default"
+                                },
+                                "Type": "Microsoft.Devices/IotHubs"
+                            },
+                            "Serialization": {
+                                "Properties": {
+                                    "Encoding": "UTF8"
+                                },
+                                "Type": "Json"
+                            },
+                            "Type": "Stream"
+                        }
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "TitanBlob",
+                        "apiVersion": "2016-03-01",
+                        "scale": null,
+                        "properties": {
+                            "datasource": {
+                                "type": "Microsoft.Storage/Blob",
+                                "properties": {
+                                    "blobPathPrefix": "",
+                                    "storageAccounts": [
+                                        {
+                                            "accountName": "[parameters('storageAccount').storageAccountName]",
+                                            "accountKey":"[listKeys(resourceId('Microsoft.Storage/storageAccounts',parameters('storageAccount').storageAccountName), '2015-05-01-preview').key1]"
+                                        }
+                                    ],
+                                    "container": "[parameters('storageAccount').containerName]",
+                                    "pathPattern": "",
+                                    "dateFormat": "yyyy/MM/dd",
+                                    "timeFormat": "HH"
+                                }
+                            },
+                            "serialization": {
+                                "type": "Json",
+                                "properties": {
+                                    "encoding": "UTF8",
+                                    "format": "LineSeparated"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "TitanCosmosAlert",
+                        "apiVersion": "2016-03-01",
+                        "scale": null,
+                        "properties": {
+                            "datasource": {
+                                "type": "Microsoft.Storage/DocumentDB",
+                                "properties": {
+                                    "accountId": "[parameters('documentDB').DocDBAccountName]",
+                                    "accountKey": "[listkeys(resourceId('Microsoft.DocumentDb/databaseAccounts', parameters('documentDB').DocDBAccountName), '2015-04-08').primaryMasterKey]",
+                                    "database": "[parameters('documentDB').DocDBName]",
+                                    "collectionNamePattern": "TitanAlertCollection"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "TitanCosmosHeartBeat",
+                        "apiVersion": "2016-03-01",
+                        "scale": null,
+                        "properties": {
+                            "datasource": {
+                                "type": "Microsoft.Storage/DocumentDB",
+                                "properties": {
+                                    "accountId": "[parameters('documentDB').DocDBAccountName]",
+                                    "accountKey": "[listkeys(resourceId('Microsoft.DocumentDb/databaseAccounts', parameters('documentDB').DocDBAccountName), '2015-04-08').primaryMasterKey]",
+                                    "database": "[parameters('documentDB').DocDBName]",
+                                    "collectionNamePattern": "TitanHeartBeatCollection"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "TitanCosmosTelemetry",
+                        "apiVersion": "2016-03-01",
+                        "scale": null,
+                        "properties": {
+                            "datasource": {
+                                "type": "Microsoft.Storage/DocumentDB",
+                                "properties": {
+                                    "accountId": "[parameters('documentDB').DocDBAccountName]",
+                                    "accountKey": "[listkeys(resourceId('Microsoft.DocumentDb/databaseAccounts', parameters('documentDB').DocDBAccountName), '2015-04-08').primaryMasterKey]",
+                                    "database": "[parameters('documentDB').DocDBName]",
+                                    "collectionNamePattern": "TitanTelemetryCollection"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "TitanSQLAlert",
+                        "apiVersion": "2016-03-01",
+                        "scale": null,
+                        "properties": {
+                            "datasource": {
+                                "type": "Microsoft.Sql/Server/Database",
+                                "properties": {
+                                    "server": "[parameters('sqlServer').sqlFailoverGroupName]",
+                                    "database": "[parameters('sqlServer').databaseName]",
+                                    "user": "[parameters('sqlServer').sqlAdministratorLogin]",
+                                    "password": "[parameters('sqlServer').sqlAdministratorLoginPassword]",
+                                    "table": "Raw_Alert",
+                                    "maxWriterCount": 1,
+                                    "maxBatchCount": 10000
+                                }
+                            }
+                        }
+                    }
+                ],
+                "transformation": {
+                    "name": "Transformation",
+                    "properties": {
+                        "streamingUnits": 1,
+                        "query": "WITH FlatAlert AS \r\n(\r\n    \r\nSELECT\r\n[Alert].[gatewayId] AS [GatewayID],\r\n \r\n[Alert].[message_type] AS [Messagetype],\r\n\r\n[Alert].[current_latitude] AS [LocationLattitude],\r\n\r\n[Alert].[current_longitude] AS [LocationLongitude],\r\n\r\n[Alert].[current_system_time] AS [CURRENTSYSTEMTIME],\r\n\r\n[Alert].[current_system_time] AS [AlertDatetime],\r\n\r\n\r\n[Alert].[SensorData].[sensorID] AS [BeaconID],\r\n\r\n[Alert].[SensorData].[temperature] AS [Temperature],\r\n\r\n[Alert].[SensorData].[humidity] AS [Humidity],\r\n\r\n[Alert].[SensorData].[humidity_alert] AS [HumidityAlert],\r\n\r\n[Alert].[SensorData].[shock_alert] AS [ShockAlert],\r\n\r\n[Alert].[SensorData].[tamper_alert] AS [TamperAlert],\r\n\r\n[Alert].[SensorData].[temperature_alert] AS [TemperatureAlert]\r\nFROM\r\n\r\n(\r\n\r\nSELECT\r\ne.*,\r\n\r\n[SensorValues].[ArrayValue] AS [SensorData]\r\nFROM TitanTelemetry AS e\r\nCROSS APPLY GetArrayElements(e.sensor_Values) AS [SensorValues]\r\nWHERE (e.message_type ='Alert')\r\n  \r\n)\r\n AS Alert\r\n\r\n)\r\n  \r\nSELECT GatewayID,BeaconID,\r\nTemperature,\r\nHumidity,\r\nShockAlert,\r\nTamperAlert,\r\nTemperatureAlert,\r\n\r\nHumidityAlert,\r\nLocationLattitude,\r\nLocationLongitude,\r\n'Raw' as Status,\r\n AlertDatetime,\r\ncurrentsystemtime\r\nINTO TitanSQLAlert \r\nFROM FlatAlert \r\nWHERE HumidityAlert=1 OR ShockAlert=1 OR TamperAlert=1 OR TemperatureAlert=1\r\n\r\n/* Heart Beat CosmosDB */\r\nSELECT\r\n *\r\n INTO TitanCosmosHeartBeat FROM TitanTelemetry WHERE message_type='HeartBeat'\r\n/* Alert CosmosDB */\r\nSELECT\r\n *\r\n INTO TitanCosmosAlert FROM TitanTelemetry WHERE message_type='Alert'\r\n/* Alert Telemetry */\r\nSELECT\r\n *\r\n INTO TitanCosmosTelemetry FROM TitanTelemetry WHERE message_type='Telemetry' OR message_type='Alert' OR message_type='Stored_Telemetry' OR message_type='Stored_Alert'"
+                    }
+                }
+            }
+        }
+    ]
+}

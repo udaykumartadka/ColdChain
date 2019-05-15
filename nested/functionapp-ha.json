@@ -1,0 +1,169 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "azureFunction": {
+            "type": "object"
+        },
+        "storageAccount":{
+            "type": "object"
+        },
+        "solutionType": {
+            "type": "string"
+        },
+        "appInsights": {
+            "type": "object"
+        },
+        "iotHub": {
+            "type": "object"
+        },
+        "sqlServer": {
+            "type": "object"
+        },
+        "documentDB": {
+            "type": "object"
+        },
+        "trafficManagerSettings": {
+            "type": "object"
+        }
+    },
+    "variables": {
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2015-04-01",
+            "name": "[parameters('azureFunction').hostingPlanName]",
+            "location": "[parameters('azureFunction').location]",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            },
+            "properties": {
+                "name": "[parameters('azureFunction').hostingPlanName]",
+                "computeMode": "Dynamic",
+                "sku": "Dynamic"
+            }
+        },
+        {
+            "apiVersion": "2015-08-01",
+            "type": "Microsoft.Web/sites",
+            "name": "[parameters('azureFunction').functionAppName]",
+            "location": "[parameters('azureFunction').location]",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            },
+            "kind": "functionapp",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms',parameters('azureFunction').hostingPlanName)]"
+            ],
+            "properties": {
+                "name": "[parameters('azureFunction').functionAppName]",
+                "clientAffinityEnabled": false,
+                "siteConfig": {
+                    "appSettings": [
+                        {
+                            "name": "AzureWebJobsStorage",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccount').storageAccountName,';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts',parameters('storageAccount').storageAccountName), '2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "FUNCTIONS_EXTENSION_VERSION",
+                            "value": "~1"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccount').storageAccountName,';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccount').storageAccountName), '2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTSHARE",
+                            "value": "[concat(toLower(parameters('azureFunction').functionAppName), '9717')]"
+                        },
+                        {
+                            "name": "WEBSITE_NODE_DEFAULT_VERSION",
+                            "value": "6.5.0"
+                        },
+                        {
+                            "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+                            "value": "[reference(resourceId('Microsoft.Insights/components', parameters('appInsights').appInsightResourceName), '2014-04-01').InstrumentationKey]"
+                        },
+                        {
+                            "name": "IOTHubConnectionString",
+                            "value": "[concat('HostName=',parameters('iotHub').iotHubName,'.azure-devices.net;SharedAccessKeyName=',parameters('iotHub').iotHubKeyName,';SharedAccessKey=',listKeys(resourceId('Microsoft.Devices/IotHubs/Iothubkeys', parameters('iotHub').iotHubName, parameters('iotHub').iotHubKeyName), '2016-02-03').primaryKey)]"
+                        },
+                        {
+                            "name": "SQLConnectionString",
+                            "value": "[concat('Server=tcp:',parameters('sqlServer').sqlFailoverGroupName,'.database.windows.net,1433;Initial Catalog=',parameters('sqlServer').databaseName,';Persist Security Info=False;User ID=',parameters('sqlServer').sqlAdministratorLogin,';Password=',parameters('sqlServer').sqlAdministratorLoginPassword,';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;')]"
+                        },
+                        {
+                            "name": "NoSQLConnectionString",
+                            "value": "[concat('https://',parameters('documentDB').DocDBAccountName,'.documents.azure.com:443/')]"
+                        },
+                        {
+                            "name": "NoSqlPrimaryKey",
+                            "value": "[listkeys(resourceId('Microsoft.DocumentDb/databaseAccounts', parameters('documentDB').DocDBAccountName), '2015-04-08').primaryMasterKey]"
+                        },
+                        {
+                            "name": "authString",
+                            "value":   "[concat('https://login.microsoftonline.com/',parameters('azureFunction').tenantId)]"
+                        },
+                        {
+                            "name": "ClientID",
+                            "value": "[parameters('azureFunction').clientID]"
+                        },
+                        {
+                            "name": "clientSecret",
+                            "value": "[parameters('azureFunction').clientSecret]"
+                        },
+                        {
+                            "name": "resAzureGraphAPI",
+                            "value":   "https://graph.windows.net"
+                        },
+                        {
+                            "name": "TenantID",
+                            "value": "[parameters('azureFunction').tenantId]"
+                        }
+                    ]
+                }
+            },
+            "resources": [
+                {
+                    "name": "MSDeploy",
+                    "type": "extensions",
+                    "location": "[parameters('azureFunction').location]",
+                    "apiVersion": "2015-08-01",
+                    "dependsOn": [
+                        "[concat('Microsoft.Web/sites/', parameters('azureFunction').functionAppName)]"
+                    ],
+                    "tags": {
+                        "IotSuiteType": "[parameters('solutionType')]"
+                    },
+                    "properties": {
+                        "packageUri": "[parameters('azureFunction').functionPackageURI]"
+                    }
+                },
+                {
+                    "type": "config",
+                    "name": "web",
+                    "apiVersion": "2016-08-01",
+                    "properties": {
+                      "cors": {
+                        "allowedOrigins": [
+                            "https://functions.azure.com",
+                            "https://functions-staging.azure.com",
+                            "https://functions-next.azure.com",
+                          "[concat('https://',parameters('azureFunction').functionAppName,'.azurewebsites.net')]",
+                          "[concat('http://',parameters('azureFunction').functionAppName,'.azurewebsites.net')]",
+                          "[concat('http://',parameters('trafficManagerSettings').trafficManagerName,'.trafficmanager.net')]",
+                          "[concat('https://',parameters('storageAccount').storageAccountName,'.azurewebsites.net')]",
+                          "[concat('http://',parameters('storageAccount').storageAccountName,'.azurewebsites.net')]"
+                        ]
+                      }
+                    },
+                    "dependsOn": [
+                         "[concat('Microsoft.Web/sites/', parameters('azureFunction').functionAppName)]",
+                         "[concat('Microsoft.Web/sites/', parameters('azureFunction').functionAppName, '/extensions/MSDeploy')]"
+                    ]
+                  }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "trafficManagerSettings": {
+            "type": "object"
+        },
+        "azureFunction": {
+            "type": "object"
+        },
+        "solutionType":{
+            "type": "string"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/trafficManagerProfiles/azureEndpoints",
+            "name": "[concat(parameters('trafficManagerSettings').trafficManagerName1,'/', parameters('azureFunction').functionAppNameDR)]",
+            "apiVersion": "[parameters('trafficManagerSettings').trafficManagerApiVersion]",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            },
+            "properties": {
+                "endpointStatus": "Enabled",
+                "targetResourceId": "[resourceId('Microsoft.Web/sites', parameters('azureFunction').functionAppNameDR)]",
+                "weight": 1,
+                "priority": 2,
+                "endpointLocation": "[parameters('azureFunction').locationDR]"
+            }
+        }
+    ]
+}

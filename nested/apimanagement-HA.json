@@ -1,0 +1,75 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "apiManagement":{
+            "type": "object"
+        }
+    },
+    "variables": {
+    },
+    "resources": [
+        {
+            "type": "Microsoft.ApiManagement/service",
+            "name": "[parameters('apiManagement').apiServiceName]",
+            "apiVersion": "2018-06-01-preview",
+            "location": "[parameters('apiManagement').location]",
+            "sku": {
+                "name": "[parameters('apiManagement').skuName]",
+                "capacity":"[parameters('apiManagement').skuCapacity]"
+            },
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "publisherEmail": "[parameters('apiManagement').publisherEmail]",
+                "publisherName": "[parameters('apiManagement').publisherName]",
+                "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+                "hostnameConfigurations": [],
+                "additionalLocations": null,
+                "virtualNetworkConfiguration": null,
+                "customProperties": null,
+                "virtualNetworkType": "None",
+                "certificates": null
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis",
+            "name": "[concat(parameters('apiManagement').apiServiceName, '/', parameters('apiManagement').functionappName)]",
+            "apiVersion": "2018-06-01-preview",
+            "scale": null,
+            "properties": {
+                "displayName": "[parameters('apiManagement').functionappName]",
+                "apiRevision": "1",
+                "description": "[concat('Import from \"', parameters('apiManagement').functionappName,'\" Function App')]",
+                "serviceUrl": null,
+                "path": "[parameters('apiManagement').functionappName]",
+                "protocols": [
+                    "https",
+                    "http"
+                ],
+                "authenticationSettings": null,
+                "subscriptionKeyParameterNames": null
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service', parameters('apiManagement').apiServiceName)]"
+            ]
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/backends",
+           "name": "[concat(parameters('apiManagement').apiServiceName, '/', parameters('apiManagement').backendApiName)]",
+           "apiVersion": "2018-06-01-preview",
+           "scale": null,
+           "properties": {
+               "title": null,
+               "description": "[parameters('apiManagement').backendApiName]",
+               "url": "[concat('https://', parameters('apiManagement').backendApiName,'.azurewebsites.net/api')]",
+               "protocol": "http",
+               "resourceId": "[concat('https://management.azure.com/subscriptions/',subscription().subscriptionId,'/resourceGroups/',resourceGroup().name,'/providers/Microsoft.Web/sites/', parameters('apiManagement').functionappName)]"
+           },
+           "dependsOn": [
+               "[resourceId('Microsoft.ApiManagement/service', parameters('apiManagement').apiServiceName)]"
+           ]
+       }
+    ]
+}

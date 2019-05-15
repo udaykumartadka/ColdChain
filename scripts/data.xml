@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StorageServiceProperties>
+   <Cors>
+      <CorsRule>
+         <AllowedOrigins>*</AllowedOrigins>
+         <AllowedMethods>GET,PUT,DELETE,HEAD,OPTIONS,POST,MERGE</AllowedMethods>
+         <MaxAgeInSeconds>5000000</MaxAgeInSeconds>
+         <ExposedHeaders>*</ExposedHeaders>
+         <AllowedHeaders>*</AllowedHeaders>
+      </CorsRule>
+   </Cors>
+</StorageServiceProperties>

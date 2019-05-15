@@ -1,0 +1,53 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "trafficManagerSettings": {
+            "type": "object"
+        },
+        "azureFunction": {
+            "type": "object"
+        },
+        "solutionType":{
+            "type": "string"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "apiVersion": "[parameters('trafficManagerSettings').trafficManagerApiVersion]",
+            "type": "Microsoft.Network/trafficmanagerprofiles",
+            "name": "[parameters('trafficManagerSettings').trafficManagerName1]",
+            "location": "global",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            },
+            "properties": {
+                "trafficRoutingMethod": "[parameters('trafficManagerSettings').trafficRoutingMethod]",
+                "dnsConfig": {
+                    "relativeName": "[parameters('trafficManagerSettings').trafficManagerName1]",
+                    "ttl": "100"
+                },
+                "monitorConfig": {
+                    "protocol": "HTTPS",
+                    "port": "443",
+                    "path": "/"
+                },
+                "endpoints": [
+                    {
+                        "name": "[parameters('azureFunction').functionAppName]",
+                        "type": "Microsoft.Network/trafficManagerProfiles/azureEndpoints",
+                        "properties": {
+                            "endpointStatus": "Enabled",
+                            "targetResourceId": "[resourceId('Microsoft.Web/sites', parameters('azureFunction').functionAppName)]",
+                            "weight": 1,
+                            "priority": 1,
+                            "endpointLocation": "[parameters('azureFunction').location]"
+                        }
+                    }
+                ]
+            }
+        }       
+       
+    ]
+}

@@ -1,0 +1,126 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "solutionType": {
+            "value": "ColdChain"
+        },
+        "deploymentType":{
+          "value": ""
+         },
+         "apiManagement":{
+             "value":""
+         },
+        "location": {
+            "value": "westus2"
+        },
+        "oms-region": {
+            "value": "eastus"
+        },
+        "appInsightsLocation": {
+            "value": "westus2"
+        },
+        "sqlAdministratorLogin": {
+            "value": "sqluser"
+        },
+        "sqlAdministratorLoginPassword": {
+            "value": "Password@1234"
+        },
+        "tenantId": {
+            "value": "acxxx5-a7xxx-4ca7-87eb-c5xxxxxd38"
+        },
+        "clientID":{
+            "value":"xxxxx-a79a-xxxx-87eb-c5exxxxxd38"
+        },
+        "clientSecret":{
+            "value":"xxxxx-xxx-4xx7-8xxb-xxxxxxxxxd38"
+        },
+        "objectId":{
+            "value":"xxxxx-3774-455-244-xxxxxxxxx"
+        },
+        "azureAccountName": {
+            "value": "sample@sysgain.com"
+        },
+        "azurePassword": {
+            "value": "Passwordxxxx"
+        },
+        "accountSasProperties":{
+            "value": {
+                "signedServices": "bfqt",
+                "signedPermission": "rwdlacup",
+                "signedExpiry": "2019-05-02T00:00:00Z",
+                "signedProtocol": "https",
+                "signedResourceTypes": "sco"
+            }
+        },
+        "sessionId": {
+            "value": "3791180c-24c5-4290-8459-a454feee90ab"
+        },
+        "cosmosdbModuleUri": {
+            "value": "provide your cosmosdb module zip file url"
+        },
+        "azureAdPreviewModuleUri":{
+            "value":"please provide the Azure AD Preview module which placed under /code folder by placing it in any public storage"
+        },
+        "functionAppUrl":{
+            "value": "provide your function app zip file url"
+        },
+        "webAppBuildfileUrl": {
+            "value": "provide your webapplication zip file url"
+        },
+        "sqldbbacpacUrl": {
+            "value": "provide the sql bacpac file storage url "
+        },
+        "namePrefix": {
+            "value":    "ccbc"
+        },
+        "authType": {
+            "value": "password"
+        },
+        "adminUsername": {
+            "value": "gethadmin"
+        },
+        "adminPassword": {
+            "value": "Password@1234"
+        },
+        "adminSSHKey": {
+            "value": ""
+        },
+        "restrictAccess": {
+            "value": 0
+        },
+        "ipAddressOrSubnet": {
+            "value": ""
+        },
+        "numBlockMakers": {
+            "value": 1
+        },
+        "numVoters": {
+            "value": 1
+        },
+        "numObservers": {
+            "value": 1
+        },
+        "storagePerformance": {
+            "value": "Standard"
+        },
+        "vmSize": {
+            "value": "Standard_D1_v2"
+        },
+        "consortiumMemberId": {
+            "value": 0
+        },
+        "ethereumAccountPsswd": {
+            "value":"Password@1234"
+        },
+        "passphrase": {
+            "value":"Password@1234"
+        },
+        "ethereumNetworkID": {
+            "value": 10101010
+        },
+        "baseUrl": {
+            "value": "https://raw.githubusercontent.com/sysgain/coldchain-bclocal/master/blockchain"
+        }
+    }
+}
