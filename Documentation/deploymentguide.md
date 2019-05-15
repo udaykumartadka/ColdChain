@@ -2,40 +2,43 @@
 
 # ColdChain Solution
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/de0.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/de0.png)
 
 ### Table of Contents 
 
-- [1. Deployment Guide](#1-deployment-guide)
-- [2. Prerequisites for Deploying ARM Templatee](#2-prerequisites-for-deploying-arm-template)
-    - [2.1 Integrating Applications with Azure Active Directory ](#21-integrating-applications-with-azure-active-directory)
+- [Microsoft](#microsoft)
+- [ColdChain Solution](#coldchain-solution)
+    - [Table of Contents](#table-of-contents)
+  - [1. Deployment Guide](#1-deployment-guide)
+  - [2. Prerequisites for Deploying ARM Template](#2-prerequisites-for-deploying-arm-template)
+    - [2.1. Integrating Applications with Azure Active Directory](#21-integrating-applications-with-azure-active-directory)
       - [2.1.1. To Register a new Application using the Azure Portal](#211-to-register-a-new-application-using-the-azure-portal)
       - [2.1.2. To add Application Credentials or Permissions to Access Web APIs](#212-to-add-application-credentials-or-permissions-to-access-web-apis)
-      - [2.1.3 To get Tenant ID](#213-to-get-tenant-id)
-      - [2.1.4 To get application ID and Authentication Key](#214-to-get-application-id-and-authentication-Key)
-      - [2.1.5 Creating Session ID](#215-creating-session-id)
-- [3. ARM Template Input Parameters](#3-arm-template-input-parameters)
-- [4. ARM Template Deployment](#4-ARM-template-deployment)
-    - [4.1 ARM Template Deployment Using Azure Portal](#41-arm-template-deployment-using-azure-portal)
-      - [4.1.1 Inputs](#411-inputs)
-      - [4.1.2 Outputs](#412-outputs)
-    - [4.2. ARM Template Deployment Using Azure CLI](#42-arm-template-deployment-using-azure-CLI)
-      - [4.2.1 Outputs](#421-outputs)
- - [5. Post Deployment Steps](#5-post-deployment-steps)
-    - [5.1 Deploying smart contract and getting the Contract Address](#51-deploying-smart-contract-and-getting-the-contract-address)
-       - [5.1.1 Running Blockchain servic in TMT-VM](#511-running-blockchain-servic-in-tmt-vm)
+      - [2.1.3. To get Tenant ID](#213-to-get-tenant-id)
+      - [2.1.4. To get application ID and Authentication Key](#214-to-get-application-id-and-authentication-key)
+      - [2.1.5. Creating Session ID](#215-creating-session-id)
+  - [3. ARM Template Input Parameters](#3-arm-template-input-parameters)
+  - [4. ARM Template Deployment](#4-arm-template-deployment)
+    - [4.1. ARM Template Deployment Using Azure Portal](#41-arm-template-deployment-using-azure-portal)
+      - [4.1.1. Inputs](#411-inputs)
+      - [4.1.2. Outputs](#412-outputs)
+    - [4.2. ARM Template Deployment Using Azure CLI](#42-arm-template-deployment-using-azure-cli)
+      - [4.2.1. Outputs](#421-outputs)
+  - [5. Post Deployment Steps](#5-post-deployment-steps)
+    - [5.1. Deploying smart contract and getting the Contract Address](#51-deploying-smart-contract-and-getting-the-contract-address)
+      - [5.1.1 Running Blockchain servic in TMT-VM](#511-running-blockchain-servic-in-tmt-vm)
     - [5.2 Performing Azure Site Recovery for Block Chain Virtual Machines](#52-performing-azure-site-recovery-for-block-chain-virtual-machines)
-    - [5.3 Importing Function App into the API Management ](#53-importing-function-app-into-the-API-management )
+    - [5.3 Importing Function App into the API Management](#53-importing-function-app-into-the-api-management)
     - [5.4 Building the Web App code](#54-building-the-web-app-code)
     - [5.5 Connecting Devices to the solution](#55-connecting-devices-to-the-solution)
-      - [5.5.1 TMT-250 Device Configuration](#551-TMT-250-device-configuration)
-      - [5.5.2 Connecting Rigado](#552-connecting-rigado)
+      - [5.5.1. TMT-250 Device Configuration](#551-tmt-250-device-configuration)
+      - [5.5.2. Connecting Rigado](#552-connecting-rigado)
       - [5.5.3 Connecting Beacons](#553-connecting-beacons)
- - [6. Device Configuration](#6-device-configuration)
-    - [6.1 Build and Deploy Snap to Gateway](#61-build-and-deploy-snap-to-gateway)
-      - [6.1.1 Snap Building](#611-snap-building)
-    - [6.2 Uploading the snap to Gateway](#62-uploading-the-snap-to-gateway)
-    - [6.3 Verifying the device configurations](#63-verifying-the-device-configurations)
+  - [6. Device Configuration](#6-device-configuration)
+    - [6.1. Build and Deploy Snap to Gateway](#61-build-and-deploy-snap-to-gateway)
+      - [6.1.1. Snap Building:](#611-snap-building)
+    - [6.2. Uploading the snap to Gateway](#62-uploading-the-snap-to-gateway)
+    - [6.3. Verifying the device configurations](#63-verifying-the-device-configurations)
     
     
     
@@ -62,7 +65,7 @@ Any application that wants to use the capabilities of Azure AD must first be reg
 1.	Sign in to the **Azure portal.**
 2.	In the left-hand navigation pane, click the **Azure Active Directory(symbol)** service, click **App registrations,** and click **+ New application registration.**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d1.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d1.png)
 
 3. When the **Create** page appears, enter your application's registration information:
   - **Name**: Enter the application name
@@ -72,7 +75,7 @@ Any application that wants to use the capabilities of Azure AD must first be reg
   
 4.When finished, click **Create.**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d2.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d2.png)
 
 #### 2.1.2. To add Application Credentials or Permissions to Access Web APIs
 
@@ -80,17 +83,17 @@ Any application that wants to use the capabilities of Azure AD must first be reg
 2. You are taken to the application's main registration page, which opens the **Settings** page of the application. To add a secret key for your web application's credentials:
 3. Click the **Keys** section on the **Settings** page.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d3.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d3.png)
 
 4. Add a description for your key and Select duration, click **Save**. 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d4.png)   
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d4.png)   
     
 5. The right-most column will contain the key value, after you save the configuration changes. **Be sure to copy the key** for use in your client application code, as it is not accessible once you leave this page.  
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d4-1.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d4-1.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d5.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d5.png)
 
 #### 2.1.3. To get Tenant ID
 
@@ -98,18 +101,18 @@ Any application that wants to use the capabilities of Azure AD must first be reg
 2.	To get the tenant ID, select for your **Azure AD Properties tenant** and **Copy** the **Directory ID**. This value is your **tenant ID.**
 3. **Note down** the Copied **Directory ID** which is highlighted in the below figure, this will be used while deploying the **ARM template.**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d6.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d6.png)
 
 #### 2.1.4. To get application ID and Authentication Key
 
 1. From **App registrations** in **Azure Active Directory, select** your **application.**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d7.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d7.png)
 
 2. **Copy** the **Application ID** and **object ID.** The application ID value is referred as the **client ID.**
 3. **Note down** the Copied **Application ID** and **object ID** which is highlighted in the below figure, this will be used while deploying the **ARM template.**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d8.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d8.png)
 
 #### 2.1.5. Creating Session ID
 
@@ -117,13 +120,13 @@ Any application that wants to use the capabilities of Azure AD must first be reg
 
 <https://www.guidgenerator.com/>
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d9.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d9.png)
 
 2. Click **Generate some GUIDs!** This will generate **GUID** in Results box. 
     
 3.	**Copy** and **Note down** the generated GUID which is highlighted in the below figure, this will be used while deploying the **ARM template.**  
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d10.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d10.png)
 
 ## 3. ARM Template Input Parameters
     
@@ -192,39 +195,39 @@ Resource manager provides the following features:
 2.	Select from **branch** as shown in the following figure.
 3.	Select **Raw** from the top right corner.
    
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d11.png) 
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d11.png) 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d12.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d12.png)
 
 4. **Copy** the raw template and **paste** in your **Azure Portal** for template deployment.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d13.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d13.png)
     
 **To deploy a template for Azure Resource Manager, follow the below steps.**
 1.	Go to **Azure portal.**
 2.	Navigate to **Create a resource (+)**, search for **Template deployment.**
 3.	Click **Create** button and click **Build your own Template in the editor** as shown in the following figure.
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d13-1.PNG)
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d13-2.PNG)
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d14.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d13-1.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d13-2.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d14.png)
 
 4.	The **Edit template** page is displayed as shown in the following figure.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d15.png) 
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d15.png) 
 
 5.	**Replace / paste** the template and click **Save** button.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d16.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d16.png)
 
 6. The **Custom deployment** page is displayed as shown in the following figure. 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d17.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d17.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d18.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d18.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d19.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d19.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d20.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d20.png)
 
 #### 4.1.1. Inputs
 
@@ -236,13 +239,13 @@ If you want to deploy the **Basic Solution** you must enter the values for the p
 
 For **basic solution,** enter the parameters as shown below. 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/1.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/1.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/2.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/2.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/3.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/3.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/4.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/4.PNG)
 
 **Parameters for Standard Solution**
 
@@ -250,25 +253,25 @@ If you want to deploy the **standard solution** you must enter the below paramet
 
 For **standard solution,** select new values for **numBlockMakers as 2, apiManagement as YES/NO** and keep the default values for other parameters. 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/5.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/5.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/6.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/6.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/7.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/7.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/8.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/8.PNG)
 
 **Parameters for Premium solution:**
 
 If you want to deploy the **Premium solution** you must enter the below parameters as shown in the screens.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/9.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/9.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/10.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/10.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/11.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/11.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/12.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/12.PNG)
 
 Once all the parameters are entered, check in the **terms and conditions** check box and click **Purchase.**
 
@@ -306,20 +309,20 @@ The above resources are deployed for **Basic Solution.**
 
 Once the solution is deployed successfully, navigate to the **resource group** to view the list of resources that are created as shown below.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d33.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d33.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d34.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d34.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d35.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d35.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d36.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d36.png)
 
 #### 4.1.2. Outputs
 Go to **Resource Group** -> Click **Deployments** then click on **Microsoft.Template** after that click on **Outputs**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d37.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d37.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d38.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d38.png)
 
 ### 4.2. ARM Template Deployment Using Azure CLI
 
@@ -333,40 +336,40 @@ Customize maintemplate.parameters.json file
 1.	Log in to **Azure portal.** 
 2.	Open the **prompt.** 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d39.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d39.png)
 
 
 3.	Select **Bash (Linux) environment** as shown in the following figure. 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d40.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d40.png)
 
 
 4.	Select **Confirm** button.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d41.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d41.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d43.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d43.png)
   
 5.	Copy maintemplate.json and maintemplate.parameters.json to your **Cloud Shell** before updating the parameters. 
 6.	Create **maintemplate.json** using the following command. 
 
 **$ vim maintemplate.json**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d44.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d44.png)
     
 7.	Paste your **maintemplate.json** in editor as shown below and save the file.     
     
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d45.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d45.png)
        
 8.	Create **maintemplate.parameters.json** using the following command. 
 
 **$ vim maintemplate.parameters.json**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d46.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d46.png)
   
  9. Paste your **maintemplate.parameters.json** in editor. 
  
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d47.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d47.png)
        
  10. Update the following parameters in **maintemplate.parameters.json** file 
  
@@ -452,7 +455,7 @@ It uses the name parameter to specify the name for resource group (-n) and locat
 
 **Syntax: az** group create -n "resource group name" -l "location"
    
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d48.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d48.png)
  
 11.	Execute the Template Deployment 
 12.	Use the **az group deployment create** command to deploy the ARM template
@@ -467,16 +470,16 @@ Syntax:  az group deployment create --template-file './<main-template.json filen
     
 Ex: az group deployment create --template-file './maintemplate.json' --parameters '@./maintemplate.parameters.json' -g snsbasicsolution -n deploy >> outputs.txt
  
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d49.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d49.png)
 
 13.	Deployment may take between 15-20 minutes depending on deployment size. 
 14.	After successful deployment you can see the deployment outputs as follows.
 
 #### 4.2.1. Outputs
  
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d50.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d50.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d38.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d38.png)
        
 ## 5. Post Deployment Steps
 
@@ -484,21 +487,21 @@ Associating **NAT rule** of port **8545** to the **BM0 Machine**
 
 1. Click on **Load Balancer** resource and click on **Inbound NAT rules** in left side.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/de10.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/de10.PNG)
 
 2. Click on **NatBM0_RPC_Port** rules
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/de11.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/de11.PNG)
 
 3. Click on Dropdown **Target virtual machine** to **BMO** and **Network IP configuration** to **BM0** and click **Save**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/de12.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/de12.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/de13.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/de13.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/de14.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/de14.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/de15.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/de15.PNG)
 
 ### 5.1. Deploying smart contract and getting the Contract Address
 
@@ -506,51 +509,51 @@ Associating **NAT rule** of port **8545** to the **BM0 Machine**
 
 **NOTE**: If deployment type is **Standard (OR) Premium** you have to use **Blockchain traffic manager URL** along with port **3000** to SSH into the **BM0 VM**.
     
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d51.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d51.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d52.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d52.png)
     
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d53.png)    
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d53.png)    
     
 Click **Yes** to continue.    
     
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d54.png)    
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d54.png)    
     
 Login ID: **gethadmin**
 
 Password: **Password@1234**
     
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d55.png)    
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d55.png)    
     
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d56.png)  
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d56.png)  
 
 1.	Run the following command in **BM0** to download the **script(smart-script.sh)** to deploy the smart contract
 
 $wget https://storageccqia.blob.core.windows.net/cc-iot/arm-ha/scripts/smart-script.sh
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d57.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d57.png)
 
 2.	Run the following command to change the permissions of the file **smart-script.sh**
 
 $ sudo chmod 777 smart-script.sh 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d58.png)    
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d58.png)    
     
 3.	Run the script by using below command 
 
 $ ./smart-script.sh http://52.247.204.66:8545  https://storageccqia.blob.core.windows.net/cc-iot/arm-ha/scripts/contract.sol   https://storageccqia.blob.core.windows.net/cc-iot/arm-ha/scripts/smart_contratct.js
 
-NOTE: The IP address used in the RPC URL will change for every deployment. So use the updated IP address to use in RPC URL. The IP address for forming RPC URL is taken from the LoadBalancer IP address if the solution type is Basic. If the solution type Standard (OR) Premium you need to use the Blockchain Traffic Manager URL  
+NOTE: The IP address used in the RPC URL will change for every deployment. So use the updated IP address to use in RPC URL. The IP address for forming RPC URL is taken from the LoadBalancer IP address if the solution type is Basic. If the solution type Standard (OR) Premium you need to use the Blockchain Traffic Manager URL  
 
 Rpc Url: $1
 Contractsol: $2
 smart_contract_js: $3
     
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d59.png)    
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d59.png)    
     
 4. Contract address displayed on the screen, make a note of the contract address for future reference.   
     
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d60.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d60.png)
 
 #### 5.1.1 Running Blockchain servic in TMT-VM
 
@@ -570,22 +573,22 @@ Refer output section from the ARM deployment **4.2.1**
 
 5. Login into the **TMT-VM** using **Putty**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d60-1.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d60-1.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d60-3.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d60-3.PNG)
 
 Login ID: **gethadmin**
 
 Password: **Password@1234**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d60-5.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d60-5.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d60-6.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d60-6.PNG)
 
 
 6. Run the following command: 
 
-    **wget "https://storageccqia.blob.core.windows.net/cc-iot/cold-chain-2304/cold-chain-costing-latest/scripts/blockchain-service.sh"**
+    **wget "https://raw.githubusercontent.com/SecureColdChain/ColdChain/master/scripts/blockchain-service.sh"**
 
     **cat blockchain-service.sh | tr -d '\r' > blockchain-service.sh1 | mv blockchain-service.sh1 blockchain-service.sh**
 
@@ -595,84 +598,84 @@ Password: **Password@1234**
 
 **Ex**: ./blockchain-service.sh "52.175.243.187" "Password@1234" "0xd761de896114f745e5ef789532523ff9ab3cf553" "4000000"
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d60-7.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d60-7.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d60-8.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d60-8.PNG)
     
 ### 5.2 Performing Azure Site Recovery for Block Chain Virtual Machines
 
 **Note: This step is performed only for the Standard and Premium Solution deployments.**
 1.	In Azure portal search for “site recovery”  as shown below and click on **Recovery Services Vaults.**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr1.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr1.png)
 
 2.	Click on + **Add**.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr2.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr2.png)
 
 3.	Enter the required details and click on **Create**. 
 Select **Location**(East US2) value which is different from the resources Location(Blockchain VMs ).
 **Note:** In this case, Blockchain VMs are deployed in West US2 so you can choose Location as East US2
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr3.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr3.png)
 
 4.	Click on the **Resource Group(cc-standard-asr)** which have created above , then click on the **site recovey vault(cc-standard-vault)** you have created above. 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr4.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr4.png)
 
 5.	Click on **Site Receovery** and then click on **Prepare Infrastructure**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr5.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr5.png)
 
 6.	Click on **OK**  after selecting the values as shown below.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr6.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr6.png)
 
 7.	Click on **Ok** 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr7.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr7.png)
 
 8.	Click on **Step1: Replicate Application**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr8.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr8.png)
 
 9.	Enter the required details as shown below and click on **OK.**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr9.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr9.png)
 
 10.	Select the virtual machine which you want to replicate, in this case you need to select Blockchain VMs Only and click on **OK**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr10.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr10.png)
 
 11.	In the next screen keep all the values to default and then click **Create tagrget resources.**
 
 **NOTE:** If you want,  you can customize the values by clikcing the Customize link
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr11.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr11.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr12.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr12.png)
 
 12.	Click on **Enable Replication.** It will create the required resources as shown below.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr13.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr13.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr14.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr14.png)
 
 13.	Click on the **Resource Group(cc-standard-asr)** which you have created as part of ASR as shown below.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr15.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr15.png)
 
 14.	Click on the **Site Recovery Vault(cc-standard-vault)** which you have created before
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr16.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr16.png)
 
 15.	Click on **Replicated Items**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr17.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr17.png)
 
 16.	Once you click on Replicated Items, it will show all the replicated VMs. If the Status is “**Protected**” then you can do Failover/ Test Failover otherwise you need to wait until the status becomes “**Protected**”.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/asr18.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/asr18.png)
 
 **NOTE:**  The Failover steps can be performed once the primary region fails as discussed in 
 
@@ -684,59 +687,59 @@ If the option for the parameter **apiManagement** is **YES**, then you must perf
 
 1. Go to **resource group** [Symbol] select **API Management.** 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/api1.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/api1.PNG)
 
 2. Select **API’s** under **API Management** in the left-hand side.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/api2.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/api2.PNG)
 
 3. Click on the **API** which is named as like function app name.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/api3.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/api3.PNG)
 
 4. Click on the … icon to import the function app.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/api4.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/api4.PNG)
 
 5. Click on **browse tab** to select the function app that we want to import.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/api5.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/api5.PNG)
 
 6. Now click on **configure required settings** to choose your function app.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/api6.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/api6.PNG)
 
 7. Now choose the **function app** of your resource group and click on **select**. 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/api7.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/api7.PNG)
 
 8. After few seconds **all the operations of the function app** will load and then click on **select.** 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/api9.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/api9.PNG)
 
 9. Click on **Import.** 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/api10.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/api10.PNG)
 
 10. After some time all the operations in a function app will load into the API Management. 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/api11.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/api11.PNG)
 
 11. Now click on **products** under API Management in the left-hand side and then click on starter.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/api12.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/api12.PNG)
 
 12. Click on **settings** and then **uncheck** the **required subscription** option then **save**. 
 
 Follow the below screens to uncheck the required subscription option. 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/api13.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/api13.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/api14.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/api14.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/api15.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/api15.PNG)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/api16.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/api16.PNG)
 
 
 
@@ -744,73 +747,73 @@ Follow the below screens to uncheck the required subscription option.
 
 Follow the below steps to build web application UI code to point to the deployed resources 
 
-1.	Open the **ProjectTitanUICode** from **UI WebApp** folder from the **PJ-TITAN-SECURE-COLD-CHAIN** folder. 
+1.	Open the **ProjectTitanUICode** from **UI WebApp** folder from the **ColdChain** folder. 
 
  **Note:** Clone the cold-chain repository to your local system and perform the below steps
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d61.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d61.png)
 
 2. Open the **src** folder from **ProjectTitanUICode** folder.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d62.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d62.png)
 
 3.	Open environment folder and update the values of **environment.prod** file.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d63.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d63.png)
 
 4.	Update the values **API_Endpoint, SAS_Token,blobAccessUrl,storageUrl, client_id,web3_password,contractAddress,HttpProvider,gasLimit and BingApiKey**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d64.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d64.png)
 
 5. You can take all the resource values from the ARM template output section                                         
                                            
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d128.png) 
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d128.png) 
 
 6.	You can get all the values from the Azure portal as shown below and use the same contract address which you have copied in the earlier step (**5.1. Deploying smart contract and getting the Contract Address**)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d65.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d65.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d66.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d66.png)
 
 7.Click on **Storage Account -> Shared access signature.**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d67.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d67.png)
 
 8. Click on **Generate SAS and connection string** button. Copy the **SAS token** and **Blob Access URL** and update into **environment.prod.ts** file.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d68.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d68.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d69.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d69.png)
 
 **Create Bing Map API**
 
 1.	In Azure portal click on Create a resource.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/b1.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/b1.png)
 
 2.	Search for “bing maps” as show below and click on Bing Maps API for Enterprise.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/b2.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/b2.png)
 
 3.	Click on Create.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/b3.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/b3.png)
 
 4.	Fill all the required details as shown below and click on Create.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/b4.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/b4.png)
 
 5.	Go the resource group and Click on Bing map resource 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/b5.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/b5.png)
 
 6.	Click on the Key Management and copy the masterkey this value you need to use for BingApiKey
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/b6.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/b6.png)
 
  Here you can updated the details:
  
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d70.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d70.png)
 
 **NOTE1**: If you choose api Managemnet option as **YES** for the deployment then you have to provide the api management test url under the API_Endpoint of the environment.prod.ts file.
 
@@ -820,23 +823,23 @@ Follow the below steps to build web application UI code to point to the deployed
 
 2.HttpProvider: <"http://cctrafficmng-bc4ji7q.trafficmanager.net:8545">
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d127.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d127.png)
 
 9. After updating the **environment.prod.ts** click on open **Node.js command prompt** window and go to the ProjectTitanUICode location i.e. you web application code location as shown in the following screenshots.
 
 **NOTE:** make sure that you have latest **node modules installed** and you have **Angular CLI** installed on your local machine
 
-Command: **npm install -g @angular/cli**
+Command: **npm install -g @angular/cli**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d71.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d71.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d72.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d72.png)
 
 10. Here we can **install npm**
 
 Command: **npm install**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d73.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d73.png)
 
 11.	Run the following command to build the code 
 
@@ -844,35 +847,35 @@ Command: **ng build –prod**
 
 Note: Before running the above command make sure that you have installed Angular CLI.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d74.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d74.png)
 
 12. After successful build, you will get the folder called **dist**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d75.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d75.png)
 
 13.	Open **AngularFrontEnd** from the **dist folder,** add the web.config(download it from here ) to the **AngularFrontEnd** and select all the files then zip them. 
 
 **Note**: Download the Web.config file from the repository
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d76.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d76.png)
 
 14.	Open kudu tool to upload the built web application code to the web app. You can open the Kudu tool by adding the scm in the web App URL as shown below 
 
 Ex: <https://webapikowgh.scm.azurewebsites.net)>
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d77.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d77.png)
 
 15.	Click on **Tools** dropdown list and click **Zip Push Deploy** to push the zipped web app code as shown below.
 
 **Note:** Remove the existing files before you push new code. 
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d78.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d78.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d79.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d79.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d80.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d80.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d81.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d81.png)
 
 ### 5.5 Connecting Devices to the solution
 
@@ -907,23 +910,23 @@ Connect device to computer using **Magnetic USB cable** or **Blue-tooth** connec
 
    Click on **Add Bluetooth** or another devices option to add the teltanika.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d82.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d82.png)
 
 Click on **Bluetooth.**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d83.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d83.png)
 
 Choose your **teltanika device ID without LE.**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d84.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d84.png)
 
 Provide the Default **password** as 5555 and click on **connect.**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d85.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d85.png)
 
 After paired click on **Done.**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d86.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d86.png)
 
 3. You are now ready to use the device on your computer.
 
@@ -934,21 +937,21 @@ Below is the link to download the latest TMT250 **Configurator** version.
 
 After downloading, Extract the .zip file and double click on the **configurator.exe** to open the TMT-250 Application.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d87.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d87.png)
 
 Now the application will appear as below.
 
 Click on the **Device icon** to connect the device.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d88.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d88.png)
 
 After connection to Configurator **Status window** will be displayed
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d89.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d89.png)
 
 After the application opens you can see the pop up of parameters loaded success.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d90.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d90.png)
 
 Now go to **GPRS property** on the left-hand side and set the below properties.
 
@@ -956,22 +959,22 @@ Now go to **GPRS property** on the left-hand side and set the below properties.
 
 **2.Domain:** Provide your TMT-VM **public IPAddress.**
 
-**NOTE**: If the deployed solution type is **standard or Premium** you must provide the **traffic manager** DNS name under the Domain field.
+**NOTE**: If the deployed solution type is **standard or Premium** you must provide the **traffic manager** DNS name under the Domain field.
 
-**Ex: “cctrafficmng-tmtjct7q.trafficmanager.net”** 
+**Ex: “cctrafficmng-tmtjct7q.trafficmanager.net”** 
 
 **3.Port:** Set the port as **21684.**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d91.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d91.png)
 
 After providing all the details click on **save to device** tab on the top.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d92.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d92.png)
 
 Go to **Status GSM Info**
 Here you can see the full information like the **Number of records sent, SIM State, GPRS Status and Socket Information.**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d93.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d93.png)
 
 For more information regarding configuration of **TMT-250** please follow the below link.
 https://wiki.teltonika.lt/view/TMT250_First_Start
@@ -979,7 +982,7 @@ https://wiki.teltonika.lt/view/TMT250_First_Start
 #### 5.5.2. Connecting Rigado
 1.	Connect **LAN cable** to the **Rigado** and switch on it.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d94.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d94.png)
 
 #### 5.5.3 Connecting Beacons
 
@@ -987,7 +990,7 @@ https://wiki.teltonika.lt/view/TMT250_First_Start
 
     Note: If Beacon will show **Red light,** it is in **ON** state otherwise **OFF** state
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d95.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d95.png)
 
 Press **ON** the **beacon 3 times,** at that time if it shows **Red light,** it is in **ON** state otherwise it shows **Green light,** it is in **OFF** state.
 
@@ -1025,17 +1028,17 @@ Below listed are the steps to be followed to build and deploy snap to Rigado Cas
 
 $ ssh abc@175.21.10.9 [IP address of the RaspberryPi]
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d97.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d97.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d98.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d98.png)
 
 3. Copy the project folder from your local to Raspberry Pi
 
    **$ scp -r user@175.21.10.4:/home/user/Project-Titan/.**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d99.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d99.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d100.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d100.png)
 
 4. Install Classic
 
@@ -1047,7 +1050,7 @@ $ ssh abc@175.21.10.9 [IP address of the RaspberryPi]
    
    **$ sudo classic**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d101.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d101.png)
 
 6. In Classic mode, install snapcraft:
 
@@ -1057,7 +1060,7 @@ $ ssh abc@175.21.10.9 [IP address of the RaspberryPi]
       
 7.	Once snapcraft is installed [in classic mode] navigate to the project folder, where the snapcraft.yaml file is present, change the version number to the higher number than the one present in the file.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d102.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d102.png)
 
 **NOTE:** if you’re building the snap multiple times make sure that the version should be updated to the next number in **snapcraft.yaml** file. Ex: If version is 1.9.10 make it as 1.9.11 for the next build.
 
@@ -1065,21 +1068,21 @@ $ ssh abc@175.21.10.9 [IP address of the RaspberryPi]
 
 **Note**: You can take the URL from the output section of ARM template.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d129.PNG)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d129.PNG)
 
 **Note**: If the Deployment type is Standard or Premium, you have to provide Traffic Manager URL
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d96.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d96.png)
 
 **Note**: If you want to re-build the snap you need to delete the following folders
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d96-1.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d96-1.png)
 
 To build the snap, enter the following command
 
 **$ sudo snapcraft**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d104.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d104.png)
 
 9. Once the snap is built, it will create an abc_test_1.0.1_**armhf.snap** file. Copy this snap from the build host [i.e Raspberry Pi] to development host [i.e. Ubuntu 16.04 machine] using the following command:
 
@@ -1087,7 +1090,7 @@ To build the snap, enter the following command
 
 This will copy the snap to Local at the path mentioned.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d105.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d105.png)
 
 ### 6.2. Uploading the snap to Gateway
 
@@ -1097,116 +1100,72 @@ This will copy the snap to Local at the path mentioned.
 
     **Create new App**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d106.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d106.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d107.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d107.png)
 
 Application created successfully
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d108.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d108.png)
 
 Create Bundle for the specific Application.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d109.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d109.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d110.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d110.png)
 
 Bundle created successfully and add tag to that bundle
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d111.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d111.png)
 
 Select an App and add app to that Bundle then save it.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d112.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d112.png)
 
 Navigate to created App and upload the Snap by following the below steps.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d113.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d113.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d114.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d114.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d115.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d115.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d116.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d116.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d117.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d117.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d118.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d118.png)
 
 **Note: The name of the app must be same as the name mentioned in snapcraft.yaml of the project**
 
 3.	When it’s done uploading, a modal will ask you if you want to release the app revision to a channel. Select the edge channel and click the RELEASE button.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d119.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d119.png)
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d120.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d120.png)
 
 ### 6.3. Verifying the device configurations
 1.	Go to **Azure Portal.**
 2.	Click on the **Resource Group** and Navigate to the **IoT Hub resource**.
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d121.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d121.png)
 
 3.	Click on the **IoT Hub** and Navigate to the **IoT Hub Overview**, here you can see the **IoT Hub Message count.**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d122.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d122.png)
 
 4. Click on the **IoT devices** in **IoT Hub,** here you can see the **Gateway Device Id.**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d123.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d123.png)
 
 5. Click on the **Gateway**  
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d124.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d124.png)
 
 6. Click on the **Device twin**
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d125.png)
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d125.png)
 
 7.	Once all the above configurations are correct you can see the device status as connected as shown below
 
-![alt text](https://github.com/sysgain/PJ-TITAN-SECURE-COLD-CHAIN/blob/dev/Documentation/images/d126.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-    
-    
-    
-   
-    
+![alt text](https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/d126.png)
