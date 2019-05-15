@@ -17,7 +17,7 @@
                  "NO"
              ],
              "metadata": {
-                 "description":"Select YES/NO to deploy Api Management Service to provide security to function App.It also cost effective."
+                 "description":"Make sure to select the same option what you choosed for primary deployment"
              }
          },
        "location":{  
@@ -44,7 +44,7 @@
              "ukwest"
           ],
           "metadata":{  
-             "description":"Choose the location where resources to be deployed"
+             "description":"Make sure to choose the same location which was selected for primary deployment."
           }
        },
        "appInsightsLocation":{  
@@ -109,7 +109,7 @@
           "defaultValue":{  
              "signedServices":"bfqt",
              "signedPermission":"rwdlacup",
-             "signedExpiry":"2019-05-03T00:00:00Z",
+             "signedExpiry":"2019-06-02T00:00:00Z",
              "signedProtocol":"https",
              "signedResourceTypes":"sco"
           },
@@ -117,20 +117,20 @@
              "description":"Here we need to provide the immediate day/time gap between the deployment start and completion time in the place of signedExpiry"
           }
        },
-       "functionAppUrl":{  
-          "type":"string",
-          "defaultValue":"https://storageccqia.blob.core.windows.net/cc-iot/cc-functionapp-1203.zip",
-          "metadata":{  
-             "description":"Please use function app build file url here which is in public storage"
-          }
-       },
-       "webAppBuildfileUrl":{  
-          "type":"string",
-          "defaultValue":"https://storageccqia.blob.core.windows.net/cc-iot/AngularFrontEnd.zip",
-          "metadata":{  
-             "description":"Please use web app build file url here which is in public storage"
-          }
-       },
+       "functionAppUrl": {
+            "type": "string",
+            "defaultValue": "https://github.com/sysgain/ColdChain/raw/master/cc-packages/cc-functionapp.zip",
+            "metadata": {
+                "description": "Provide the function app build file url which placed under /cc-packages folder"
+            }
+        },
+        "webAppBuildfileUrl": {
+            "type": "string",
+            "defaultValue": "https://github.com/sysgain/ColdChain/raw/master/cc-packages/AngularFrontEnd.zip",
+            "metadata": {
+                "description": "Provide the AngularFrontEnd build code URL which placed under /cc-packages folder"
+            }
+        },
        "adminUsername":{  
           "type":"string",
           "defaultValue":"gethadmin",
