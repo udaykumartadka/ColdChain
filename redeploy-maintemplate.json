@@ -59,49 +59,49 @@
              "westus2"
           ],
           "metadata":{  
-             "description":"specify the region for application insights"
+             "description":"Make sure to choose the same location which was selected for primary deployment"
           }
        },
        "sqlAdministratorLogin":{  
           "type":"string",
           "defaultValue":"",
           "metadata":{  
-             "description":"provide the user name for the SQL server, please make a note of Username this will be used further"
+             "description":"Provide the user name for the SQL server, Make sure the username should be same as the primary deployment"
           }
        },
        "sqlAdministratorLoginPassword":{  
           "type":"securestring",
           "defaultValue":"",
           "metadata":{  
-             "description":"provide the password for the SQL server, make a note of the Password this will be used further"
+             "description":"Provide the password for the SQL server, Make sure the password should be as the primary deployment"
           }
        },
        "azureAccountName":{  
           "type":"string",
           "defaultValue":"",
           "metadata":{  
-             "description":"azure portal login username"
+             "description":"Azure portal login username"
           }
        },
        "tenantId":{  
           "type":"string",
           "defaultValue":"",
           "metadata":{  
-             "description":"Please provide Tenant Id of the subscription. This will be used to authenticate the Azure account while deploying the automation account"
+             "description":"Provide Tenant Id of the subscription. This will be used to authenticate the Azure account while deploying the automation account"
           }
        },
        "clientID":{  
           "type":"string",
           "defaultValue":"",
           "metadata":{  
-             "description":"please provide the Application clientID"
+             "description":"Provide the AD  Application clientID"
           }
        },
        "clientSecret":{  
           "type":"securestring",
           "defaultValue":"",
           "metadata":{  
-             "description":"provide the Application Client Secret"
+             "description":"Provide the AD Application Client Secret"
           }
        },
        "accountSasProperties":{  
@@ -501,6 +501,9 @@
        }
     ],
     "outputs":{  
- 
+        "websiteURLHA":{
+            "type": "string",
+            "value": "[concat('http://',variables('trafficManagerSettings').trafficManagerName,'.trafficmanager.net')]"
+        }
     }
  }
