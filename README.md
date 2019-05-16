@@ -1,4 +1,4 @@
-ColdChain Solution with Azure IoT
+A Secure Cold Chain and Anti-Counterfeiting Solution - Leveraging IoT & Blockchain
 ========
 <div align="center">
 <img src="https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/u96.png" width="600" height="auto"/>
