@@ -501,7 +501,7 @@
        }
     ],
     "outputs":{  
-        "websiteURLHA":{
+        "websiteURL":{
             "type": "string",
             "value": "[concat('http://',variables('trafficManagerSettings').trafficManagerName,'.trafficmanager.net')]"
         }
