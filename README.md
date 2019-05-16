@@ -1,7 +1,7 @@
 ColdChain Solution with Azure IoT
 ========
 <div align="center">
-<img src="https://github.com/sysgain/ColdChain/raw/master/Documentation/images/dashboard.png" width="600" height="auto"/>
+<img src="https://github.com/SecureColdChain/ColdChain/blob/master/Documentation/images/u96.png" width="600" height="auto"/>
 </div>
 
 Overview
