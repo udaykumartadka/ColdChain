@@ -148,6 +148,9 @@
             "type": "Microsoft.Compute/availabilitySets",
             "name": "[variables('availabilitySetName')]",
             "location": "[parameters('location')]",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            },
             "properties": {
                 "platformUpdateDomainCount": "2",
                 "platformFaultDomainCount": "2",
@@ -159,6 +162,9 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "name": "[variables('publicIPAddressName')]",
             "location": "[parameters('location')]",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            },
             "properties": {
                 "publicIPAllocationMethod": "Dynamic",
                 "dnsSettings": {
@@ -218,6 +224,9 @@
                     },
                     "location": {
                         "value": "[parameters('location')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
                     }
                 }
             }
@@ -228,7 +237,7 @@
             "name": "[variables('nsgName')]",
             "location": "[parameters('location')]",
             "tags": {
-                "displayName": "Network Security Group"
+                "IotSuiteType": "[parameters('solutionType')]"
             },
             "properties": {
                 "securityRules": [
@@ -330,6 +339,9 @@
             "type": "Microsoft.Network/virtualNetworks",
             "name": "[variables('vNet').name]",
             "location": "[parameters('location')]",
+            "tags": {
+                "IotSuiteType": "[parameters('solutionType')]"
+            },
             "dependsOn": [
                 "[concat('Microsoft.Network/networkSecurityGroups/', variables('nsgName'))]"
             ],
@@ -414,6 +426,9 @@
                     },
                     "location": {
                         "value": "[parameters('location')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
                     }
                 }
             }
@@ -490,6 +505,9 @@
                     },
                     "location": {
                         "value": "[parameters('location')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
                     }
                 }
             }
@@ -566,6 +584,9 @@
                     },
                     "location": {
                         "value": "[parameters('location')]"
+                    },
+                    "solutionType": {
+                        "value": "[parameters('solutionType')]"
                     }
                 }
             }
@@ -646,7 +667,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://storageccqia.blob.core.windows.net/cc-iot/arm-ha/bm0-extension.json",
+                    "uri": "[concat(parameters('baseUrl'), '/nested/bm0-extension.json')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
