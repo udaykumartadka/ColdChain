@@ -14,16 +14,16 @@ Documentation
 
 ### Getting Started Guide
 
-To understand the overview of the Cold-Chain solution please refer **Getting Started Guide(https://github.com/sysgain/ColdChain/blob/master/Documentation/getting-started.md)**. 
+To understand the overview of the Cold-Chain solution please refer **[Getting Started Guide](https://github.com/sysgain/ColdChain/blob/master/Documentation/getting-started.md)**. 
 
 ### Deployment Guide
 
-To Deploy the Cold-Chain solution please refer **Deployment Guide(https://github.com/sysgain/ColdChain/blob/master/Documentation/deploymentguide.md)**. 
+To Deploy the Cold-Chain solution please refer **[Deployment Guide](https://github.com/sysgain/ColdChain/blob/master/Documentation/deploymentguide.md)**. 
 
 ### Admin Guide
 
-**Admin Guide(https://github.com/sysgain/ColdChain/blob/master/Documentation/admin-guide.md)** explains about how to manage Azure resources, how to perform HA & DR strategies and validate components once the solution deployed Successfully. 
+**[Admin Guide](https://github.com/sysgain/ColdChain/blob/master/Documentation/admin-guide.md)** explains about how to manage Azure resources, how to perform HA & DR strategies and validate components once the solution deployed Successfully. 
 
 ### User Guide
 
-To find how to use the Cold-chain solution once deployed successfully in Azure portal refer **User Guide(https://github.com/sysgain/ColdChain/blob/master/Documentation/user-guide.md)** 
+To find how to use the Cold-chain solution once deployed successfully in Azure portal refer **[User Guide](https://github.com/sysgain/ColdChain/blob/master/Documentation/user-guide.md)** 
