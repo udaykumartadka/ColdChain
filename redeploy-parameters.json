@@ -1,0 +1,57 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "solutionType": {
+            "value": "ColdChain"
+        },
+         "apiManagement":{
+             "value":""
+         },
+        "location": {
+            "value": "eastus2"
+        },
+        "appInsightsLocation": {
+            "value": "westus2"
+        },
+        "sqlAdministratorLogin": {
+            "value": "sqluser"
+        },
+        "sqlAdministratorLoginPassword": {
+            "value": "Password@1234"
+        },
+        "azureAccountName": {
+            "value": "sample@sysgain.com"
+        },
+        "tenantId": {
+            "value": "acxxx5-a7xxx-4ca7-87eb-c5xxxxxd38"
+        },
+        "clientID":{
+            "value":"xxxxx-a79a-xxxx-87eb-c5exxxxxd38"
+        },
+        "clientSecret":{
+            "value":"xxxxx-xxx-4xx7-8xxb-xxxxxxxxxd38"
+        },
+        "accountSasProperties":{
+            "value": {
+                "signedServices": "bfqt",
+                "signedPermission": "rwdlacup",
+                "signedExpiry": "2019-05-02T00:00:00Z",
+                "signedProtocol": "https",
+                "signedResourceTypes": "sco"
+            }
+        },
+        "functionAppUrl":{
+            "value": "provide your function app zip file url"
+        },
+        "webAppBuildfileUrl": {
+            "value": "provide your webapplication zip file url"
+        },
+        "adminUsername": {
+            "value": "gethadmin"
+        },
+        "adminPassword": {
+            "value": "Password@1234"
+        }
+    }
+}
