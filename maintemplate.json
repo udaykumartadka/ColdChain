@@ -169,28 +169,28 @@
         },
         "cosmosdbModuleUri": {
             "type": "string",
-            "defaultValue": "https://github.com/sysgain/ColdChain/raw/master/cc-packages/cosmosdb.2.1.15.239.zip",
+            "defaultValue": "https://github.com/SecureColdChain/ColdChain/raw/master/cc-packages/cosmosdb.2.1.15.239.zip",
             "metadata": {
                 "description": "Provide the cosmosdb module URL which placed under /cc-packages folder"
             }
         },
         "azureAdPreviewModuleUri": {
             "type": "string",
-            "defaultValue": "https://github.com/sysgain/ColdChain/raw/master/cc-packages/AzureADPreview.zip",
+            "defaultValue": "https://github.com/SecureColdChain/ColdChain/raw/master/cc-packages/AzureADPreview.zip",
             "metadata": {
                 "description": "Provide the Azure AD Preview module URL which placed under /cc-packages folder "
             }
         },
         "functionAppUrl": {
             "type": "string",
-            "defaultValue": "https://github.com/sysgain/ColdChain/raw/master/cc-packages/cc-functionapp.zip",
+            "defaultValue": "https://github.com/SecureColdChain/ColdChain/raw/master/cc-packages/cc-functionapp.zip",
             "metadata": {
                 "description": "Provide the function app build file url which placed under /cc-packages folder"
             }
         },
         "webAppBuildfileUrl": {
             "type": "string",
-            "defaultValue": "https://github.com/sysgain/ColdChain/raw/master/cc-packages/AngularFrontEnd.zip",
+            "defaultValue": "https://github.com/SecureColdChain/ColdChain/raw/master/cc-packages/AngularFrontEnd.zip",
             "metadata": {
                 "description": "Provide the AngularFrontEnd build code URL which placed under /cc-packages folder"
             }
@@ -335,7 +335,7 @@
                 "description": "The base URL for dependent assets",
                 "artifactsBaseUrl": ""
             },
-            "defaultValue": "https://raw.githubusercontent.com/sysgain/ColdChain/master/BlockchainARM"
+            "defaultValue": "https://raw.githubusercontent.com/SecureColdChain/ColdChain/master/BlockchainARM"
         }
     },
     "variables": {
@@ -505,7 +505,7 @@
             "availabilitysetNameDR":"[concat('avsetDR',variables('suffix'))]",
             "fileUri": "[concat(variables('artifactsBaseUrl'),'scripts/tmt-latest-script.sh')]"
         },
-        "artifactsBaseUrl": "https://raw.githubusercontent.com/sysgain/ColdChain/master/",
+        "artifactsBaseUrl": "https://raw.githubusercontent.com/SecureColdChain/ColdChain/master/",
         "scriptUrl": "[concat(variables('artifactsBaseUrl'),'scripts/script.sh')]",
         "suffix": "[substring(uniqueString(resourceGroup().id), 0, 5)]",
         "DocDBAccountName": "[concat('ccdocdb',variables('suffix'))]",
