@@ -18,7 +18,7 @@
                 "Premium-Solution"
             ],
             "metadata": {
-                "description": "Choose the deployment type of your solution"
+                "description": "Choose the deployment type"
             }
         },
         "apiManagement":{
@@ -29,7 +29,7 @@
                 "NO"
             ],
             "metadata": {
-                "description":"Select YES/NO to deploy Api Management Service to provide security to function App.It also cost effective."
+                "description":"Select YES/NO to deploy Api Management Service to provide security to function App.It will incure more cost and takes more time to deploy.Please check the cost before deploying it."
             }
         },
         "location": {
@@ -56,7 +56,7 @@
                 "ukwest"
             ],
             "metadata": {
-                "description": "Choose the location where resources to be deployed.If your deployment type is Standard/Premium make sure both the regions which are in geo-paired condition should active(means region should work properly for all the resource deployments)."
+                "description": "Choose the location where resources to be deployed."
             }
         },
         "oms-region": {
@@ -88,63 +88,63 @@
                 "westus2"
             ],
             "metadata": {
-                "description": "specify the region for application insights"
+                "description": "Choose the location for application insights"
             }
         },
         "sqlAdministratorLogin": {
             "type": "string",
             "defaultValue": "",
             "metadata": {
-                "description": "provide the user name for the SQL server, please make a note of Username this will be used further"
+                "description": "Provide the user name for the SQL server, please make a note of Username for further use"
             }
         },
         "sqlAdministratorLoginPassword": {
             "type": "securestring",
             "defaultValue": "",
             "metadata": {
-                "description": "provide the password for the SQL server, make a note of the Password this will be used further"
+                "description": "Provide the password for the SQL server, make a note of the Password for further use"
             }
         },
         "tenantId": {
             "type": "string",
             "defaultValue": "",
             "metadata": {
-                "description": "Please provide Tenant Id of the subscription. This will be used to authenticate the Azure account while deploying the automation account"
+                "description": "Provide Tenant Id of the subscription. This will be used to authenticate the Azure account while deploying the automation account"
             }
         },
         "clientID": {
             "type": "string",
             "defaultValue": "",
             "metadata": {
-                "description": "please provide the Application clientID"
+                "description": "Provide the AD Application clientID"
             }
         },
         "clientSecret": {
             "type": "securestring",
             "defaultValue": "",
             "metadata": {
-                "description": "provide the Application Client Secret"
+                "description": "Provide the AD Application Client Secret"
             }
         },
         "objectId": {
             "type": "string",
             "defaultValue": "",
             "metadata": {
-                "description": "provide the Application object ID"
+                "description": "Provide the AD Application object ID"
             }
         },
         "azureAccountName": {
             "type": "string",
             "defaultValue": "",
             "metadata": {
-                "description": "azure portal login username"
+                "description": "Azure portal login username"
             }
         },
         "azurePassword": {
             "type": "securestring",
             "defaultValue": "",
             "metadata": {
-                "description": "azure portal login password"
+                "description": "Azure portal login password"
             }
         },
         "accountSasProperties": {
@@ -157,7 +157,7 @@
                 "signedResourceTypes": "sco"
             },
             "metadata": {
-                "description": "Here we need to provide the immediate day/time gap between the deployment start and completion time in the place of signedExpiry"
+                "description": "Here you need to provide the immediate day/time gap between the deployment start and completion time in the place of signedExpiry"
             }
         },
         "sessionId": {
@@ -199,7 +199,7 @@
             "type": "string",
             "defaultValue": "https://storageccqia.blob.core.windows.net/cc-iot/cctitandb-lt.bacpac",
             "metadata": {
-                "description": "Please use the sql bacpac file which placed under /cc-packages folder and upload it to any public storageAccount then provide the storage URL of the bacpac file."
+                "description": "Use the SQL bacpac file which placed under /cc-packages folder and upload it to any public storageAccount then provide the storage URL of the bacpac file."
             }
         },
         "namePrefix": {
